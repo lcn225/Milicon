@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MiliconObjectList_DataSet" targetNamespace="http://tempuri.org/MiliconObjectList_DataSet.xsd" xmlns:mstns="http://tempuri.org/MiliconObjectList_DataSet.xsd" xmlns="http://tempuri.org/MiliconObjectList_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="MiliconConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MiliconConnectionString (MySettings)" PropertyReference="ApplicationSettings.WindowsApplication1.My.MySettings.GlobalReference.Default.MiliconConnectionString" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Obejct_ListTableAdapter" GeneratorDataComponentClassName="Obejct_ListTableAdapter" Name="Obejct_List" UserDataComponentName="Obejct_ListTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="MiliconConnectionString (MySettings)" DbObjectName="Obejct_List" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Obj_Name, Sup FROM Obejct_List</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Obj_Name" DataSetColumn="Obj_Name" />
+              <Mapping SourceColumn="Sup" DataSetColumn="Sup" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MiliconObjectList_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="MiliconObjectList_DataSet" msprop:Generator_UserDSName="MiliconObjectList_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Obejct_List" msprop:Generator_TableClassName="Obejct_ListDataTable" msprop:Generator_TableVarName="tableObejct_List" msprop:Generator_TablePropName="Obejct_List" msprop:Generator_RowDeletingName="Obejct_ListRowDeleting" msprop:Generator_RowChangingName="Obejct_ListRowChanging" msprop:Generator_RowEvHandlerName="Obejct_ListRowChangeEventHandler" msprop:Generator_RowDeletedName="Obejct_ListRowDeleted" msprop:Generator_UserTableName="Obejct_List" msprop:Generator_RowChangedName="Obejct_ListRowChanged" msprop:Generator_RowEvArgName="Obejct_ListRowChangeEvent" msprop:Generator_RowClassName="Obejct_ListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Obj_Name" msprop:Generator_ColumnVarNameInTable="columnObj_Name" msprop:Generator_ColumnPropNameInRow="Obj_Name" msprop:Generator_ColumnPropNameInTable="Obj_NameColumn" msprop:Generator_UserColumnName="Obj_Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sup" msprop:Generator_ColumnVarNameInTable="columnSup" msprop:Generator_ColumnPropNameInRow="Sup" msprop:Generator_ColumnPropNameInTable="SupColumn" msprop:Generator_UserColumnName="Sup" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
