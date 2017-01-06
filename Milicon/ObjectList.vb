@@ -20,9 +20,17 @@
         '按OK后将选中行的第一单元格数据传输至规格值输入框
         Me.Close()
     End Sub
+    '点击OK选中材料名称
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         Me.Close()
     End Sub
 
+    Private Sub ObjectList_DataGridView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ObjectList_DataGridView.MouseDoubleClick
+        SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
+        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
+        '按OK后将选中行的第一单元格数据传输至规格值输入框
+        Me.Close()
+    End Sub
+    '双击选中材料名称
 End Class

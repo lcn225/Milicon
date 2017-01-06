@@ -18,6 +18,7 @@ Public Class Signin
         Me.TestDate_Label.Text = ini.GetIniString("Signin", "Label3", "N/A")
         Me.Tester_Label.Text = ini.GetIniString("Signin", "Label4", "N/A")
     End Sub
+    'UI文本初始化
 
     Private Sub SignReset()
         Me.NameInput_TextBox.Text = ""
@@ -25,13 +26,34 @@ Public Class Signin
         Me.TestDate_TextBox.Text = ""
         Me.Tester_TextBox.Text = ""
     End Sub
+    '重置输入（配合确定/取消按钮）
 
     Private Sub DBcon()
         Dim cnStr As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\192.168.2.100\DataBase\Milicon.mdb;Persist Security Info=False"
         '定义链接字符串
         cn = New OleDbConnection(cnStr)
         '建立链接
-        Dim sql As String = "select Sup from Object_List where Obj_name='J22'"
+    End Sub
+    '链接数据库
+
+    Private Sub DisaplyObjectFormat(Object_Name As String)
+        DBcon()
+
+        Dim sql As String = "select Obj_name as 材料名称,Sup as 供应商 from Object_List where Obj_name='" + Object_Name + "'"
+
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+
+        da.Fill(ds, "result")
+        TestDateInput_DataGridView.DataSource = ds.Tables(0)
+
+    End Sub
+
+    Private Function GetObjectFormat(Type As String, TestObject As Integer) As String
+
+        DBcon()
+
+        Dim sql As String = "select Sup from Object_List where Obj_name='" + TestObject + "'"
 
         da = New OleDbDataAdapter(sql, cn)
 
@@ -39,20 +61,14 @@ Public Class Signin
 
         da.Fill(ds, "result")
 
-        TestDateInput_DataGridView.DataSource = ds.Tables(0)
-
-        Temp_Label.Text = ds.Tables(0).Rows(0)(0).ToString
-    End Sub
-
-    Private Function GetObjectFormat(Type As String, TestObject As Integer) As String
-
-
-        DBcon()
+        Return 0
     End Function
+    '此函数暂时搁置
 
     Private Function GetTestLots() As String
         Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
-        'Dim TodayLots As String = 0
+        Dim TodayLots As String
+
         Return TestLots
         '生成yyyymmdd形式的测试编号
     End Function
@@ -64,21 +80,30 @@ Public Class Signin
         Me.TestLots_Label.Text = "测试编号： " & GetTestLots() '获得测试编号
 
     End Sub
-
+    '加载登录功能窗口时初始化UI，获得并显示测试编号
 
     Private Sub Signin_Close(sender As Object, e As EventArgs) Handles MyBase.Closing
+        SignReset()
         MainMenu.Show()
     End Sub
+    '关闭登录功能窗口时重置并打开主菜单
 
     Private Sub ObjectList_Button_Click(sender As Object, e As EventArgs) Handles ObjectList_Button.Click
         ObjectList.Show()
     End Sub
 
     Private Sub ObjectInput_Button_Click(sender As Object, e As EventArgs) Handles ObjectInput_Button.Click
-        TestDateInput_DataGridView.Rows.Clear()
-        TestDateInput_DataGridView.Rows.Add(2)
-        TestDateInput_DataGridView.Rows(0).Cells(0).Value = GetObjectFormat("HX11", 1)
+
+        Dim Object_Name = NameInput_TextBox.Text
+
+        If Object_Name = "" Then
+            MessageBox.Show("请输入材料名称")
+        Else
+            DisaplyObjectFormat(Object_Name)
+        End If
+
     End Sub
+    '根据输入的材料名称显示不同的输入项目
 
     Private Sub Exit_Button_Click(sender As Object, e As EventArgs) Handles Exit_Button.Click
         Me.Close()
@@ -97,8 +122,6 @@ Public Class Signin
             SignReset()
             TestDateInput_DataGridView.Rows.Clear()
         End If
-
-        DBcon()
 
     End Sub
 End Class
