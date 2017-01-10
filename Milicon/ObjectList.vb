@@ -1,4 +1,6 @@
-﻿Public Class ObjectList
+﻿Imports System.ComponentModel
+
+Public Class ObjectList
 
     Dim SelectRowNumber As String = 0
     '默认选中第一行
@@ -25,6 +27,7 @@
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         Me.Close()
     End Sub
+    '点取消按钮直接退出
 
     Private Sub ObjectList_DataGridView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ObjectList_DataGridView.MouseDoubleClick
         SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
@@ -33,4 +36,6 @@
         Me.Close()
     End Sub
     '双击选中材料名称
+
+
 End Class

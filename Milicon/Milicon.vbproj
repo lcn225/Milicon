@@ -94,6 +94,18 @@
       <DependentUpon>MainMenu.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maintenance\MaintenanceMainMenu.Designer.vb">
+      <DependentUpon>MaintenanceMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\MaintenanceMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenance\Maintenance_ObjectList.Designer.vb">
+      <DependentUpon>Maintenance_ObjectList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\Maintenance_ObjectList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ObjectList_DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,6 +132,14 @@
     <Compile Include="ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ObjectList_DataSet.vb">
+      <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectList_DataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Signin.Designer.vb">
       <DependentUpon>Signin.vb</DependentUpon>
     </Compile>
@@ -135,6 +155,12 @@
   <ItemGroup>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\MaintenanceMainMenu.resx">
+      <DependentUpon>MaintenanceMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\Maintenance_ObjectList.resx">
+      <DependentUpon>Maintenance_ObjectList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -152,6 +178,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram3.cd" />
     <None Include="ObjectList_DataSet.xsc">
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </None>
@@ -173,6 +200,17 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="ObjectList_DataSet1.xsc">
+      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ObjectList_DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ObjectList_DataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ObjectList_DataSet1.xss">
+      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="TestObjectName_DataSet.xsc">
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>
     </None>

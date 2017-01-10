@@ -63,6 +63,17 @@ Namespace My
                 Return CType(Me("MiliconConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\192.168.2.100\DataBase\Milicon.mdb"& _ 
+            "")>  _
+        Public ReadOnly Property ObjectList_ConnectionString() As String
+            Get
+                Return CType(Me("ObjectList_ConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

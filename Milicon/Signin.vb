@@ -29,8 +29,8 @@ Public Class Signin
     '重置输入（配合确定/取消按钮）
 
     Private Sub DBcon()
-        Dim cnStr As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\192.168.2.100\DataBase\Milicon.mdb;Persist Security Info=False"
-        '定义链接字符串
+        Dim cnStr As String = "Provider=" + ini.GetIniString("DBconnect", "Provider", "Microsoft.Jet.OLEDB.4.0") + ";Data Source=" + ini.GetIniString("DBconnect", "Source", "\\192.168.2.100\DataBase\Milicon.mdb") + ";Persist Security Info=" + ini.GetIniString("DBconnect", "Persist Security Info", "False")
+        '根据INI内容定义链接字符串
         cn = New OleDbConnection(cnStr)
         '建立链接
     End Sub
@@ -48,6 +48,12 @@ Public Class Signin
         TestDateInput_DataGridView.DataSource = ds.Tables(0)
 
     End Sub
+    '输入测试材料规格，显示登录界面
+
+    Private Function GetObjectTestInfo(Object_Name As String) As String
+
+        Return 0
+    End Function
 
     Private Function GetObjectFormat(Type As String, TestObject As Integer) As String
 
@@ -66,12 +72,32 @@ Public Class Signin
     '此函数暂时搁置
 
     Private Function GetTestLots() As String
-        Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
+        'Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
         Dim TodayLots As String
+        Dim today As String = Format(Date.Today, "yyyy/MM/dd")
+        Dim Lots As String = 0
 
-        Return TestLots
-        '生成yyyymmdd形式的测试编号
+        DBcon()
+        '获取当日日期
+        'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
+        '调整日期，测试用
+        Dim sql As String = "SELECT COUNT(TestDate) AS LoginNoDate FROM Data_list WHERE (((Data_list.[TestDate])=#" & today & "#))"
+        Dim TestLots_da = New OleDbDataAdapter(sql, cn)
+        Dim TestLots_DS = New DataSet
+        TestLots_da.Fill(TestLots_DS, "TestLots")
+        '查询并统计Data_List表中，本日已登录多少数据
+
+        Lots = Format(Val(TestLots_DS.Tables(0).Rows(0)(0).ToString) + 1, "00")
+        '批号Lots为本日已登录数据量+1
+
+        TodayLots = Format(Date.Today, "yyMMdd") & Lots
+        Return TodayLots
+        '生成并返回yymmdd00形式的测试编号，其中00为批号
+
+        cn.Close()
+
     End Function
+    '获取该次登录的批号
 
     Private Sub Signin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -91,6 +117,7 @@ Public Class Signin
     Private Sub ObjectList_Button_Click(sender As Object, e As EventArgs) Handles ObjectList_Button.Click
         ObjectList.Show()
     End Sub
+    '点击浏览打开原材料列表进行选择
 
     Private Sub ObjectInput_Button_Click(sender As Object, e As EventArgs) Handles ObjectInput_Button.Click
 
@@ -109,11 +136,13 @@ Public Class Signin
         Me.Close()
         MainMenu.Show()
     End Sub
+    '点击退出按钮关闭登录窗口
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         SignReset()
         TestDateInput_DataGridView.Rows.Clear()
     End Sub
+    '点击重置按钮重置所有textbox
 
     Private Sub Signin_Button_Click(sender As Object, e As EventArgs) Handles Signin_Button.Click
         Dim SigninCheck As String = ""
@@ -124,4 +153,6 @@ Public Class Signin
         End If
 
     End Sub
+    '点击登录按钮登录数据
+
 End Class

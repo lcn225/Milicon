@@ -12,3 +12,5 @@ C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Win
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\bin\Debug\Milicon.mdb
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.ObjectList.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.vbprojResolveAssemblyReference.cache
+C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.MaintenanceMainMenu.resources
+C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Maintenance_ObjectList.resources

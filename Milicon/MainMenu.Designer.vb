@@ -101,10 +101,10 @@ Partial Class MainMenu
 
     Private Sub MainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = ini.GetIniString("SWName", "Title", "NAini") & " " & ini.GetIniString("SWName", "Ver", "NAini")
-        Me.SWName_Label.Text = ini.GetIniString("UI", "Label", "SWName")
-        Me.Signin_Button.Text = ini.GetIniString("UI", "Button1", "Signin")
-        Me.SearchData_Button.Text = ini.GetIniString("UI", "Button2", "SearchData")
-        Me.FormatMaintenance_Button.Text = ini.GetIniString("UI", "Button3", "FormatMaintenance")
+        Me.SWName_Label.Text = ini.GetIniString("MainMenu", "Label", "SWName")
+        Me.Signin_Button.Text = ini.GetIniString("MainMenu", "Button1", "Signin")
+        Me.SearchData_Button.Text = ini.GetIniString("MainMenu", "Button2", "SearchData")
+        Me.FormatMaintenance_Button.Text = ini.GetIniString("MainMenu", "Button3", "FormatMaintenance")
     End Sub
 
     Private Sub MainMenu_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
@@ -136,4 +136,9 @@ Partial Class MainMenu
     End Sub
 
     Friend WithEvents operation_Button As Button
+
+    Private Sub operation_Button_Click(sender As Object, e As EventArgs) Handles operation_Button.Click
+        MaintenanceMainMenu.Show()
+        Me.Hide()
+    End Sub
 End Class
