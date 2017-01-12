@@ -20,12 +20,12 @@ Option Explicit On
  Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
  Global.System.ComponentModel.ToolboxItem(true),  _
  Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"),  _
- Global.System.Xml.Serialization.XmlRootAttribute("ObjectList_DataSet"),  _
+ Global.System.Xml.Serialization.XmlRootAttribute("ObjectType_List_DataSet"),  _
  Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")>  _
-Partial Public Class ObjectList_DataSet
+Partial Public Class ObjectType_List_DataSet
     Inherits Global.System.Data.DataSet
     
-    Private tableObject_List As Object_ListDataTable
+    Private tableObjectType_List As ObjectType_ListDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -56,8 +56,8 @@ Partial Public Class ObjectList_DataSet
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
-            If (Not (ds.Tables("Object_List")) Is Nothing) Then
-                MyBase.Tables.Add(New Object_ListDataTable(ds.Tables("Object_List")))
+            If (Not (ds.Tables("ObjectType_List")) Is Nothing) Then
+                MyBase.Tables.Add(New ObjectType_ListDataTable(ds.Tables("ObjectType_List")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -80,9 +80,9 @@ Partial Public Class ObjectList_DataSet
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property Object_List() As Object_ListDataTable
+    Public ReadOnly Property ObjectType_List() As ObjectType_ListDataTable
         Get
-            Return Me.tableObject_List
+            Return Me.tableObjectType_List
         End Get
     End Property
     
@@ -128,7 +128,7 @@ Partial Public Class ObjectList_DataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Overrides Function Clone() As Global.System.Data.DataSet
-        Dim cln As ObjectList_DataSet = CType(MyBase.Clone,ObjectList_DataSet)
+        Dim cln As ObjectType_List_DataSet = CType(MyBase.Clone,ObjectType_List_DataSet)
         cln.InitVars
         cln.SchemaSerializationMode = Me.SchemaSerializationMode
         Return cln
@@ -153,8 +153,8 @@ Partial Public Class ObjectList_DataSet
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
-            If (Not (ds.Tables("Object_List")) Is Nothing) Then
-                MyBase.Tables.Add(New Object_ListDataTable(ds.Tables("Object_List")))
+            If (Not (ds.Tables("ObjectType_List")) Is Nothing) Then
+                MyBase.Tables.Add(New ObjectType_ListDataTable(ds.Tables("ObjectType_List")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -188,10 +188,10 @@ Partial Public Class ObjectList_DataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableObject_List = CType(MyBase.Tables("Object_List"),Object_ListDataTable)
+        Me.tableObjectType_List = CType(MyBase.Tables("ObjectType_List"),ObjectType_ListDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableObject_List) Is Nothing) Then
-                Me.tableObject_List.InitVars
+            If (Not (Me.tableObjectType_List) Is Nothing) Then
+                Me.tableObjectType_List.InitVars
             End If
         End If
     End Sub
@@ -199,18 +199,18 @@ Partial Public Class ObjectList_DataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Sub InitClass()
-        Me.DataSetName = "ObjectList_DataSet"
+        Me.DataSetName = "ObjectType_List_DataSet"
         Me.Prefix = ""
-        Me.Namespace = "http://tempuri.org/ObjectList_DataSet1.xsd"
+        Me.Namespace = "http://tempuri.org/ObjectType_List_DataSet.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
-        Me.tableObject_List = New Object_ListDataTable()
-        MyBase.Tables.Add(Me.tableObject_List)
+        Me.tableObjectType_List = New ObjectType_ListDataTable()
+        MyBase.Tables.Add(Me.tableObjectType_List)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Private Function ShouldSerializeObject_List() As Boolean
+    Private Function ShouldSerializeObjectType_List() As Boolean
         Return false
     End Function
     
@@ -225,7 +225,7 @@ Partial Public Class ObjectList_DataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Shared Function GetTypedDataSetSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-        Dim ds As ObjectList_DataSet = New ObjectList_DataSet()
+        Dim ds As ObjectType_List_DataSet = New ObjectType_List_DataSet()
         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
         Dim any As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
@@ -273,31 +273,25 @@ Partial Public Class ObjectList_DataSet
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Delegate Sub Object_ListRowChangeEventHandler(ByVal sender As Object, ByVal e As Object_ListRowChangeEvent)
+    Public Delegate Sub ObjectType_ListRowChangeEventHandler(ByVal sender As Object, ByVal e As ObjectType_ListRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class Object_ListDataTable
-        Inherits Global.System.Data.TypedTableBase(Of Object_ListRow)
+    Partial Public Class ObjectType_ListDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ObjectType_ListRow)
         
-        Private columnCode4 As Global.System.Data.DataColumn
-        
-        Private columnCode9 As Global.System.Data.DataColumn
+        Private columnID As Global.System.Data.DataColumn
         
         Private columnObj_Type As Global.System.Data.DataColumn
-        
-        Private columnObj_Name As Global.System.Data.DataColumn
-        
-        Private columnObj_Sup As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "Object_List"
+            Me.TableName = "ObjectType_List"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -330,17 +324,9 @@ Partial Public Class ObjectList_DataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Code4Column() As Global.System.Data.DataColumn
+        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnCode4
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Code9Column() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCode9
+                Return Me.columnID
             End Get
         End Property
         
@@ -349,22 +335,6 @@ Partial Public Class ObjectList_DataSet
         Public ReadOnly Property Obj_TypeColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnObj_Type
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Obj_NameColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnObj_Name
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Obj_SupColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnObj_Sup
             End Get
         End Property
         
@@ -379,44 +349,50 @@ Partial Public Class ObjectList_DataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As Object_ListRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ObjectType_ListRow
             Get
-                Return CType(Me.Rows(index),Object_ListRow)
+                Return CType(Me.Rows(index),ObjectType_ListRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event Object_ListRowChanging As Object_ListRowChangeEventHandler
+        Public Event ObjectType_ListRowChanging As ObjectType_ListRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event Object_ListRowChanged As Object_ListRowChangeEventHandler
+        Public Event ObjectType_ListRowChanged As ObjectType_ListRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event Object_ListRowDeleting As Object_ListRowChangeEventHandler
+        Public Event ObjectType_ListRowDeleting As ObjectType_ListRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event Object_ListRowDeleted As Object_ListRowChangeEventHandler
+        Public Event ObjectType_ListRowDeleted As ObjectType_ListRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Sub AddObject_ListRow(ByVal row As Object_ListRow)
+        Public Overloads Sub AddObjectType_ListRow(ByVal row As ObjectType_ListRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddObject_ListRow(ByVal Code4 As Short, ByVal Code9 As String, ByVal Obj_Type As String, ByVal Obj_Name As String, ByVal Obj_Sup As String) As Object_ListRow
-            Dim rowObject_ListRow As Object_ListRow = CType(Me.NewRow,Object_ListRow)
-            Dim columnValuesArray() As Object = New Object() {Code4, Code9, Obj_Type, Obj_Name, Obj_Sup}
-            rowObject_ListRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowObject_ListRow)
-            Return rowObject_ListRow
+        Public Overloads Function AddObjectType_ListRow(ByVal Obj_Type As String) As ObjectType_ListRow
+            Dim rowObjectType_ListRow As ObjectType_ListRow = CType(Me.NewRow,ObjectType_ListRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, Obj_Type}
+            rowObjectType_ListRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowObjectType_ListRow)
+            Return rowObjectType_ListRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByObj_Type(ByVal Obj_Type As String) As ObjectType_ListRow
+            Return CType(Me.Rows.Find(New Object() {Obj_Type}),ObjectType_ListRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As Object_ListDataTable = CType(MyBase.Clone,Object_ListDataTable)
+            Dim cln As ObjectType_ListDataTable = CType(MyBase.Clone,ObjectType_ListDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -424,61 +400,56 @@ Partial Public Class ObjectList_DataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New Object_ListDataTable()
+            Return New ObjectType_ListDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnCode4 = MyBase.Columns("Code4")
-            Me.columnCode9 = MyBase.Columns("Code9")
+            Me.columnID = MyBase.Columns("ID")
             Me.columnObj_Type = MyBase.Columns("Obj_Type")
-            Me.columnObj_Name = MyBase.Columns("Obj_Name")
-            Me.columnObj_Sup = MyBase.Columns("Obj_Sup")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnCode4 = New Global.System.Data.DataColumn("Code4", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCode4)
-            Me.columnCode9 = New Global.System.Data.DataColumn("Code9", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCode9)
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID)
             Me.columnObj_Type = New Global.System.Data.DataColumn("Obj_Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnObj_Type)
-            Me.columnObj_Name = New Global.System.Data.DataColumn("Obj_Name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnObj_Name)
-            Me.columnObj_Sup = New Global.System.Data.DataColumn("Obj_Sup", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnObj_Sup)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnObj_Type}, true))
+            Me.columnID.AutoIncrement = true
+            Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
+            Me.columnObj_Type.AllowDBNull = false
+            Me.columnObj_Type.Unique = true
             Me.columnObj_Type.MaxLength = 255
-            Me.columnObj_Name.MaxLength = 255
-            Me.columnObj_Sup.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function NewObject_ListRow() As Object_ListRow
-            Return CType(Me.NewRow,Object_ListRow)
+        Public Function NewObjectType_ListRow() As ObjectType_ListRow
+            Return CType(Me.NewRow,ObjectType_ListRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New Object_ListRow(builder)
+            Return New ObjectType_ListRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(Object_ListRow)
+            Return GetType(ObjectType_ListRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.Object_ListRowChangedEvent) Is Nothing) Then
-                RaiseEvent Object_ListRowChanged(Me, New Object_ListRowChangeEvent(CType(e.Row,Object_ListRow), e.Action))
+            If (Not (Me.ObjectType_ListRowChangedEvent) Is Nothing) Then
+                RaiseEvent ObjectType_ListRowChanged(Me, New ObjectType_ListRowChangeEvent(CType(e.Row,ObjectType_ListRow), e.Action))
             End If
         End Sub
         
@@ -486,8 +457,8 @@ Partial Public Class ObjectList_DataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.Object_ListRowChangingEvent) Is Nothing) Then
-                RaiseEvent Object_ListRowChanging(Me, New Object_ListRowChangeEvent(CType(e.Row,Object_ListRow), e.Action))
+            If (Not (Me.ObjectType_ListRowChangingEvent) Is Nothing) Then
+                RaiseEvent ObjectType_ListRowChanging(Me, New ObjectType_ListRowChangeEvent(CType(e.Row,ObjectType_ListRow), e.Action))
             End If
         End Sub
         
@@ -495,8 +466,8 @@ Partial Public Class ObjectList_DataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.Object_ListRowDeletedEvent) Is Nothing) Then
-                RaiseEvent Object_ListRowDeleted(Me, New Object_ListRowChangeEvent(CType(e.Row,Object_ListRow), e.Action))
+            If (Not (Me.ObjectType_ListRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ObjectType_ListRowDeleted(Me, New ObjectType_ListRowChangeEvent(CType(e.Row,ObjectType_ListRow), e.Action))
             End If
         End Sub
         
@@ -504,14 +475,14 @@ Partial Public Class ObjectList_DataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.Object_ListRowDeletingEvent) Is Nothing) Then
-                RaiseEvent Object_ListRowDeleting(Me, New Object_ListRowChangeEvent(CType(e.Row,Object_ListRow), e.Action))
+            If (Not (Me.ObjectType_ListRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ObjectType_ListRowDeleting(Me, New ObjectType_ListRowChangeEvent(CType(e.Row,ObjectType_ListRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub RemoveObject_ListRow(ByVal row As Object_ListRow)
+        Public Sub RemoveObjectType_ListRow(ByVal row As ObjectType_ListRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -520,7 +491,7 @@ Partial Public Class ObjectList_DataSet
         Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
             Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
             Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As ObjectList_DataSet = New ObjectList_DataSet()
+            Dim ds As ObjectType_List_DataSet = New ObjectType_List_DataSet()
             Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
             any1.Namespace = "http://www.w3.org/2001/XMLSchema"
             any1.MinOccurs = New Decimal(0)
@@ -538,7 +509,7 @@ Partial Public Class ObjectList_DataSet
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "Object_ListDataTable"
+            attribute2.FixedValue = "ObjectType_ListDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -585,45 +556,30 @@ Partial Public Class ObjectList_DataSet
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class Object_ListRow
+    Partial Public Class ObjectType_ListRow
         Inherits Global.System.Data.DataRow
         
-        Private tableObject_List As Object_ListDataTable
+        Private tableObjectType_List As ObjectType_ListDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableObject_List = CType(Me.Table,Object_ListDataTable)
+            Me.tableObjectType_List = CType(Me.Table,ObjectType_ListDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Code4() As Short
+        Public Property ID() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableObject_List.Code4Column),Short)
+                    Return CType(Me(Me.tableObjectType_List.IDColumn),Integer)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("表““Object_List””中列““Code4””的值为 DBNull。", e)
+                    Throw New Global.System.Data.StrongTypingException("表““ObjectType_List””中列““ID””的值为 DBNull。", e)
                 End Try
             End Get
             Set
-                Me(Me.tableObject_List.Code4Column) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Code9() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableObject_List.Code9Column),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("表““Object_List””中列““Code9””的值为 DBNull。", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableObject_List.Code9Column) = value
+                Me(Me.tableObjectType_List.IDColumn) = value
             End Set
         End Property
         
@@ -631,105 +587,23 @@ Partial Public Class ObjectList_DataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Obj_Type() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableObject_List.Obj_TypeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("表““Object_List””中列““Obj_Type””的值为 DBNull。", e)
-                End Try
+                Return CType(Me(Me.tableObjectType_List.Obj_TypeColumn),String)
             End Get
             Set
-                Me(Me.tableObject_List.Obj_TypeColumn) = value
+                Me(Me.tableObjectType_List.Obj_TypeColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Obj_Name() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableObject_List.Obj_NameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("表““Object_List””中列““Obj_Name””的值为 DBNull。", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableObject_List.Obj_NameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Obj_Sup() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableObject_List.Obj_SupColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("表““Object_List””中列““Obj_Sup””的值为 DBNull。", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableObject_List.Obj_SupColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCode4Null() As Boolean
-            Return Me.IsNull(Me.tableObject_List.Code4Column)
+        Public Function IsIDNull() As Boolean
+            Return Me.IsNull(Me.tableObjectType_List.IDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCode4Null()
-            Me(Me.tableObject_List.Code4Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCode9Null() As Boolean
-            Return Me.IsNull(Me.tableObject_List.Code9Column)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCode9Null()
-            Me(Me.tableObject_List.Code9Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsObj_TypeNull() As Boolean
-            Return Me.IsNull(Me.tableObject_List.Obj_TypeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetObj_TypeNull()
-            Me(Me.tableObject_List.Obj_TypeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsObj_NameNull() As Boolean
-            Return Me.IsNull(Me.tableObject_List.Obj_NameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetObj_NameNull()
-            Me(Me.tableObject_List.Obj_NameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsObj_SupNull() As Boolean
-            Return Me.IsNull(Me.tableObject_List.Obj_SupColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetObj_SupNull()
-            Me(Me.tableObject_List.Obj_SupColumn) = Global.System.Convert.DBNull
+        Public Sub SetIDNull()
+            Me(Me.tableObjectType_List.IDColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -737,16 +611,16 @@ Partial Public Class ObjectList_DataSet
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Class Object_ListRowChangeEvent
+    Public Class ObjectType_ListRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As Object_ListRow
+        Private eventRow As ObjectType_ListRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub New(ByVal row As Object_ListRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As ObjectType_ListRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -754,7 +628,7 @@ Partial Public Class ObjectList_DataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Row() As Object_ListRow
+        Public ReadOnly Property Row() As ObjectType_ListRow
             Get
                 Return Me.eventRow
             End Get
@@ -770,7 +644,7 @@ Partial Public Class ObjectList_DataSet
     End Class
 End Class
 
-Namespace ObjectList_DataSetTableAdapters
+Namespace ObjectType_List_DataSetTableAdapters
     
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
@@ -781,7 +655,7 @@ Namespace ObjectList_DataSetTableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class Object_ListTableAdapter
+    Partial Public Class ObjectType_ListTableAdapter
         Inherits Global.System.ComponentModel.Component
         
         Private WithEvents _adapter As Global.System.Data.OleDb.OleDbDataAdapter
@@ -898,65 +772,32 @@ Namespace ObjectList_DataSetTableAdapters
             Me._adapter = New Global.System.Data.OleDb.OleDbDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "Object_List"
-            tableMapping.ColumnMappings.Add("Code4", "Code4")
-            tableMapping.ColumnMappings.Add("Code9", "Code9")
+            tableMapping.DataSetTable = "ObjectType_List"
+            tableMapping.ColumnMappings.Add("ID", "ID")
             tableMapping.ColumnMappings.Add("Obj_Type", "Obj_Type")
-            tableMapping.ColumnMappings.Add("Obj_Name", "Obj_Name")
-            tableMapping.ColumnMappings.Add("Obj_Sup", "Obj_Sup")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `Object_List` WHERE ((`ID` = ?) AND ((? = 1 AND `Code4` IS NULL) OR ("& _ 
-                "`Code4` = ?)) AND ((? = 1 AND `Code9` IS NULL) OR (`Code9` = ?)) AND ((? = 1 AND"& _ 
-                " `Obj_Type` IS NULL) OR (`Obj_Type` = ?)) AND ((? = 1 AND `Obj_Name` IS NULL) OR"& _ 
-                " (`Obj_Name` = ?)) AND ((? = 1 AND `Obj_Sup` IS NULL) OR (`Obj_Sup` = ?)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `ObjectType_List` WHERE (((? = 1 AND `ID` IS NULL) OR (`ID` = ?)) AND"& _ 
+                " (`Obj_Type` = ?))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Code4", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Code4", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Code9", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Code9", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Type", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Name", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Name", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Sup", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Sup", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO `Object_List` (`Code4`, `Code9`, `Obj_Type`, `Obj_Name`, `Obj_Sup`) V"& _ 
-                "ALUES (?, ?, ?, ?, ?)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `ObjectType_List` (`Obj_Type`) VALUES (?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Code4", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Code9", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Name", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Sup", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE `Object_List` SET `Code4` = ?, `Code9` = ?, `Obj_Type` = ?, `Obj_Name` = ?"& _ 
-                ", `Obj_Sup` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `Code4` IS NULL) OR (`Code4` ="& _ 
-                " ?)) AND ((? = 1 AND `Code9` IS NULL) OR (`Code9` = ?)) AND ((? = 1 AND `Obj_Typ"& _ 
-                "e` IS NULL) OR (`Obj_Type` = ?)) AND ((? = 1 AND `Obj_Name` IS NULL) OR (`Obj_Na"& _ 
-                "me` = ?)) AND ((? = 1 AND `Obj_Sup` IS NULL) OR (`Obj_Sup` = ?)))"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `ObjectType_List` SET `Obj_Type` = ? WHERE (((? = 1 AND `ID` IS NULL) OR ("& _ 
+                "`ID` = ?)) AND (`Obj_Type` = ?))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Code4", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Code9", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Name", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Obj_Sup", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Code4", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Code4", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code4", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Code9", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Code9", Global.System.Data.OleDb.OleDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Code9", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Type", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Type", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Name", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Name", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Name", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Obj_Sup", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Obj_Sup", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Obj_Sup", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -972,7 +813,7 @@ Namespace ObjectList_DataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Code4, Code9, Obj_Type, Obj_Name, Obj_Sup FROM Object_List"
+            Me._commandCollection(0).CommandText = "SELECT ID, Obj_Type FROM ObjectType_List"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -980,7 +821,7 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As ObjectList_DataSet.Object_ListDataTable) As Integer
+        Public Overloads Overridable Function Fill(ByVal dataTable As ObjectType_List_DataSet.ObjectType_ListDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -993,9 +834,9 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As ObjectList_DataSet.Object_ListDataTable
+        Public Overloads Overridable Function GetData() As ObjectType_List_DataSet.ObjectType_ListDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As ObjectList_DataSet.Object_ListDataTable = New ObjectList_DataSet.Object_ListDataTable()
+            Dim dataTable As ObjectType_List_DataSet.ObjectType_ListDataTable = New ObjectType_List_DataSet.ObjectType_ListDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
@@ -1003,15 +844,15 @@ Namespace ObjectList_DataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As ObjectList_DataSet.Object_ListDataTable) As Integer
+        Public Overloads Overridable Function Update(ByVal dataTable As ObjectType_List_DataSet.ObjectType_ListDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As ObjectList_DataSet) As Integer
-            Return Me.Adapter.Update(dataSet, "Object_List")
+        Public Overloads Overridable Function Update(ByVal dataSet As ObjectType_List_DataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "ObjectType_List")
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1032,41 +873,13 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_Code4 As Global.System.Nullable(Of Short), ByVal Original_Code9 As Global.System.Nullable(Of Short), ByVal Original_Obj_Type As String, ByVal Original_Obj_Name As String, ByVal Original_Obj_Sup As String) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
-            If (Original_Code4.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_Code4.Value,Short)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (Original_Code9.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Code9.Value,Short)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
-            End If
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_Obj_Type As String) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(0,Object)
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_ID,Integer)
             If (Original_Obj_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Obj_Type")
             Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Obj_Type,String)
-            End If
-            If (Original_Obj_Name Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Obj_Name,String)
-            End If
-            If (Original_Obj_Sup Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Obj_Sup,String)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_Obj_Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -1087,31 +900,11 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Code4 As Global.System.Nullable(Of Short), ByVal Code9 As String, ByVal Obj_Type As String, ByVal Obj_Name As String, ByVal Obj_Sup As String) As Integer
-            If (Code4.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Code4.Value,Short)
-            Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
-            End If
-            If (Code9 Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Code9,String)
-            End If
+        Public Overloads Overridable Function Insert(ByVal Obj_Type As String) As Integer
             If (Obj_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Obj_Type")
             Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Obj_Type,String)
-            End If
-            If (Obj_Name Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Obj_Name,String)
-            End If
-            If (Obj_Sup Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Obj_Sup,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Obj_Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -1132,66 +925,18 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal Code4 As Global.System.Nullable(Of Short), ByVal Code9 As Global.System.Nullable(Of Short), ByVal Obj_Type As String, ByVal Obj_Name As String, ByVal Obj_Sup As String, ByVal Original_ID As Integer, ByVal Original_Code4 As Global.System.Nullable(Of Short), ByVal Original_Code9 As Global.System.Nullable(Of Short), ByVal Original_Obj_Type As String, ByVal Original_Obj_Name As String, ByVal Original_Obj_Sup As String) As Integer
-            If (Code4.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Code4.Value,Short)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
-            End If
-            If (Code9.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Code9.Value,Short)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
-            End If
+        Public Overloads Overridable Function Update(ByVal Obj_Type As String, ByVal Original_ID As Integer, ByVal Original_Obj_Type As String) As Integer
             If (Obj_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Obj_Type")
             Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Obj_Type,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Obj_Type,String)
             End If
-            If (Obj_Name Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Obj_Name,String)
-            End If
-            If (Obj_Sup Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Obj_Sup,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_ID,Integer)
-            If (Original_Code4.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_Code4.Value,Short)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
-            End If
-            If (Original_Code9.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_Code9.Value,Short)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
-            End If
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(0,Object)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Original_ID,Integer)
             If (Original_Obj_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Obj_Type")
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Obj_Type,String)
-            End If
-            If (Original_Obj_Name Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_Obj_Name,String)
-            End If
-            If (Original_Obj_Sup Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Obj_Sup,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_Obj_Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -1206,6 +951,14 @@ Namespace ObjectList_DataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal Original_ID As Integer, ByVal Original_Obj_Type As String) As Integer
+            Return Me.Update(Original_Obj_Type, Original_ID, Original_Obj_Type)
         End Function
     End Class
     
@@ -1222,7 +975,7 @@ Namespace ObjectList_DataSetTableAdapters
         
         Private _updateOrder As UpdateOrderOption
         
-        Private _object_ListTableAdapter As Object_ListTableAdapter
+        Private _objectType_ListTableAdapter As ObjectType_ListTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -1244,12 +997,12 @@ Namespace ObjectList_DataSetTableAdapters
          Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
             "a", "System.Drawing.Design.UITypeEditor")>  _
-        Public Property Object_ListTableAdapter() As Object_ListTableAdapter
+        Public Property ObjectType_ListTableAdapter() As ObjectType_ListTableAdapter
             Get
-                Return Me._object_ListTableAdapter
+                Return Me._objectType_ListTableAdapter
             End Get
             Set
-                Me._object_ListTableAdapter = value
+                Me._objectType_ListTableAdapter = value
             End Set
         End Property
         
@@ -1272,9 +1025,9 @@ Namespace ObjectList_DataSetTableAdapters
                 If (Not (Me._connection) Is Nothing) Then
                     Return Me._connection
                 End If
-                If ((Not (Me._object_ListTableAdapter) Is Nothing)  _
-                            AndAlso (Not (Me._object_ListTableAdapter.Connection) Is Nothing)) Then
-                    Return Me._object_ListTableAdapter.Connection
+                If ((Not (Me._objectType_ListTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._objectType_ListTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._objectType_ListTableAdapter.Connection
                 End If
                 Return Nothing
             End Get
@@ -1289,7 +1042,7 @@ Namespace ObjectList_DataSetTableAdapters
         Public ReadOnly Property TableAdapterInstanceCount() As Integer
             Get
                 Dim count As Integer = 0
-                If (Not (Me._object_ListTableAdapter) Is Nothing) Then
+                If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -1301,14 +1054,14 @@ Namespace ObjectList_DataSetTableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateUpdatedRows(ByVal dataSet As ObjectList_DataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateUpdatedRows(ByVal dataSet As ObjectType_List_DataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._object_ListTableAdapter) Is Nothing) Then
-                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Object_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+            If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.ObjectType_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
                 If ((Not (updatedRows) Is Nothing)  _
                             AndAlso (0 < updatedRows.Length)) Then
-                    result = (result + Me._object_ListTableAdapter.Update(updatedRows))
+                    result = (result + Me._objectType_ListTableAdapter.Update(updatedRows))
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
@@ -1320,13 +1073,13 @@ Namespace ObjectList_DataSetTableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateInsertedRows(ByVal dataSet As ObjectList_DataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateInsertedRows(ByVal dataSet As ObjectType_List_DataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._object_ListTableAdapter) Is Nothing) Then
-                Dim addedRows() As Global.System.Data.DataRow = dataSet.Object_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+            If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.ObjectType_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
                             AndAlso (0 < addedRows.Length)) Then
-                    result = (result + Me._object_ListTableAdapter.Update(addedRows))
+                    result = (result + Me._objectType_ListTableAdapter.Update(addedRows))
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
@@ -1338,13 +1091,13 @@ Namespace ObjectList_DataSetTableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateDeletedRows(ByVal dataSet As ObjectList_DataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateDeletedRows(ByVal dataSet As ObjectType_List_DataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._object_ListTableAdapter) Is Nothing) Then
-                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Object_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+            If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.ObjectType_List.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
-                    result = (result + Me._object_ListTableAdapter.Update(deletedRows))
+                    result = (result + Me._objectType_ListTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -1382,15 +1135,15 @@ Namespace ObjectList_DataSetTableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overridable Function UpdateAll(ByVal dataSet As ObjectList_DataSet) As Integer
+        Public Overridable Function UpdateAll(ByVal dataSet As ObjectType_List_DataSet) As Integer
             If (dataSet Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dataSet")
             End If
             If (dataSet.HasChanges = false) Then
                 Return 0
             End If
-            If ((Not (Me._object_ListTableAdapter) Is Nothing)  _
-                        AndAlso (Me.MatchTableAdapterConnection(Me._object_ListTableAdapter.Connection) = false)) Then
+            If ((Not (Me._objectType_ListTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._objectType_ListTableAdapter.Connection) = false)) Then
                 Throw New Global.System.ArgumentException("由 TableAdapterManager 管理的所有 TableAdapter 必须使用相同的连接字符串。")
             End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
@@ -1424,13 +1177,13 @@ Namespace ObjectList_DataSetTableAdapters
             Try 
                 '---- Prepare for update -----------
                 '
-                If (Not (Me._object_ListTableAdapter) Is Nothing) Then
-                    revertConnections.Add(Me._object_ListTableAdapter, Me._object_ListTableAdapter.Connection)
-                    Me._object_ListTableAdapter.Connection = CType(workConnection,Global.System.Data.OleDb.OleDbConnection)
-                    Me._object_ListTableAdapter.Transaction = CType(workTransaction,Global.System.Data.OleDb.OleDbTransaction)
-                    If Me._object_ListTableAdapter.Adapter.AcceptChangesDuringUpdate Then
-                        Me._object_ListTableAdapter.Adapter.AcceptChangesDuringUpdate = false
-                        adaptersWithAcceptChangesDuringUpdate.Add(Me._object_ListTableAdapter.Adapter)
+                If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._objectType_ListTableAdapter, Me._objectType_ListTableAdapter.Connection)
+                    Me._objectType_ListTableAdapter.Connection = CType(workConnection,Global.System.Data.OleDb.OleDbConnection)
+                    Me._objectType_ListTableAdapter.Transaction = CType(workTransaction,Global.System.Data.OleDb.OleDbTransaction)
+                    If Me._objectType_ListTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._objectType_ListTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._objectType_ListTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -1493,9 +1246,9 @@ Namespace ObjectList_DataSetTableAdapters
                 If workConnOpened Then
                     workConnection.Close
                 End If
-                If (Not (Me._object_ListTableAdapter) Is Nothing) Then
-                    Me._object_ListTableAdapter.Connection = CType(revertConnections(Me._object_ListTableAdapter),Global.System.Data.OleDb.OleDbConnection)
-                    Me._object_ListTableAdapter.Transaction = Nothing
+                If (Not (Me._objectType_ListTableAdapter) Is Nothing) Then
+                    Me._objectType_ListTableAdapter.Connection = CType(revertConnections(Me._objectType_ListTableAdapter),Global.System.Data.OleDb.OleDbConnection)
+                    Me._objectType_ListTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter

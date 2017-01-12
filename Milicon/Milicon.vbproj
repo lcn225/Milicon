@@ -106,11 +106,6 @@
     <Compile Include="Maintenance\Maintenance_ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ObjectList_DataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -132,13 +127,15 @@
     <Compile Include="ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ObjectList_DataSet.vb">
-      <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ObjectList_DataSet1.Designer.vb">
+    <Compile Include="ObjectList_DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
+      <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectType_List_DataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Signin.Designer.vb">
       <DependentUpon>Signin.vb</DependentUpon>
@@ -179,6 +176,16 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
     <None Include="ObjectList_DataSet.xsc">
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </None>
@@ -190,26 +197,16 @@
     <None Include="ObjectList_DataSet.xss">
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    <None Include="ObjectType_List_DataSet.xsc">
+      <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="App.config" />
-    <None Include="ObjectList_DataSet1.xsc">
-      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="ObjectList_DataSet1.xsd">
+    <None Include="ObjectType_List_DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ObjectList_DataSet1.Designer.vb</LastGenOutput>
+      <LastGenOutput>ObjectType_List_DataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ObjectList_DataSet1.xss">
-      <DependentUpon>ObjectList_DataSet1.xsd</DependentUpon>
+    <None Include="ObjectType_List_DataSet.xss">
+      <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </None>
     <None Include="TestObjectName_DataSet.xsc">
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>

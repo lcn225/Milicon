@@ -7,46 +7,39 @@ Public Class Maintenance_ObjectList
 
     End Sub
 
-    Private Function RowMax() As Integer
-
+    Public Function DB_RowCount(ByVal TableName As String) As Integer
         Dim Max As Integer = 0
         Dim da As OleDbDataAdapter
         Dim ds As DataSet
-        Dim cn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\192.168.2.100\DataBase\Milicon.mdb")
-        Dim sql As String = "SELECT Count(Object_List.Code4) AS [Row Count] FROM Object_List"
+        'Dim sql As String = "SELECT Count(Object_List.Code4) AS [Row Count] FROM Object_List"
+        Dim sql As String = "SELECT * FROM " + TableName
 
-        da = New OleDbDataAdapter(sql, cn)
+        Signin.DBcon()
+
+        da = New OleDbDataAdapter(sql, Signin.cn)
         ds = New DataSet
 
         da.Fill(ds, "result")
 
-        Max = ds.Tables(0).Rows(0)(0).ToString
+        'Max = ds.Tables(0).Rows(0)(0).ToString
+        Max = ds.Tables(0).Rows.Count
 
         Return Max
+        Signin.cn.Close()
+
     End Function
-    '获取数据库当前记录数
+    '输入表名，返回记录数
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.Close()
-        MaintenanceMainMenu.Show()
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Me.Object_ListTableAdapter.Fill(Me.ObjectList_DataSet.Object_List)
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub UpdateNewDate()
+        Signin.DBcon()
 
         Dim tempStrSQL As String
-        Dim cn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\192.168.2.100\DataBase\Milicon.mdb")
-        cn.Open()
         Dim i As Integer = 0
 
-        'RowMax为当前DataGridView中最大行号
-
-        For i = RowMax() To Me.ObjectList_DataGridView.Rows.Count
+        For i = DB_RowCount("Object_List") To Me.ObjectList_DataGridView.Rows.Count
+            'i从数据库记录数到DGV行数递增
             If ObjectList_DataGridView.Rows(i).Cells(2).Value = "" Then
+                '判断是否填入新行
                 Exit For
             ElseIf True Then
                 Dim Code4 As String = ObjectList_DataGridView.Rows(i).Cells(0).Value.ToString.Trim
@@ -57,11 +50,32 @@ Public Class Maintenance_ObjectList
 
                 Dim SendValues = "('" + Code4 + "','" + Code9 + "','" + Obj_Name + "','" + Obj_Sup + "','" + Obj_Type + "')"
                 tempStrSQL = "INSERT INTO Object_List VALUES " + SendValues
-                Dim cmd As OleDbCommand = New OleDbCommand(tempStrSQL, cn)
+
+                Dim cmd As OleDbCommand = New OleDbCommand(tempStrSQL, Signin.cn)
                 cmd.ExecuteNonQuery()
+                '依次将DGV每行数据填入cmd中
             End If
         Next
         MessageBox.Show("保存成功", "信息")
-        cn.Close()
+        Signin.cn.Close()
     End Sub
+    '将新增数据填入DB中
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+        MaintenanceMainMenu.Show()
+    End Sub
+    '点击关闭按钮关闭
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Me.Object_ListTableAdapter.Fill(Me.ObjectList_DataSet.Object_List)
+
+    End Sub
+    '点击取消按钮取消输入（重新读取）
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        UpdateNewDate()
+    End Sub
+    '点击登录按钮，将新增数据填入DB中
+
 End Class

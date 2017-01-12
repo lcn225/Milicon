@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class Signin
 
-    Dim cn As OleDbConnection
+    Public cn As OleDbConnection
     Dim da As OleDbDataAdapter
     Dim ds As DataSet
 
@@ -28,7 +28,7 @@ Public Class Signin
     End Sub
     '重置输入（配合确定/取消按钮）
 
-    Private Sub DBcon()
+    Public Sub DBcon()
         Dim cnStr As String = "Provider=" + ini.GetIniString("DBconnect", "Provider", "Microsoft.Jet.OLEDB.4.0") + ";Data Source=" + ini.GetIniString("DBconnect", "Source", "\\192.168.2.100\DataBase\Milicon.mdb") + ";Persist Security Info=" + ini.GetIniString("DBconnect", "Persist Security Info", "False")
         '根据INI内容定义链接字符串
         cn = New OleDbConnection(cnStr)
