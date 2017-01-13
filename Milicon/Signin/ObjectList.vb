@@ -34,7 +34,23 @@ Public Class ObjectList
     '用材料类型列表填充下拉列表
 
     Private Sub FillDGV()
-        Dim sql As String = "select Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, Signin.cn)
+        Dim ds As DataSet = New DataSet
+        '准备查询所有材料的ID与名称与厂商
+
+        da.Fill(ds, "result")
+
+        ObjectList_DataGridView.DataSource = ds.Tables(0)
+        ObjectList_DataGridView.Columns(0).Visible = False
+        '隐藏第一列“ID”
+
+    End Sub
+    '参数为空时，该方法用TYPE表内全部数据填充DGV
+
+    Private Sub FillDGV(ByVal Type As String)
+
+        Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
         Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, Signin.cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料名称与厂商
@@ -42,8 +58,11 @@ Public Class ObjectList
         da.Fill(ds, "result")
 
         ObjectList_DataGridView.DataSource = ds.Tables(0)
+        ObjectList_DataGridView.Columns(0).Visible = False
+        '隐藏第一列“ID”
 
     End Sub
+    '参数为材料种类时，该方法使DGV仅显示全部该种类材料
 
     Private Sub ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -64,8 +83,10 @@ Public Class ObjectList
 
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
         SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
-        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
-        '按OK后将选中行的第一单元格数据传输至规格值输入框
+        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
+        '按OK后将选中行的第三单元格数据传输至规格值输入框
+        Signin.ID_Object = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
+        '将选中材料的ID赋予Signin的ID参数（查询用）
         Me.Close()
     End Sub
     '点击OK选中材料名称
@@ -77,12 +98,31 @@ Public Class ObjectList
 
     Private Sub ObjectList_DataGridView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ObjectList_DataGridView.MouseDoubleClick
         SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
-        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
-        '按OK后将选中行的第一单元格数据传输至规格值输入框
+        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
+        '按OK后将选中行的第三单元格数据传输至规格值输入框
+        Signin.ID_Object = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
+        '将选中材料的ID赋予Signin的ID参数（查询用）
         Me.Close()
     End Sub
-
     '双击选中材料名称
 
+    Private Sub ObjectType_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ObjectType_ComboBox.SelectedIndexChanged
+
+        Dim selected As String = ObjectType_ComboBox.SelectedItem.ToString
+        '获取变更后所选字符串
+
+        If selected = "所有材料" Then
+            FillDGV()
+            '如果所选为所有材料时，DGV显示所有材料
+        Else
+            FillDGV(selected)
+            '否则显示所选种类材料
+        End If
+    End Sub
+    '当改变下拉列表选择时，改变DGV显示
+
+    Private Sub ObjectList_Close() Handles MyBase.Closing
+        Signin.Temp_Label.Text = Signin.ID_Object
+    End Sub
 
 End Class

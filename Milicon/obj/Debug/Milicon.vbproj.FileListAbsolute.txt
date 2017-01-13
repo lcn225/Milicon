@@ -9,7 +9,6 @@ C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Mil
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.xml
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.pdb
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Signin.resources
-C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\bin\Debug\Milicon.mdb
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.ObjectList.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.vbprojResolveAssemblyReference.cache
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.MaintenanceMainMenu.resources

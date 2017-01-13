@@ -5,6 +5,8 @@ Public Class Signin
     Dim da As OleDbDataAdapter
     Dim ds As DataSet
 
+    Public ID_Object As Integer = 0
+
     Private Sub TextFormat()
 
         Me.Text = ini.GetIniString("Signin", "Title", "N/A")
@@ -36,10 +38,11 @@ Public Class Signin
     End Sub
     '链接数据库
 
+
     Private Sub DisaplyObjectFormat(Object_Name As String)
         DBcon()
 
-        Dim sql As String = "select Obj_name as 材料名称,Sup as 供应商 from Object_List where Obj_name='" + Object_Name + "'"
+        Dim sql As String = "select Obj_name as 材料名称,Obj_Sup as 供应商 from Object_List where Obj_name='" + Object_Name + "'"
 
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet

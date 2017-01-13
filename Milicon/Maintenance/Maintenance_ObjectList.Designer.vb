@@ -48,6 +48,7 @@ Partial Class Maintenance_ObjectList
         Me.ObjectList_DataGridView.DataSource = Me.ObjectListBindingSource
         Me.ObjectList_DataGridView.Location = New System.Drawing.Point(43, 30)
         Me.ObjectList_DataGridView.Name = "ObjectList_DataGridView"
+        Me.ObjectList_DataGridView.RowHeadersVisible = False
         Me.ObjectList_DataGridView.RowTemplate.Height = 23
         Me.ObjectList_DataGridView.Size = New System.Drawing.Size(484, 224)
         Me.ObjectList_DataGridView.TabIndex = 0

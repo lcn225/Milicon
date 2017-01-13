@@ -121,10 +121,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ObjectList.Designer.vb">
+    <Compile Include="Signin\ObjectList.Designer.vb">
       <DependentUpon>ObjectList.vb</DependentUpon>
     </Compile>
-    <Compile Include="ObjectList.vb">
+    <Compile Include="Signin\ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ObjectList_DataSet.Designer.vb">
@@ -137,10 +137,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Signin.Designer.vb">
+    <Compile Include="Signin\Signin.Designer.vb">
       <DependentUpon>Signin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Signin.vb">
+    <Compile Include="Signin\Signin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TestObjectName_DataSet.Designer.vb">
@@ -165,10 +165,10 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ObjectList.resx">
+    <EmbeddedResource Include="Signin\ObjectList.resx">
       <DependentUpon>ObjectList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Signin.resx">
+    <EmbeddedResource Include="Signin\Signin.resx">
       <DependentUpon>Signin.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -231,11 +231,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Milicon.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
