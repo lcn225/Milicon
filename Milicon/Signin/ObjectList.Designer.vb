@@ -76,6 +76,7 @@ Partial Class ObjectList
         Me.ObjectType_ComboBox.Name = "ObjectType_ComboBox"
         Me.ObjectType_ComboBox.Size = New System.Drawing.Size(177, 20)
         Me.ObjectType_ComboBox.TabIndex = 3
+        Me.ObjectType_ComboBox.Text = "所有材料"
         '
         'ObjectListBindingSource
         '

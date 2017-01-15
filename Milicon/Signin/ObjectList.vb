@@ -81,27 +81,29 @@ Public Class ObjectList
     End Sub
     '窗体初始化
 
-    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+    Private Sub PassSelected()
         SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
-        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
-        '按OK后将选中行的第三单元格数据传输至规格值输入框
         Signin.ID_Object = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
         '将选中材料的ID赋予Signin的ID参数（查询用）
+        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
+        '按OK后将选中行的第三单元格数据传输至规格值输入框
+    End Sub
+    '将选中数据传给Signin窗口相关
+
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+        PassSelected()
         Me.Close()
     End Sub
     '点击OK选中材料名称
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+
         Me.Close()
     End Sub
-    '点取消按钮直接退出
+    '点取消按钮后直接退出
 
     Private Sub ObjectList_DataGridView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ObjectList_DataGridView.MouseDoubleClick
-        SelectRowNumber = Me.ObjectList_DataGridView.CurrentRow.Index
-        Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
-        '按OK后将选中行的第三单元格数据传输至规格值输入框
-        Signin.ID_Object = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(0).Value
-        '将选中材料的ID赋予Signin的ID参数（查询用）
+        PassSelected()
         Me.Close()
     End Sub
     '双击选中材料名称
@@ -122,7 +124,8 @@ Public Class ObjectList
     '当改变下拉列表选择时，改变DGV显示
 
     Private Sub ObjectList_Close() Handles MyBase.Closing
-        Signin.Temp_Label.Text = Signin.ID_Object
+        'Signin.Temp_Label.Text = Signin.ID_Object
+        '临时调试刷新用，完成后可删除上行
     End Sub
 
 End Class

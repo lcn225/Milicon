@@ -6,6 +6,8 @@ Public Class Signin
     Dim ds As DataSet
 
     Public ID_Object As Integer = 0
+    Private TI_ds As DataSet = New DataSet
+    Dim TestLots As String
 
     Private Sub TextFormat()
 
@@ -24,9 +26,20 @@ Public Class Signin
 
     Private Sub SignReset()
         Me.NameInput_TextBox.Text = ""
-        Me.ProDate_TextBox.Text = ""
-        Me.TestDate_TextBox.Text = ""
+        Me.ProDate_DateTimePicker.Text = ""
+        Me.TestDate_DateTimePicker.Text = ""
         Me.Tester_TextBox.Text = ""
+        '重置textbox
+
+        Dim CountColumns As Integer = TestDateInput_DataGridView.Columns.Count
+        TestDateInput_DataGridView.DataSource = vbNull
+        '清除DGV所有数据
+        For i = CountColumns - 1 To 0 Step -1
+            TestDateInput_DataGridView.Columns.RemoveAt(i)
+        Next
+        '清除DGV所有列
+        '重置DGV
+
     End Sub
     '重置输入（配合确定/取消按钮）
 
@@ -38,41 +51,155 @@ Public Class Signin
     End Sub
     '链接数据库
 
-
-    Private Sub DisaplyObjectFormat(Object_Name As String)
+    Private Function GetObjType(ByVal ID_Obj As String) As String
         DBcon()
 
-        Dim sql As String = "select Obj_name as 材料名称,Obj_Sup as 供应商 from Object_List where Obj_name='" + Object_Name + "'"
-
-        da = New OleDbDataAdapter(sql, cn)
+        Dim sql1 As String = "Select Obj_Type from Object_List where ID=" + ID_Obj
+        da = New OleDbDataAdapter(sql1, cn)
         ds = New DataSet
-
         da.Fill(ds, "result")
-        TestDateInput_DataGridView.DataSource = ds.Tables(0)
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据ID查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据ID查找材料种类，输入ID，返回字符串
+
+    Private Function GetTableName_Type(ByVal ID_Obj As String) As DataSet
+        DBcon()
+        Dim result As DataSet
+
+        Dim Type_Obj As String = GetObjType(ID_Obj)
+        '根据ID查找材料种类
+
+        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
+        da = New OleDbDataAdapter(sql2, cn)
+        result = New DataSet
+        da.Fill(result, "GetTableName_Type")
+        'Dim Type As String = ds.Tables(0).Rows(0)(0).ToString
+
+        '根据材料种类查找表名
+        Return result
+        cn.Close()
+
+    End Function
+    '根据ID查找表名，返回DS
+
+    Private Function GetTI(ByVal ID_Obj As String) As DataSet
+        DBcon()
+        Dim Type_ds As DataSet
+        Type_ds = GetTableName_Type(ID_Obj)
+        '根据ID返回TYPE相关信息（主要是表名）
+
+        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("TableName").ToString
+        Dim sql As String = "select * from " + TableName_Type + " where ID=1"
+        '根据ID在材料测试项目表中查询记录
+        da = New OleDbDataAdapter(sql, cn)
+        da.Fill(Me.TI_ds, "GetTIInfo")
+
+        Return Me.TI_ds
+
+        cn.Close()
+    End Function
+    '根据ID返回测试信息ds
+
+    Private Sub ADD_TestDateInput_DataGridView(ByVal i As Integer)
+        DBcon()
+
+        Dim TI_Name As String
+        Dim sql_ds_TIName As String
+
+        sql_ds_TIName = "TI" + i.ToString + "_Name"
+        TI_Name = TI_ds.Tables(0).Rows(0)(sql_ds_TIName).ToString
+        '获取字段名为"TIi_Name"的值，i为参数
+
+        TestDateInput_DataGridView.Rows.Add()
+        TestDateInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
+        '增添一行，标题为测试项目
+
+        cn.Close()
+
+    End Sub
+    'DGV添加行，每一行标题为各测试项目
+
+    Private Sub DisaplyObjectFormat(ByVal ID_Obj As String)
+        DBcon()
+
+        Dim i As Integer
+        Dim TI_Num As String = TI_ds.Tables(0).Rows(0)("TI_Num").ToString
+        '获得测试项目数量
+
+        'TestDateInput_DataGridView.DataSource = ds.Tables(0)
+        TestDateInput_DataGridView.Columns.Add("1", "①")
+        TestDateInput_DataGridView.Columns.Add("2", "②")
+        TestDateInput_DataGridView.Columns.Add("3", "③")
+        '新增三列待填
+
+
+        For i = 1 To TI_Num
+            ADD_TestDateInput_DataGridView(i)
+        Next
+        '添加若干行，每一行标题为各测试项目
 
     End Sub
     '输入测试材料规格，显示登录界面
 
-    Private Function GetObjectTestInfo(Object_Name As String) As String
-
-        Return 0
-    End Function
-
-    Private Function GetObjectFormat(Type As String, TestObject As Integer) As String
+    Private Sub SigninTestInfo()
 
         DBcon()
 
-        Dim sql As String = "select Sup from Object_List where Obj_name='" + TestObject + "'"
+        Dim LoginNo As String = Me.TestLots
+        Dim Obj_Name As String = Me.TI_ds.Tables(0).Rows(0)("Obj_Name").ToString
+        Dim Obj_Type As String = GetObjType(Me.ID_Object)
+        Dim ProDate As String = Me.ProDate_DateTimePicker.Text
+        Dim Lots As String = Me.Lots_TextBox.Text
+        Dim TestDate As String = Me.TestDate_DateTimePicker.Text
+        Dim Tester As String = Me.Tester_TextBox.Text
 
-        da = New OleDbDataAdapter(sql, cn)
+        Dim sql As String = "INSERT INTO Data_List VALUES ('" + LoginNo + "','" + Obj_Type + "','" + Obj_Name + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "')"
+        Dim cmd As OleDbCommand = New OleDbCommand(sql, cn)
 
-        ds = New DataSet
+        cn.Open()
+        cmd.ExecuteNonQuery()
+        cn.Close()
 
-        da.Fill(ds, "result")
+    End Sub
+    '登录测试信息（批号、日期等）
 
-        Return 0
-    End Function
-    '此函数暂时搁置
+    Private Sub SigninTestData()
+        DBcon()
+
+        Dim sql As String
+        Dim cmd As OleDbCommand
+
+        Dim Value(3) As String
+        Dim Str_Col As String = "LoginNo"
+        Dim Str_Val As String = "'" + Me.TestLots + "'"
+        Dim RowsCount As Integer = TestDateInput_DataGridView.RowCount
+        '获取DGV总行数
+
+        cn.Open()
+
+        For i = 0 To RowsCount - 1
+            For j = 0 To 2
+                Str_Col = Str_Col + ",Value" + （i + 1）.ToString + "_" + （j + 1）.ToString
+                If TestDateInput_DataGridView.Rows(i).Cells(j).Value = "" Then
+                    Str_Val = Str_Val + ",'0'"
+                Else
+                    Str_Val = Str_Val + ",'" + TestDateInput_DataGridView.Rows(i).Cells(j).Value + "'"
+                End If
+            Next
+        Next
+        'INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
+        sql = "INSERT INTO Data_RawSteel (" + Str_Col + ") VALUES (" + Str_Val + ")"
+        cmd = New OleDbCommand(sql, cn)
+        cmd.ExecuteNonQuery()
+
+        cn.Close()
+
+    End Sub
 
     Private Function GetTestLots() As String
         'Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
@@ -103,10 +230,14 @@ Public Class Signin
     '获取该次登录的批号
 
     Private Sub Signin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         TextFormat()
         '初始化界面文本
-        Me.TestLots_Label.Text = "测试编号： " & GetTestLots() '获得测试编号
+
+        Signin_Button.Enabled = False
+        '确认材料名之前禁用登录按钮
+
+        Me.TestLots = GetTestLots()
+        Me.TestLots_Label.Text = "测试编号： " & Me.TestLots '获得测试编号
 
     End Sub
     '加载登录功能窗口时初始化UI，获得并显示测试编号
@@ -124,16 +255,23 @@ Public Class Signin
 
     Private Sub ObjectInput_Button_Click(sender As Object, e As EventArgs) Handles ObjectInput_Button.Click
 
-        Dim Object_Name = NameInput_TextBox.Text
+        TI_ds = GetTI(ID_Object)
+        '将TI相关信息填入TI_DS
 
+        Dim Object_Name = NameInput_TextBox.Text
         If Object_Name = "" Then
             MessageBox.Show("请输入材料名称")
+            '如果未填材料名，报错提示
         Else
-            DisaplyObjectFormat(Object_Name)
+            DisaplyObjectFormat(ID_Object)
+            '否则显示实验相关项目
         End If
 
+        Me.Signin_Button.Enabled = True
+        '确定材料名后启用登录按钮
+
     End Sub
-    '根据输入的材料名称显示不同的输入项目
+    '点击确定，根据输入的材料名称显示不同的输入项目
 
     Private Sub Exit_Button_Click(sender As Object, e As EventArgs) Handles Exit_Button.Click
         Me.Close()
@@ -143,17 +281,35 @@ Public Class Signin
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         SignReset()
-        TestDateInput_DataGridView.Rows.Clear()
     End Sub
     '点击重置按钮重置所有textbox
 
+    Private Sub Signin()
+        SigninTestInfo()
+        SigninTestData()
+        '之后加一个成功一个失败时的防错
+
+    End Sub
+
     Private Sub Signin_Button_Click(sender As Object, e As EventArgs) Handles Signin_Button.Click
         Dim SigninCheck As String = ""
+
+        '之后可以加一个检测未输入项目的方法，在messagebox中显示未输入项目
+
         SigninCheck = MessageBox.Show(“是否输入完毕？”, “登录确认”, MessageBoxButtons.YesNo)
         If SigninCheck = 6 Then
+            Signin()
             SignReset()
-            TestDateInput_DataGridView.Rows.Clear()
         End If
+        '如果返回值为6，则为选择“是”
+
+        MessageBox.Show("登录成功")
+
+        Signin_Button.Enabled = False
+        '确认材料名之前禁用登录按钮
+
+        Me.TestLots = GetTestLots()
+        Me.TestLots_Label.Text = "测试编号： " & Me.TestLots '获得测试编号
 
     End Sub
     '点击登录按钮登录数据
