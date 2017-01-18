@@ -3,21 +3,20 @@ Imports System.Data.OleDb
 
 Public Class ObjectList
 
-    Dim SelectRowNumber As String = 0
-    '默认选中第一行
+    Dim SelectRowNumber As String
 
     Private Sub FillComboBoxByObjType()
         Me.ObjectType_ComboBox.Items.Add("所有材料")
         '在下拉列表中增加第一行，全部材料
 
-        'Signin.cn.Open()
+        'cn.Open()
 
         Dim sql As String = "select Obj_Type from ObjectType_List"
-        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, Signin.cn)
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料类型
 
-        da.Fill(ds, "result")
+        da.Fill(ds, "FillComboBoxByObjType")
         Dim RowsCount = ds.Tables(0).Rows.Count
         '建立数据集，统计记录数
 
@@ -28,18 +27,21 @@ Public Class ObjectList
         Next
         '将查询结果（数据集）添加到Combobox中
 
-        Signin.cn.Close()
+        ObjectType_ComboBox.SelectedIndex = 0
+        '默认选中第一个
+
+        cn.Close()
 
     End Sub
     '用材料类型列表填充下拉列表
 
     Private Sub FillDGV()
         Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
-        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, Signin.cn)
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料的ID与名称与厂商
 
-        da.Fill(ds, "result")
+        da.Fill(ds, "FillDGV")
 
         ObjectList_DataGridView.DataSource = ds.Tables(0)
         ObjectList_DataGridView.Columns(0).Visible = False
@@ -51,11 +53,11 @@ Public Class ObjectList
     Private Sub FillDGV(ByVal Type As String)
 
         Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
-        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, Signin.cn)
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料名称与厂商
 
-        da.Fill(ds, "result")
+        da.Fill(ds, "FillDGV")
 
         ObjectList_DataGridView.DataSource = ds.Tables(0)
         ObjectList_DataGridView.Columns(0).Visible = False
@@ -66,6 +68,9 @@ Public Class ObjectList
 
     Private Sub ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        SelectRowNumber = 0
+        '默认选中第一行
+
         'TODO: 这行代码将数据加载到表“ObjectList_DataSet.Object_List”中。您可以根据需要移动或删除它。
         Me.Object_ListTableAdapter.Fill(Me.ObjectList_DataSet.Object_List)
 
@@ -73,10 +78,10 @@ Public Class ObjectList
         Me.OK_Button.Text = ini.GetIniString("ObjectList", "Button1", "OK")
         Me.Cancel_Button.Text = ini.GetIniString("ObjectList", "Button2", "Cancel")
 
-        Signin.DBcon()
-
         FillComboBoxByObjType()
+        '填充ComboBox
         FillDGV()
+        '填充DGV
 
     End Sub
     '窗体初始化

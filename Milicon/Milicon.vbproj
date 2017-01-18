@@ -121,18 +121,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MiliconModule.vb" />
+    <Compile Include="Search\SearchData.Designer.vb">
+      <DependentUpon>SearchData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Search\SearchData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search\TestResult.Designer.vb">
+      <DependentUpon>TestResult.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Search\TestResult.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Signin\ObjectList.Designer.vb">
       <DependentUpon>ObjectList.vb</DependentUpon>
     </Compile>
     <Compile Include="Signin\ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ObjectList_DataSet.Designer.vb">
+    <Compile Include="Signin\ObjectList_DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ObjectType_List_DataSet.Designer.vb">
+    <Compile Include="Signin\ObjectType_List_DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
@@ -143,7 +156,7 @@
     <Compile Include="Signin\Signin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestObjectName_DataSet.Designer.vb">
+    <Compile Include="Signin\TestObjectName_DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>
@@ -164,6 +177,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search\SearchData.resx">
+      <DependentUpon>SearchData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search\TestResult.resx">
+      <DependentUpon>TestResult.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Signin\ObjectList.resx">
       <DependentUpon>ObjectList.vb</DependentUpon>
@@ -186,37 +205,37 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="ObjectList_DataSet.xsc">
+    <None Include="Signin\ObjectList_DataSet.xsc">
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="ObjectList_DataSet.xsd">
+    <None Include="Signin\ObjectList_DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ObjectList_DataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ObjectList_DataSet.xss">
+    <None Include="Signin\ObjectList_DataSet.xss">
       <DependentUpon>ObjectList_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="ObjectType_List_DataSet.xsc">
+    <None Include="Signin\ObjectType_List_DataSet.xsc">
       <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="ObjectType_List_DataSet.xsd">
+    <None Include="Signin\ObjectType_List_DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ObjectType_List_DataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ObjectType_List_DataSet.xss">
+    <None Include="Signin\ObjectType_List_DataSet.xss">
       <DependentUpon>ObjectType_List_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="TestObjectName_DataSet.xsc">
+    <None Include="Signin\TestObjectName_DataSet.xsc">
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>
     </None>
-    <None Include="TestObjectName_DataSet.xsd">
+    <None Include="Signin\TestObjectName_DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TestObjectName_DataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="TestObjectName_DataSet.xss">
+    <None Include="Signin\TestObjectName_DataSet.xss">
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>

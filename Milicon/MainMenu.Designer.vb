@@ -141,4 +141,10 @@ Partial Class MainMenu
         MaintenanceMainMenu.Show()
         Me.Hide()
     End Sub
+
+    Private Sub SearchData_Button_Click(sender As Object, e As EventArgs) Handles SearchData_Button.Click
+        SearchData.Show()
+        Me.Hide()
+
+    End Sub
 End Class

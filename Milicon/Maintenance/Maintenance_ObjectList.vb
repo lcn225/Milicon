@@ -14,9 +14,9 @@ Public Class Maintenance_ObjectList
         'Dim sql As String = "SELECT Count(Object_List.Code4) AS [Row Count] FROM Object_List"
         Dim sql As String = "SELECT * FROM " + TableName
 
-        Signin.DBcon()
+        DBcon()
 
-        da = New OleDbDataAdapter(sql, Signin.cn)
+        da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
 
         da.Fill(ds, "result")
@@ -25,13 +25,13 @@ Public Class Maintenance_ObjectList
         Max = ds.Tables(0).Rows.Count
 
         Return Max
-        Signin.cn.Close()
+        cn.Close()
 
     End Function
     '输入表名，返回记录数
 
     Private Sub UpdateNewDate()
-        Signin.DBcon()
+        DBcon()
 
         Dim tempStrSQL As String
         Dim i As Integer = 0
@@ -51,13 +51,13 @@ Public Class Maintenance_ObjectList
                 Dim SendValues = "('" + Code4 + "','" + Code9 + "','" + Obj_Name + "','" + Obj_Sup + "','" + Obj_Type + "')"
                 tempStrSQL = "INSERT INTO Object_List VALUES " + SendValues
 
-                Dim cmd As OleDbCommand = New OleDbCommand(tempStrSQL, Signin.cn)
+                Dim cmd As OleDbCommand = New OleDbCommand(tempStrSQL, cn)
                 cmd.ExecuteNonQuery()
                 '依次将DGV每行数据填入cmd中
             End If
         Next
         MessageBox.Show("保存成功", "信息")
-        Signin.cn.Close()
+        cn.Close()
     End Sub
     '将新增数据填入DB中
 

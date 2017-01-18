@@ -1,10 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Signin
 
-    Public cn As OleDbConnection
-    Dim da As OleDbDataAdapter
-    Dim ds As DataSet
-
     Public ID_Object As Integer = 0
     Private TI_ds As DataSet = New DataSet
     Dim TestLots As String
@@ -42,68 +38,6 @@ Public Class Signin
 
     End Sub
     '重置输入（配合确定/取消按钮）
-
-    Public Sub DBcon()
-        Dim cnStr As String = "Provider=" + ini.GetIniString("DBconnect", "Provider", "Microsoft.Jet.OLEDB.4.0") + ";Data Source=" + ini.GetIniString("DBconnect", "Source", "\\192.168.2.100\DataBase\Milicon.mdb") + ";Persist Security Info=" + ini.GetIniString("DBconnect", "Persist Security Info", "False")
-        '根据INI内容定义链接字符串
-        cn = New OleDbConnection(cnStr)
-        '建立链接
-    End Sub
-    '链接数据库
-
-    Private Function GetObjType(ByVal ID_Obj As String) As String
-        DBcon()
-
-        Dim sql1 As String = "Select Obj_Type from Object_List where ID=" + ID_Obj
-        da = New OleDbDataAdapter(sql1, cn)
-        ds = New DataSet
-        da.Fill(ds, "result")
-        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
-        '根据ID查找材料种类
-
-        Return Type_Obj
-
-        cn.Close()
-    End Function
-    '根据ID查找材料种类，输入ID，返回字符串
-
-    Private Function GetTableName_Type(ByVal ID_Obj As String) As DataSet
-        DBcon()
-        Dim result As DataSet
-
-        Dim Type_Obj As String = GetObjType(ID_Obj)
-        '根据ID查找材料种类
-
-        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
-        da = New OleDbDataAdapter(sql2, cn)
-        result = New DataSet
-        da.Fill(result, "GetTableName_Type")
-        'Dim Type As String = ds.Tables(0).Rows(0)(0).ToString
-
-        '根据材料种类查找表名
-        Return result
-        cn.Close()
-
-    End Function
-    '根据ID查找表名，返回DS
-
-    Private Function GetTI(ByVal ID_Obj As String) As DataSet
-        DBcon()
-        Dim Type_ds As DataSet
-        Type_ds = GetTableName_Type(ID_Obj)
-        '根据ID返回TYPE相关信息（主要是表名）
-
-        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("TableName").ToString
-        Dim sql As String = "select * from " + TableName_Type + " where ID=1"
-        '根据ID在材料测试项目表中查询记录
-        da = New OleDbDataAdapter(sql, cn)
-        da.Fill(Me.TI_ds, "GetTIInfo")
-
-        Return Me.TI_ds
-
-        cn.Close()
-    End Function
-    '根据ID返回测试信息ds
 
     Private Sub ADD_TestDateInput_DataGridView(ByVal i As Integer)
         DBcon()
@@ -146,7 +80,25 @@ Public Class Signin
     End Sub
     '输入测试材料规格，显示登录界面
 
-    Private Sub SigninTestInfo()
+    Private Function GetTI(ByVal ID_Obj As String) As DataSet
+        DBcon()
+        Dim Type_ds As DataSet
+        Type_ds = GetTableName_Type(ID_Obj)
+        '根据ID返回TYPE相关信息（主要是表名）
+
+        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("TableName").ToString
+        Dim sql As String = "select * from " + TableName_Type + " where ID=1"
+        '根据ID在材料测试项目表中查询记录
+        da = New OleDbDataAdapter(sql, cn)
+        da.Fill(Me.TI_ds, "GetTIInfo")
+
+        Return Me.TI_ds
+
+        cn.Close()
+    End Function
+    '根据ID返回测试信息ds
+
+    Private Function SigninTestInfo() As String
 
         DBcon()
 
@@ -159,20 +111,16 @@ Public Class Signin
         Dim Tester As String = Me.Tester_TextBox.Text
 
         Dim sql As String = "INSERT INTO Data_List VALUES ('" + LoginNo + "','" + Obj_Type + "','" + Obj_Name + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "')"
-        Dim cmd As OleDbCommand = New OleDbCommand(sql, cn)
 
-        cn.Open()
-        cmd.ExecuteNonQuery()
-        cn.Close()
+        Return sql
 
-    End Sub
-    '登录测试信息（批号、日期等）
+    End Function
+    '登录测试信息（批号、日期等），返回SQL语句
 
-    Private Sub SigninTestData()
+    Private Function SigninTestData() As String
         DBcon()
 
         Dim sql As String
-        Dim cmd As OleDbCommand
 
         Dim Value(3) As String
         Dim Str_Col As String = "LoginNo"
@@ -194,12 +142,11 @@ Public Class Signin
         Next
         'INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
         sql = "INSERT INTO Data_RawSteel (" + Str_Col + ") VALUES (" + Str_Val + ")"
-        cmd = New OleDbCommand(sql, cn)
-        cmd.ExecuteNonQuery()
 
-        cn.Close()
+        Return sql
 
-    End Sub
+    End Function
+    '登录测试实验数据，返回SQL语句
 
     Private Function GetTestLots() As String
         'Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
@@ -208,6 +155,7 @@ Public Class Signin
         Dim Lots As String = 0
 
         DBcon()
+
         '获取当日日期
         'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
         '调整日期，测试用
@@ -229,6 +177,12 @@ Public Class Signin
     End Function
     '获取该次登录的批号
 
+    Private Sub RefTestLots()
+        Me.TestLots = GetTestLots()
+        Me.TestLots_Label.Text = "测试编号： " & Me.TestLots '获得测试编号
+    End Sub
+    '刷新测试批号
+
     Private Sub Signin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TextFormat()
         '初始化界面文本
@@ -236,8 +190,8 @@ Public Class Signin
         Signin_Button.Enabled = False
         '确认材料名之前禁用登录按钮
 
-        Me.TestLots = GetTestLots()
-        Me.TestLots_Label.Text = "测试编号： " & Me.TestLots '获得测试编号
+        RefTestLots()
+        '刷新测试批号
 
     End Sub
     '加载登录功能窗口时初始化UI，获得并显示测试编号
@@ -285,11 +239,25 @@ Public Class Signin
     '点击重置按钮重置所有textbox
 
     Private Sub Signin()
-        SigninTestInfo()
-        SigninTestData()
+
+        Dim sql1 As String
+        Dim sql2 As String
+        Dim cmd As OleDbCommand
+
+        sql1 = SigninTestInfo()
+        sql2 = SigninTestData()
+
+        cmd = New OleDbCommand(sql1, cn)
+        cmd.ExecuteNonQuery()
+        cmd = New OleDbCommand(sql2, cn)
+        cmd.ExecuteNonQuery()
+
+        MessageBox.Show("登录成功")
+
         '之后加一个成功一个失败时的防错
 
     End Sub
+    '之后加一个成功一个失败时的防错
 
     Private Sub Signin_Button_Click(sender As Object, e As EventArgs) Handles Signin_Button.Click
         Dim SigninCheck As String = ""
@@ -298,18 +266,15 @@ Public Class Signin
 
         SigninCheck = MessageBox.Show(“是否输入完毕？”, “登录确认”, MessageBoxButtons.YesNo)
         If SigninCheck = 6 Then
+            '如果返回值为6，则为选择“是”
             Signin()
-            SignReset()
         End If
-        '如果返回值为6，则为选择“是”
-
-        MessageBox.Show("登录成功")
 
         Signin_Button.Enabled = False
         '确认材料名之前禁用登录按钮
 
-        Me.TestLots = GetTestLots()
-        Me.TestLots_Label.Text = "测试编号： " & Me.TestLots '获得测试编号
+        RefTestLots()
+        '刷新测试批号
 
     End Sub
     '点击登录按钮登录数据

@@ -30,7 +30,6 @@ Partial Class ObjectList
         Me.ObjectListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ObjectList_DataSet = New WindowsApplication1.ObjectList_DataSet()
         Me.Object_ListTableAdapter = New WindowsApplication1.ObjectList_DataSetTableAdapters.Object_ListTableAdapter()
-        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,21 +91,11 @@ Partial Class ObjectList
         '
         Me.Object_ListTableAdapter.ClearBeforeFill = True
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(363, 26)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 12)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Label1"
-        '
         'ObjectList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(626, 319)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ObjectType_ComboBox)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.OK_Button)
@@ -117,7 +106,6 @@ Partial Class ObjectList
         CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -128,5 +116,4 @@ Partial Class ObjectList
     Friend WithEvents ObjectList_DataSet As ObjectList_DataSet
     Friend WithEvents ObjectListBindingSource As BindingSource
     Friend WithEvents Object_ListTableAdapter As ObjectList_DataSetTableAdapters.Object_ListTableAdapter
-    Friend WithEvents Label1 As Label
 End Class
