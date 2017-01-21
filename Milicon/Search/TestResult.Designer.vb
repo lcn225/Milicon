@@ -22,44 +22,47 @@ Partial Class TestResult
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TestLots_Label = New System.Windows.Forms.Label()
+        Me.TestData_DataGridView = New System.Windows.Forms.DataGridView()
+        CType(Me.TestData_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Label1
+        'TestLots_Label
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(46, 31)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 12)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Label1"
+        Me.TestLots_Label.AutoSize = True
+        Me.TestLots_Label.Location = New System.Drawing.Point(46, 31)
+        Me.TestLots_Label.Name = "TestLots_Label"
+        Me.TestLots_Label.Size = New System.Drawing.Size(41, 12)
+        Me.TestLots_Label.TabIndex = 0
+        Me.TestLots_Label.Text = "Label1"
         '
-        'DataGridView1
+        'TestData_DataGridView
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(48, 90)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 23
-        Me.DataGridView1.Size = New System.Drawing.Size(482, 390)
-        Me.DataGridView1.TabIndex = 1
+        Me.TestData_DataGridView.AllowUserToAddRows = False
+        Me.TestData_DataGridView.AllowUserToDeleteRows = False
+        Me.TestData_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TestData_DataGridView.Location = New System.Drawing.Point(48, 90)
+        Me.TestData_DataGridView.Name = "TestData_DataGridView"
+        Me.TestData_DataGridView.RowHeadersVisible = False
+        Me.TestData_DataGridView.RowTemplate.Height = 23
+        Me.TestData_DataGridView.Size = New System.Drawing.Size(482, 390)
+        Me.TestData_DataGridView.TabIndex = 1
         '
         'TestResult
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(572, 583)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TestData_DataGridView)
+        Me.Controls.Add(Me.TestLots_Label)
         Me.Name = "TestResult"
         Me.Text = "TestResult"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TestData_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TestLots_Label As Label
+    Friend WithEvents TestData_DataGridView As DataGridView
 End Class

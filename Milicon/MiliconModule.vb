@@ -17,7 +17,7 @@ Module MiliconModule
     Public Function GetObjType(ByVal ID_Obj As String) As String
         DBcon()
 
-        Dim sql1 As String = "Select Obj_Type from Object_List where ID=" + ID_Obj
+        Dim sql1 As String = "Select Obj_Type from Object_List where Obj_ID=" + ID_Obj
         da = New OleDbDataAdapter(sql1, cn)
         ds = New DataSet
         da.Fill(ds, "result")
@@ -28,7 +28,7 @@ Module MiliconModule
 
         cn.Close()
     End Function
-    '根据ID查找材料种类，输入ID，返回字符串
+    '根据材料ID查找材料种类，输入ID，返回字符串
 
     Public Function GetTableName_Type(ByVal ID_Obj As String) As DataSet
         DBcon()
@@ -48,7 +48,39 @@ Module MiliconModule
         cn.Close()
 
     End Function
-    '根据ID查找表名，返回DS
+    '根据材料ID查找表名，返回DS
 
+    Public Function GetObjTypeByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+
+        Dim sql1 As String = "Select ObjectType_List.Obj_Type from Data_List, ObjectType_List where Data_List.LoginNo=" + LoginNo
+        da = New OleDbDataAdapter(sql1, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetObjTypeByLoginNo")
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据测试批号查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据测试批号查找材料种类，输入ID，返回字符串
+
+    Public Function GetTableNameByLoginNo(ByVal LoginNo As String) As DataSet
+
+        DBcon()
+        Dim result As DataSet
+
+        Dim Type_Obj As String = GetObjTypeByLoginNo(LoginNo)
+        '根据ID查找材料种类
+
+        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
+        da = New OleDbDataAdapter(sql2, cn)
+        result = New DataSet
+        da.Fill(result, "GetTableName_Type")
+
+        Return result
+    End Function
+    '根据测试批号查找表名，返回DS
 
 End Module

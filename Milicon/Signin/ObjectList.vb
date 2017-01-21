@@ -36,7 +36,7 @@ Public Class ObjectList
     '用材料类型列表填充下拉列表
 
     Private Sub FillDGV()
-        Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
         Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料的ID与名称与厂商
@@ -52,7 +52,7 @@ Public Class ObjectList
 
     Private Sub FillDGV(ByVal Type As String)
 
-        Dim sql As String = "select ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
         Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
         Dim ds As DataSet = New DataSet
         '准备查询所有材料名称与厂商

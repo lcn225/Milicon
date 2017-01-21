@@ -103,14 +103,13 @@ Public Class Signin
         DBcon()
 
         Dim LoginNo As String = Me.TestLots
-        Dim Obj_Name As String = Me.TI_ds.Tables(0).Rows(0)("Obj_Name").ToString
-        Dim Obj_Type As String = GetObjType(Me.ID_Object)
+        Dim Obj_ID As String = ID_Object
         Dim ProDate As String = Me.ProDate_DateTimePicker.Text
         Dim Lots As String = Me.Lots_TextBox.Text
         Dim TestDate As String = Me.TestDate_DateTimePicker.Text
         Dim Tester As String = Me.Tester_TextBox.Text
 
-        Dim sql As String = "INSERT INTO Data_List VALUES ('" + LoginNo + "','" + Obj_Type + "','" + Obj_Name + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "')"
+        Dim sql As String = "INSERT INTO Data_List VALUES ('" + LoginNo + "','" + Obj_ID + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "')"
 
         Return sql
 

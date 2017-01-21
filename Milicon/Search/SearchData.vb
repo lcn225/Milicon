@@ -26,6 +26,7 @@ Public Class SearchData
         da.Fill(ds, "TOP20")
 
         TestList_DataGridView.DataSource = ds.Tables(0)
+        '应插入连接关系查询
 
         cn.Close()
 
@@ -90,7 +91,7 @@ Public Class SearchData
         Dim Obj_Type As String = Me.ObjectType_ComboBox.SelectedItem.ToString
         '获取搜索条件
 
-        Dim sql As String = "Select * from Data_List where "
+        Dim sql As String = "Select Data_List.LoginNo As 测试编号, ObjectType_List.Obj_Type As 材料类型, Data_List.ProDate As 生产日期, Data_List.Lots As 批号, Data_List.TestDate As 测试日期, Data_List.Tester As 测试人 from Data_List, ObjectType_List where "
         'sql前置指令
 
         If Me.RadioButton1.Checked = True Then
@@ -159,6 +160,7 @@ Public Class SearchData
         Me.Hide()
 
     End Sub
+    '双击打开测试结果
 
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
@@ -169,4 +171,6 @@ Public Class SearchData
         TestResult.Show()
         Me.Hide()
     End Sub
+    '点击OK打开测试结果
+
 End Class
