@@ -77,10 +77,25 @@ Module MiliconModule
         Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
         da = New OleDbDataAdapter(sql2, cn)
         result = New DataSet
-        da.Fill(result, "GetTableName_Type")
+        da.Fill(result, "GetTableName")
 
         Return result
     End Function
     '根据测试批号查找表名，返回DS
+
+
+    Public Function GetTestInfoByLoginNo(ByVal LoginNo As String) As DataSet
+
+        DBcon()
+        Dim result As DataSet
+
+        Dim sql As String = "Select * from Data_List where LoginNo=" + LoginNo
+        da = New OleDbDataAdapter(sql, cn)
+        result = New DataSet
+        da.Fill(result, "GetTestInfo")
+
+        Return result
+    End Function
+    '根据测试批号查找测试信息，返回DS
 
 End Module

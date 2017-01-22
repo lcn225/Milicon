@@ -1,4 +1,5 @@
-﻿Imports System.Data.OleDb
+﻿Imports System.ComponentModel
+Imports System.Data.OleDb
 Public Class SearchData
 
     Public TestLots As String = 0
@@ -170,6 +171,10 @@ Public Class SearchData
 
         TestResult.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub SearchData_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        MainMenu.Show()
     End Sub
     '点击OK打开测试结果
 
