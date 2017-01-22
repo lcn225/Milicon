@@ -100,7 +100,7 @@ Partial Class MainMenu
     Friend WithEvents FormatMaintenance_Button As Button
 
     Private Sub MainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = ini.GetIniString("MainMenu", "Title", "NAini") & " " & ini.GetIniString("SW", "Ver", "NAini")
+        Me.Text = ini.GetIniString("SWName", "Title", "NAini") & " " & ini.GetIniString("SWName", "Ver", "NAini")
         Me.SWName_Label.Text = ini.GetIniString("MainMenu", "Label", "SWName")
         Me.Signin_Button.Text = ini.GetIniString("MainMenu", "Button1", "Signin")
         Me.SearchData_Button.Text = ini.GetIniString("MainMenu", "Button2", "SearchData")
@@ -138,8 +138,6 @@ Partial Class MainMenu
     Friend WithEvents operation_Button As Button
 
     Private Sub operation_Button_Click(sender As Object, e As EventArgs) Handles operation_Button.Click
-        Dim Text1 = InputBox("请在下面输入内容：", "输入框", "默认值")
-        MaintenanceMainMenu.Label2.Text = encryption(Text1)
         MaintenanceMainMenu.Show()
         Me.Hide()
     End Sub

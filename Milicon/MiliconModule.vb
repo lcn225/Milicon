@@ -83,7 +83,6 @@ Module MiliconModule
     End Function
     '根据测试批号查找表名，返回DS
 
-
     Public Function GetTestInfoByLoginNo(ByVal LoginNo As String) As DataSet
 
         DBcon()
@@ -97,5 +96,17 @@ Module MiliconModule
         Return result
     End Function
     '根据测试批号查找测试信息，返回DS
+
+    Public Function encryption(ByVal Raw As String)
+
+        Dim Result As String = ""
+
+        For i = 1 To Len(Raw)
+            Result = Result & ChrW(AscW(Mid(Raw, i, 1)) + 50)
+        Next
+
+        Return Result
+    End Function
+    '对字符串简单加密，输出密文
 
 End Module

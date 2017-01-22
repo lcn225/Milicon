@@ -28,6 +28,7 @@ Partial Class MaintenanceMainMenu
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
@@ -85,11 +86,21 @@ Partial Class MaintenanceMainMenu
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "维护菜单"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(43, 332)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(41, 12)
+        Me.Label2.TabIndex = 6
+        Me.Label2.Text = "Label2"
+        '
         'MaintenanceMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(534, 398)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -109,4 +120,5 @@ Partial Class MaintenanceMainMenu
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class

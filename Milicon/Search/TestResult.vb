@@ -137,12 +137,13 @@ Public Class TestResult
 
         FillByTestData(Me.TestLots_Label.Text)
 
-
     End Sub
+    '载入初始化
 
     Private Sub TestResult_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         SearchData.Show()
     End Sub
+    '关闭窗口后显示检索窗口
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
 
