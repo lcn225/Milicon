@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+
 Module MiliconModule
 
     Public cn As OleDbConnection
@@ -100,10 +101,22 @@ Module MiliconModule
     Public Function encryption(ByVal Raw As String)
 
         Dim Result As String = ""
+        Dim lng As Integer = Len(Raw)
+        Dim MidOfRaw As Integer = Int(lng / 4)
+        Dim Dra
+
+        If lng > 4 Then
+            Raw = Mid(Raw, 1, MidOfRaw) & "L" & Mid(Raw, MidOfRaw + 1, MidOfRaw) & "C" & Mid(Raw, MidOfRaw * 2 + 1, MidOfRaw) & "N" & Mid(Raw, MidOfRaw * 3 + 1, MidOfRaw)
+        Else
+            Raw = Raw & "LCN"
+        End If
+        '加盐
 
         For i = 1 To Len(Raw)
-            Result = Result & ChrW(AscW(Mid(Raw, i, 1)) + 50)
+            Dra = Int((i + 26) * i Mod (Len(Raw)))
+            Result = Result & ChrW(AscW(Mid(Raw, Len(Raw) - i + 1, 1)) + Dra)
         Next
+        '凯撒并倒序
 
         Return Result
     End Function

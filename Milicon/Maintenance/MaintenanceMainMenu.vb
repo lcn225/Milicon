@@ -20,4 +20,8 @@
         Maintenance_ObjectList.Show()
         Me.Hide()
     End Sub
+
+    Private Sub MaintenanceMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MainMenu.Show()
+    End Sub
 End Class
