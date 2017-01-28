@@ -60,6 +60,9 @@ Public Class Signin
         TestDataInput_DataGridView.Columns.Add("1", "①")
         TestDataInput_DataGridView.Columns.Add("2", "②")
         TestDataInput_DataGridView.Columns.Add("3", "③")
+        TestDataInput_DataGridView.Columns("1").Width = 100
+        TestDataInput_DataGridView.Columns("2").Width = 100
+        TestDataInput_DataGridView.Columns("3").Width = 100
         '新增三列待填
 
 

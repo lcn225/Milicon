@@ -201,6 +201,7 @@ Public Class TestResult
         '显示测试信息
 
         FillByTestData(Me.TestLots_Label.Text)
+        '显示测试数据
 
     End Sub
     '载入初始化
@@ -227,7 +228,7 @@ Public Class TestResult
     End Sub
     '点退出按钮退出
 
-    Private Sub UpdateChange()
+    Public Sub UpdateChange()
 
 
         Dim sql1 As String
@@ -259,7 +260,7 @@ Public Class TestResult
         SigninCheck = MessageBox.Show(“是否输入完毕？”, “登录确认”, MessageBoxButtons.YesNo)
         If SigninCheck = 6 Then
             '如果返回值为6，则为选择“是”
-            UpdateChange()
+            Password_Change.Show()
             '提交变动至DB
         End If
 

@@ -16,3 +16,4 @@ C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Mil
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.pdb
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.MainMenu.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Password.resources
+C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Password_Change.resources

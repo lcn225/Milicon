@@ -1,18 +1,17 @@
-﻿Public Class Password
+﻿Public Class Password_Change
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
-        Dim PW = ini.GetIniString("SW", "Set_PW", "NAini")
+        Dim PW = ini.GetIniString("SW", "ChangeData_PW", "NAini")
         Dim PW_IN = encryption(TextBox1.Text)
         '加密输入值
 
         If PW = PW_IN Then
             '对比ini中的PW
-            MaintenanceMainMenu.Show()
-            MainMenu.Hide()
+            TestResult.UpdateChange()
             Me.Hide()
-            '相同则进入维护窗口
+            '相同则变更数据
         Else
-            Dim text1 = MessageBox.Show("密码错误，请重新输入", "错误")
+            MessageBox.Show("密码错误，请重新输入", "错误")
             '不同则报错
         End If
 
@@ -21,7 +20,7 @@
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         'MainMenu.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Private Sub Password_Load(sender As Object, e As EventArgs) Handles MyBase.Load
