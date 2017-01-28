@@ -126,6 +126,71 @@ Public Class TestResult
     End Sub
     '填充DGV
 
+    Private Function UpdateTestInfo() As String
+
+        DBcon()
+
+        Dim LoginNo As String = Me.TestLots_Label.Text
+        Dim ProDate As String = Me.ProDate_DateTimePicker.Text
+        Dim Lots As String = Me.Lots_TextBox.Text
+        Dim TestDate As String = Me.TestDate_DateTimePicker.Text
+        Dim Tester As String = Me.Tester_TextBox.Text
+
+        Dim sql As String = "UPDATE Data_List SET ProDate = '" + ProDate + "',Lots = '" + Lots + "',TestDate = '" + TestDate + "',Tester = '" + Tester + "' WHERE LoginNo= " + LoginNo
+
+        Return sql
+
+    End Function
+    '更新测试信息至数据库（返回字符串）
+
+    Private Function UpDateTestData() As String
+        DBcon()
+
+        Dim sql As String
+
+        Dim TestLots As String = Me.TestLots_Label.Text
+        Dim Str_Col As String = ""
+        Dim Str_Val As String = ""
+        Dim Str As String = ""
+        '用Str_Col和Str_Val分别获取字段名与字段，再组合到Str中
+
+        Dim RowsCount As Integer = TestData_DataGridView.RowCount
+        '获取DGV总行数
+
+        Dim DataTableName As String = GetDateTableNameByLoginNo(TestLots)
+
+        For i = 0 To RowsCount - 1
+            For j = 0 To 2
+                Str_Col = "Value" + （i + 1）.ToString + "_" + （j + 1）.ToString
+                If TestData_DataGridView.Rows(i).Cells(j).Value = "" Then
+                    Str_Val = "'0'"
+                Else
+                    Str_Val = "'" + TestData_DataGridView.Rows(i).Cells(j).Value + "'"
+                End If
+                Str = Str + Str_Col + " = " + Str_Val + ", "
+                '生成"ValueI_J='X', "的连续字符串
+            Next
+        Next
+        Str = Mid(Str, 1, Len(Str) - 2)
+        '删去最后两位（即多出来的", "）
+
+        sql = "UPDATE " + DataTableName + " SET " + Str + " WHERE LoginNo = " + TestLots
+        'UPDATE Person SET FirstName = 'Fred' WHERE LastName = 'Wilson' 
+
+        Return sql
+
+    End Function
+    '更新测试数据至数据库（返回字符串）
+
+    Private Sub ClearForReset()
+
+        ResetFormText(Me)
+
+        ResetDGV(Me)
+
+    End Sub
+    '清空所有输入控件信息以备重置
+
     Private Sub TestResult_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TestLots_Label.Text = SearchData.TestLots
 
@@ -147,10 +212,13 @@ Public Class TestResult
 
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
 
+        ClearForReset()
+
         FillByTestInfo(Me.TestLots_Label.Text)
         '显示测试信息
 
         FillByTestData(Me.TestLots_Label.Text)
+        '显示测试数据
     End Sub
     '点取消重新加载
 
@@ -159,5 +227,43 @@ Public Class TestResult
     End Sub
     '点退出按钮退出
 
+    Private Sub UpdateChange()
+
+
+        Dim sql1 As String
+        Dim sql2 As String
+        Dim cmd As OleDbCommand
+
+        sql1 = UpdateTestInfo()
+        sql2 = UpDateTestData()
+
+        cn.Open()
+
+        cmd = New OleDbCommand(sql1, cn)
+        cmd.ExecuteNonQuery()
+        cmd = New OleDbCommand(sql2, cn)
+        cmd.ExecuteNonQuery()
+
+        MessageBox.Show("变更成功")
+
+        cn.Close()
+
+        '之后加一个成功一个失败时的防错
+
+    End Sub
+    '更新DGV变动至DB（配合确认按钮）
+
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+        Dim SigninCheck As String = ""
+
+        SigninCheck = MessageBox.Show(“是否输入完毕？”, “登录确认”, MessageBoxButtons.YesNo)
+        If SigninCheck = 6 Then
+            '如果返回值为6，则为选择“是”
+            UpdateChange()
+            '提交变动至DB
+        End If
+
+    End Sub
+    '点确定保存修改
 
 End Class

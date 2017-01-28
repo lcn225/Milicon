@@ -92,6 +92,8 @@ Public Class ObjectList
         '将选中材料的ID赋予Signin的ID参数（查询用）
         Signin.NameInput_TextBox.Text = ObjectList_DataGridView.Rows(SelectRowNumber).Cells(2).Value
         '按OK后将选中行的第三单元格数据传输至规格值输入框
+        Signin.DisplayTI()
+        '直接在Sign的DGV中显示TI
     End Sub
     '将选中数据传给Signin窗口相关
 

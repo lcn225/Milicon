@@ -62,6 +62,8 @@ Partial Class TestResult
         '
         'TestDate_DateTimePicker
         '
+        Me.TestDate_DateTimePicker.CustomFormat = "yyyy/MM/dd"
+        Me.TestDate_DateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.TestDate_DateTimePicker.Location = New System.Drawing.Point(113, 96)
         Me.TestDate_DateTimePicker.Name = "TestDate_DateTimePicker"
         Me.TestDate_DateTimePicker.Size = New System.Drawing.Size(115, 21)
@@ -69,6 +71,8 @@ Partial Class TestResult
         '
         'ProDate_DateTimePicker
         '
+        Me.ProDate_DateTimePicker.CustomFormat = "yyyy/MM/dd"
+        Me.ProDate_DateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.ProDate_DateTimePicker.Location = New System.Drawing.Point(113, 63)
         Me.ProDate_DateTimePicker.Name = "ProDate_DateTimePicker"
         Me.ProDate_DateTimePicker.Size = New System.Drawing.Size(115, 21)
@@ -88,16 +92,16 @@ Partial Class TestResult
         Me.Tester_Label.Name = "Tester_Label"
         Me.Tester_Label.Size = New System.Drawing.Size(41, 12)
         Me.Tester_Label.TabIndex = 22
-        Me.Tester_Label.Text = "Label1"
+        Me.Tester_Label.Text = "检测员"
         '
         'TestDate_Label
         '
         Me.TestDate_Label.AutoSize = True
         Me.TestDate_Label.Location = New System.Drawing.Point(54, 105)
         Me.TestDate_Label.Name = "TestDate_Label"
-        Me.TestDate_Label.Size = New System.Drawing.Size(41, 12)
+        Me.TestDate_Label.Size = New System.Drawing.Size(53, 12)
         Me.TestDate_Label.TabIndex = 21
-        Me.TestDate_Label.Text = "Label1"
+        Me.TestDate_Label.Text = "测试日期"
         '
         'Lots_TextBox
         '
@@ -111,18 +115,18 @@ Partial Class TestResult
         Me.Lots_Label.AutoSize = True
         Me.Lots_Label.Location = New System.Drawing.Point(290, 69)
         Me.Lots_Label.Name = "Lots_Label"
-        Me.Lots_Label.Size = New System.Drawing.Size(41, 12)
+        Me.Lots_Label.Size = New System.Drawing.Size(53, 12)
         Me.Lots_Label.TabIndex = 19
-        Me.Lots_Label.Text = "Label1"
+        Me.Lots_Label.Text = "产品批号"
         '
         'ProDate_Label
         '
         Me.ProDate_Label.AutoSize = True
         Me.ProDate_Label.Location = New System.Drawing.Point(54, 69)
         Me.ProDate_Label.Name = "ProDate_Label"
-        Me.ProDate_Label.Size = New System.Drawing.Size(41, 12)
+        Me.ProDate_Label.Size = New System.Drawing.Size(53, 12)
         Me.ProDate_Label.TabIndex = 18
-        Me.ProDate_Label.Text = "Label1"
+        Me.ProDate_Label.Text = "制造日期"
         '
         'OK_Button
         '
@@ -135,7 +139,6 @@ Partial Class TestResult
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Enabled = False
         Me.Cancel_Button.Location = New System.Drawing.Point(185, 511)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 23)

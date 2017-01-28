@@ -84,6 +84,21 @@ Module MiliconModule
     End Function
     '根据测试批号查找表名，返回DS
 
+    Public Function GetDateTableNameByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+        Dim result As DataSet
+        Dim TableName As String
+
+        result = GetTableNameByLoginNo(LoginNo)
+        '根据LoginNo返回DS
+
+        TableName = result.Tables(0).Rows(0)("DataTableName").ToString
+        '从DS中获取DataTableName
+
+        Return TableName
+    End Function
+    '根据测试批号查找测试数据表名，返回字符串
+
     Public Function GetTestInfoByLoginNo(ByVal LoginNo As String) As DataSet
 
         DBcon()
@@ -121,5 +136,56 @@ Module MiliconModule
         Return Result
     End Function
     '对字符串简单加密，输出密文
+
+    Public Sub ResetDGV(ByRef F As Form)
+
+        Dim DGV_Name As String = ""
+
+        For Each con As Control In F.Controls
+            If TypeOf con Is DataGridView Then
+                '如果当前控件是DGV的时候
+                DGV_Name = con.Name
+                '获取DGV名称
+            End If
+        Next con
+
+        Dim DGV As DataGridView = F.Controls(DGV_Name)
+        '引用该F的DGV
+
+        Dim CountColumns As Integer = DGV.Columns.Count
+        '获取该DGV列数
+
+        'DGV.DataSource = vbNull
+        '清除DGV所有数据
+        For i = CountColumns - 1 To 0 Step -1
+            DGV.Columns.RemoveAt(i)
+        Next
+        '清除DGV所有列
+        '重置DGV
+
+    End Sub
+
+
+    Public Sub ResetFormText(ByRef F As Form)
+
+        For Each con As Control In F.Controls
+            If TypeOf con Is TextBox Then
+                '如果当前控件是TextBox的时候
+                con.Text = ""
+                '改变TextBox的Text属性
+            End If
+        Next con
+
+        For Each con As Control In F.Controls
+            If TypeOf con Is DateTimePicker Then
+                '如果当前控件是Label的时候
+                con.Text = Date.Today
+                '改变Label的Text属性
+            End If
+        Next con
+
+
+    End Sub
+    '清除当前窗口的所有text
 
 End Module

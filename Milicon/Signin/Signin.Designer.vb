@@ -24,7 +24,6 @@ Partial Class Signin
     Private Sub InitializeComponent()
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
         Me.ObjectList_Button = New System.Windows.Forms.Button()
-        Me.ObjectInput_Button = New System.Windows.Forms.Button()
         Me.ProDate_Label = New System.Windows.Forms.Label()
         Me.Lots_TextBox = New System.Windows.Forms.TextBox()
         Me.Lots_Label = New System.Windows.Forms.Label()
@@ -32,13 +31,13 @@ Partial Class Signin
         Me.Tester_Label = New System.Windows.Forms.Label()
         Me.TestDate_Label = New System.Windows.Forms.Label()
         Me.TestLots_Label = New System.Windows.Forms.Label()
-        Me.TestDateInput_DataGridView = New System.Windows.Forms.DataGridView()
+        Me.TestDataInput_DataGridView = New System.Windows.Forms.DataGridView()
         Me.Signin_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.Exit_Button = New System.Windows.Forms.Button()
         Me.ProDate_DateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.TestDate_DateTimePicker = New System.Windows.Forms.DateTimePicker()
-        CType(Me.TestDateInput_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TestDataInput_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NameInput_TextBox
@@ -57,15 +56,6 @@ Partial Class Signin
         Me.ObjectList_Button.TabIndex = 1
         Me.ObjectList_Button.Text = "一览"
         Me.ObjectList_Button.UseVisualStyleBackColor = True
-        '
-        'ObjectInput_Button
-        '
-        Me.ObjectInput_Button.Location = New System.Drawing.Point(333, 30)
-        Me.ObjectInput_Button.Name = "ObjectInput_Button"
-        Me.ObjectInput_Button.Size = New System.Drawing.Size(75, 23)
-        Me.ObjectInput_Button.TabIndex = 2
-        Me.ObjectInput_Button.Text = "确认"
-        Me.ObjectInput_Button.UseVisualStyleBackColor = True
         '
         'ProDate_Label
         '
@@ -126,18 +116,18 @@ Partial Class Signin
         Me.TestLots_Label.TabIndex = 11
         Me.TestLots_Label.Text = "Label1"
         '
-        'TestDateInput_DataGridView
+        'TestDataInput_DataGridView
         '
-        Me.TestDateInput_DataGridView.AllowUserToAddRows = False
-        Me.TestDateInput_DataGridView.AllowUserToDeleteRows = False
-        Me.TestDateInput_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.TestDateInput_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TestDateInput_DataGridView.Location = New System.Drawing.Point(51, 161)
-        Me.TestDateInput_DataGridView.Name = "TestDateInput_DataGridView"
-        Me.TestDateInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        Me.TestDateInput_DataGridView.RowTemplate.Height = 23
-        Me.TestDateInput_DataGridView.Size = New System.Drawing.Size(499, 252)
-        Me.TestDateInput_DataGridView.TabIndex = 12
+        Me.TestDataInput_DataGridView.AllowUserToAddRows = False
+        Me.TestDataInput_DataGridView.AllowUserToDeleteRows = False
+        Me.TestDataInput_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.TestDataInput_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TestDataInput_DataGridView.Location = New System.Drawing.Point(51, 161)
+        Me.TestDataInput_DataGridView.Name = "TestDataInput_DataGridView"
+        Me.TestDataInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.TestDataInput_DataGridView.RowTemplate.Height = 23
+        Me.TestDataInput_DataGridView.Size = New System.Drawing.Size(499, 252)
+        Me.TestDataInput_DataGridView.TabIndex = 12
         '
         'Signin_Button
         '
@@ -190,7 +180,7 @@ Partial Class Signin
         Me.Controls.Add(Me.Exit_Button)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.Signin_Button)
-        Me.Controls.Add(Me.TestDateInput_DataGridView)
+        Me.Controls.Add(Me.TestDataInput_DataGridView)
         Me.Controls.Add(Me.TestLots_Label)
         Me.Controls.Add(Me.Tester_TextBox)
         Me.Controls.Add(Me.Tester_Label)
@@ -198,12 +188,11 @@ Partial Class Signin
         Me.Controls.Add(Me.Lots_TextBox)
         Me.Controls.Add(Me.Lots_Label)
         Me.Controls.Add(Me.ProDate_Label)
-        Me.Controls.Add(Me.ObjectInput_Button)
         Me.Controls.Add(Me.ObjectList_Button)
         Me.Controls.Add(Me.NameInput_TextBox)
         Me.Name = "Signin"
         Me.Text = "Signin"
-        CType(Me.TestDateInput_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TestDataInput_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -211,7 +200,6 @@ Partial Class Signin
 
     Public WithEvents NameInput_TextBox As TextBox
     Friend WithEvents ObjectList_Button As Button
-    Friend WithEvents ObjectInput_Button As Button
     Friend WithEvents ProDate_Label As Label
     Friend WithEvents Lots_TextBox As TextBox
     Friend WithEvents Lots_Label As Label
@@ -219,7 +207,7 @@ Partial Class Signin
     Friend WithEvents Tester_Label As Label
     Friend WithEvents TestDate_Label As Label
     Friend WithEvents TestLots_Label As Label
-    Friend WithEvents TestDateInput_DataGridView As DataGridView
+    Friend WithEvents TestDataInput_DataGridView As DataGridView
     Friend WithEvents Signin_Button As Button
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents Exit_Button As Button

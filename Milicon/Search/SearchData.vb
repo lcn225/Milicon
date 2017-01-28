@@ -92,7 +92,7 @@ Public Class SearchData
         Dim Obj_Type As String = Me.ObjectType_ComboBox.SelectedItem.ToString
         '获取搜索条件
 
-        Dim sql As String = "Select Data_List.LoginNo As 测试编号, ObjectType_List.Obj_Type As 材料类型, Data_List.ProDate As 生产日期, Data_List.Lots As 批号, Data_List.TestDate As 测试日期, Data_List.Tester As 测试人 from Data_List, ObjectType_List where "
+        Dim sql As String = "Select Data_List.LoginNo As 测试编号, ObjectType_List.Obj_Type As 材料类型, Data_List.ProDate As 生产日期, Data_List.Lots As 批号, Data_List.TestDate As 测试日期, Data_List.Tester As 测试人 from Data_List, ObjectType_List,  Object_List where "
         'sql前置指令
 
         If Me.RadioButton1.Checked = True Then
@@ -111,7 +111,7 @@ Public Class SearchData
         End If
         '如果材料不是选择所有材料，则进行筛选
 
-        sql = sql + TestDate + TestLots + TestType
+        sql = sql + TestDate + TestLots + TestType + " and ObjectType_List.Obj_Type = Object_List.Obj_Type and Object_List.Obj_ID = Data_List.Obj_ID ORDER by LoginNo DESC"
         '获得查询语句
 
         Return sql
@@ -177,5 +177,11 @@ Public Class SearchData
         MainMenu.Show()
     End Sub
     '点击OK打开测试结果
+
+    Private Sub Clear_Button_Click(sender As Object, e As EventArgs) Handles Clear_Button.Click
+        ResetFormText(Me)
+        ResetDGV(Me)
+    End Sub
+    '点击重置清除结果
 
 End Class

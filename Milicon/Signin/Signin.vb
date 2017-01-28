@@ -9,7 +9,6 @@ Public Class Signin
 
         Me.Text = ini.GetIniString("Signin", "Title", "N/A")
         Me.ObjectList_Button.Text = ini.GetIniString("Signin", "Button1", "N/A")
-        Me.ObjectInput_Button.Text = ini.GetIniString("Signin", "Button2", "N/A")
         Me.Signin_Button.Text = ini.GetIniString("Signin", "Button3", "N/A")
         Me.Cancel_Button.Text = ini.GetIniString("Signin", "Button4", "N/A")
         Me.Exit_Button.Text = ini.GetIniString("Signin", "Button5", "N/A")
@@ -21,20 +20,12 @@ Public Class Signin
     'UI文本初始化
 
     Private Sub SignReset()
-        Me.NameInput_TextBox.Text = ""
-        Me.ProDate_DateTimePicker.Text = ""
-        Me.TestDate_DateTimePicker.Text = ""
-        Me.Tester_TextBox.Text = ""
-        '重置textbox
 
-        Dim CountColumns As Integer = TestDateInput_DataGridView.Columns.Count
-        TestDateInput_DataGridView.DataSource = vbNull
-        '清除DGV所有数据
-        For i = CountColumns - 1 To 0 Step -1
-            TestDateInput_DataGridView.Columns.RemoveAt(i)
-        Next
-        '清除DGV所有列
-        '重置DGV
+        ResetFormText(Me)
+        '清除所有text
+
+        ResetDGV(Me)
+        '清除DGV
 
     End Sub
     '重置输入（配合确定/取消按钮）
@@ -49,8 +40,8 @@ Public Class Signin
         TI_Name = TI_ds.Tables(0).Rows(0)(sql_ds_TIName).ToString
         '获取字段名为"TIi_Name"的值，i为参数
 
-        TestDateInput_DataGridView.Rows.Add()
-        TestDateInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
+        TestDataInput_DataGridView.Rows.Add()
+        TestDataInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         '增添一行，标题为测试项目
 
         cn.Close()
@@ -66,9 +57,9 @@ Public Class Signin
         '获得测试项目数量
 
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
-        TestDateInput_DataGridView.Columns.Add("1", "①")
-        TestDateInput_DataGridView.Columns.Add("2", "②")
-        TestDateInput_DataGridView.Columns.Add("3", "③")
+        TestDataInput_DataGridView.Columns.Add("1", "①")
+        TestDataInput_DataGridView.Columns.Add("2", "②")
+        TestDataInput_DataGridView.Columns.Add("3", "③")
         '新增三列待填
 
 
@@ -124,23 +115,27 @@ Public Class Signin
         Dim Value(3) As String
         Dim Str_Col As String = "LoginNo"
         Dim Str_Val As String = "'" + Me.TestLots + "'"
-        Dim RowsCount As Integer = TestDateInput_DataGridView.RowCount
+        Dim RowsCount As Integer = TestDataInput_DataGridView.RowCount
         '获取DGV总行数
+
+        Dim Type_ds = GetTableName_Type(Me.ID_Object)
+        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("DataTableName").ToString
+        '获取材料对应data信息表
 
         cn.Open()
 
         For i = 0 To RowsCount - 1
             For j = 0 To 2
                 Str_Col = Str_Col + ",Value" + （i + 1）.ToString + "_" + （j + 1）.ToString
-                If TestDateInput_DataGridView.Rows(i).Cells(j).Value = "" Then
+                If TestDataInput_DataGridView.Rows(i).Cells(j).Value = "" Then
                     Str_Val = Str_Val + ",'0'"
                 Else
-                    Str_Val = Str_Val + ",'" + TestDateInput_DataGridView.Rows(i).Cells(j).Value + "'"
+                    Str_Val = Str_Val + ",'" + TestDataInput_DataGridView.Rows(i).Cells(j).Value + "'"
                 End If
             Next
         Next
         'INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
-        sql = "INSERT INTO Data_RawSteel (" + Str_Col + ") VALUES (" + Str_Val + ")"
+        sql = "INSERT INTO " + TableName_Type + " (" + Str_Col + ") VALUES (" + Str_Val + ")"
 
         Return sql
 
@@ -206,9 +201,9 @@ Public Class Signin
     End Sub
     '点击浏览打开原材料列表进行选择
 
-    Private Sub ObjectInput_Button_Click(sender As Object, e As EventArgs) Handles ObjectInput_Button.Click
+    Public Sub DisplayTI()
 
-        TI_ds = GetTI(ID_Object)
+        Me.TI_ds = GetTI(ID_Object)
         '将TI相关信息填入TI_DS
 
         Dim Object_Name = NameInput_TextBox.Text
@@ -224,7 +219,7 @@ Public Class Signin
         '确定材料名后启用登录按钮
 
     End Sub
-    '点击确定，根据输入的材料名称显示不同的输入项目
+    '在DGV中显示各种TI
 
     Private Sub Exit_Button_Click(sender As Object, e As EventArgs) Handles Exit_Button.Click
         Me.Close()
