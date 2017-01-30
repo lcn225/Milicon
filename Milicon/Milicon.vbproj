@@ -129,12 +129,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="MiliconModule.vb" />
-    <Compile Include="Object\ObjectMaintenance.Designer.vb">
-      <DependentUpon>ObjectMaintenance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Object\ObjectMaintenance.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Search\Password_Change.Designer.vb">
       <DependentUpon>Password_Change.vb</DependentUpon>
     </Compile>
@@ -199,9 +193,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Object\ObjectMaintenance.resx">
-      <DependentUpon>ObjectMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Search\Password_Change.resx">
       <DependentUpon>Password_Change.vb</DependentUpon>

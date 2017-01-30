@@ -24,7 +24,7 @@ Partial Class MainMenu
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainMenu))
         Me.operation_Button = New System.Windows.Forms.Button()
-        Me.ObjectMaintenance_Button = New System.Windows.Forms.Button()
+        Me.FormatMaintenance_Button = New System.Windows.Forms.Button()
         Me.SearchData_Button = New System.Windows.Forms.Button()
         Me.Signin_Button = New System.Windows.Forms.Button()
         Me.SWName_Label = New System.Windows.Forms.Label()
@@ -40,15 +40,15 @@ Partial Class MainMenu
         Me.operation_Button.TabIndex = 9
         Me.operation_Button.UseVisualStyleBackColor = True
         '
-        'ObjectMaintenance_Button
+        'FormatMaintenance_Button
         '
-        Me.ObjectMaintenance_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.ObjectMaintenance_Button.Location = New System.Drawing.Point(149, 278)
-        Me.ObjectMaintenance_Button.Name = "ObjectMaintenance_Button"
-        Me.ObjectMaintenance_Button.Size = New System.Drawing.Size(200, 60)
-        Me.ObjectMaintenance_Button.TabIndex = 8
-        Me.ObjectMaintenance_Button.Text = "NA"
-        Me.ObjectMaintenance_Button.UseVisualStyleBackColor = True
+        Me.FormatMaintenance_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.FormatMaintenance_Button.Location = New System.Drawing.Point(149, 278)
+        Me.FormatMaintenance_Button.Name = "FormatMaintenance_Button"
+        Me.FormatMaintenance_Button.Size = New System.Drawing.Size(200, 60)
+        Me.FormatMaintenance_Button.TabIndex = 8
+        Me.FormatMaintenance_Button.Text = "NA"
+        Me.FormatMaintenance_Button.UseVisualStyleBackColor = True
         '
         'SearchData_Button
         '
@@ -84,7 +84,7 @@ Partial Class MainMenu
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(502, 422)
         Me.Controls.Add(Me.operation_Button)
-        Me.Controls.Add(Me.ObjectMaintenance_Button)
+        Me.Controls.Add(Me.FormatMaintenance_Button)
         Me.Controls.Add(Me.SearchData_Button)
         Me.Controls.Add(Me.Signin_Button)
         Me.Controls.Add(Me.SWName_Label)
@@ -95,7 +95,7 @@ Partial Class MainMenu
     End Sub
 
     Friend WithEvents operation_Button As Button
-    Friend WithEvents ObjectMaintenance_Button As Button
+    Friend WithEvents FormatMaintenance_Button As Button
     Friend WithEvents SearchData_Button As Button
     Friend WithEvents Signin_Button As Button
     Friend WithEvents SWName_Label As Label
