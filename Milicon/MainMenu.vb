@@ -4,7 +4,7 @@
         Me.SWName_Label.Text = ini.GetIniString("MainMenu", "Label", "SWName")
         Me.Signin_Button.Text = ini.GetIniString("MainMenu", "Button1", "Signin")
         Me.SearchData_Button.Text = ini.GetIniString("MainMenu", "Button2", "SearchData")
-        Me.FormatMaintenance_Button.Text = ini.GetIniString("MainMenu", "Button3", "FormatMaintenance")
+        Me.ObjectMaintenance_Button.Text = ini.GetIniString("MainMenu", "Button3", "FormatMaintenance")
     End Sub
 
     Private Sub Signin_Click(sender As Object, e As EventArgs) Handles Signin_Button.Click
@@ -30,4 +30,8 @@
 
     End Sub
 
+    Private Sub FormatMaintenance_Button_Click(sender As Object, e As EventArgs) Handles ObjectMaintenance_Button.Click
+        ObjectMaintenance.Show()
+        Me.Hide()
+    End Sub
 End Class
