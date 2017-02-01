@@ -22,17 +22,11 @@ Partial Class ObjectList
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.ObjectList_DataGridView = New System.Windows.Forms.DataGridView()
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.ObjectType_ComboBox = New System.Windows.Forms.ComboBox()
-        Me.ObjectListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ObjectList_DataSet = New WindowsApplication1.ObjectList_DataSet()
-        Me.Object_ListTableAdapter = New WindowsApplication1.ObjectList_DataSetTableAdapters.Object_ListTableAdapter()
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ObjectList_DataGridView
@@ -77,20 +71,6 @@ Partial Class ObjectList
         Me.ObjectType_ComboBox.TabIndex = 3
         Me.ObjectType_ComboBox.Text = "所有材料"
         '
-        'ObjectListBindingSource
-        '
-        Me.ObjectListBindingSource.DataMember = "Object_List"
-        Me.ObjectListBindingSource.DataSource = Me.ObjectList_DataSet
-        '
-        'ObjectList_DataSet
-        '
-        Me.ObjectList_DataSet.DataSetName = "ObjectList_DataSet"
-        Me.ObjectList_DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'Object_ListTableAdapter
-        '
-        Me.Object_ListTableAdapter.ClearBeforeFill = True
-        '
         'ObjectList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -103,8 +83,6 @@ Partial Class ObjectList
         Me.Name = "ObjectList"
         Me.Text = "ObjectList"
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -113,7 +91,4 @@ Partial Class ObjectList
     Friend WithEvents OK_Button As Button
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents ObjectType_ComboBox As ComboBox
-    Friend WithEvents ObjectList_DataSet As ObjectList_DataSet
-    Friend WithEvents ObjectListBindingSource As BindingSource
-    Friend WithEvents Object_ListTableAdapter As ObjectList_DataSetTableAdapters.Object_ListTableAdapter
 End Class

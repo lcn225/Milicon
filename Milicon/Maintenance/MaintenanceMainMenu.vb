@@ -20,6 +20,7 @@
         Maintenance_ObjectList.Show()
         Me.Hide()
     End Sub
+    '点击按钮1进入材料维护
 
     Private Sub MaintenanceMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MainMenu.Show()

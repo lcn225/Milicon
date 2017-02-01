@@ -22,83 +22,23 @@ Partial Class Maintenance_ObjectList
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.ObjectList_DataGridView = New System.Windows.Forms.DataGridView()
-        Me.Code4DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Code9DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObjTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObjNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObjSupDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObjectListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ObjectList_DataSet = New WindowsApplication1.ObjectList_DataSet()
-        Me.Object_ListTableAdapter = New WindowsApplication1.ObjectList_DataSetTableAdapters.Object_ListTableAdapter()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ObjectList_DataGridView
         '
-        Me.ObjectList_DataGridView.AutoGenerateColumns = False
+        Me.ObjectList_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.ObjectList_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ObjectList_DataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Code4DataGridViewTextBoxColumn, Me.Code9DataGridViewTextBoxColumn, Me.ObjTypeDataGridViewTextBoxColumn, Me.ObjNameDataGridViewTextBoxColumn, Me.ObjSupDataGridViewTextBoxColumn})
-        Me.ObjectList_DataGridView.DataSource = Me.ObjectListBindingSource
-        Me.ObjectList_DataGridView.Location = New System.Drawing.Point(43, 30)
+        Me.ObjectList_DataGridView.Location = New System.Drawing.Point(43, 51)
         Me.ObjectList_DataGridView.Name = "ObjectList_DataGridView"
         Me.ObjectList_DataGridView.RowHeadersVisible = False
         Me.ObjectList_DataGridView.RowTemplate.Height = 23
-        Me.ObjectList_DataGridView.Size = New System.Drawing.Size(484, 224)
+        Me.ObjectList_DataGridView.Size = New System.Drawing.Size(484, 203)
         Me.ObjectList_DataGridView.TabIndex = 0
-        '
-        'Code4DataGridViewTextBoxColumn
-        '
-        Me.Code4DataGridViewTextBoxColumn.DataPropertyName = "Code4"
-        Me.Code4DataGridViewTextBoxColumn.HeaderText = "四位代码"
-        Me.Code4DataGridViewTextBoxColumn.Name = "Code4DataGridViewTextBoxColumn"
-        Me.Code4DataGridViewTextBoxColumn.Width = 80
-        '
-        'Code9DataGridViewTextBoxColumn
-        '
-        Me.Code9DataGridViewTextBoxColumn.DataPropertyName = "Code9"
-        Me.Code9DataGridViewTextBoxColumn.HeaderText = "九位代码"
-        Me.Code9DataGridViewTextBoxColumn.Name = "Code9DataGridViewTextBoxColumn"
-        '
-        'ObjTypeDataGridViewTextBoxColumn
-        '
-        Me.ObjTypeDataGridViewTextBoxColumn.DataPropertyName = "Obj_Type"
-        Me.ObjTypeDataGridViewTextBoxColumn.HeaderText = "材料类型"
-        Me.ObjTypeDataGridViewTextBoxColumn.Name = "ObjTypeDataGridViewTextBoxColumn"
-        Me.ObjTypeDataGridViewTextBoxColumn.Width = 80
-        '
-        'ObjNameDataGridViewTextBoxColumn
-        '
-        Me.ObjNameDataGridViewTextBoxColumn.DataPropertyName = "Obj_Name"
-        Me.ObjNameDataGridViewTextBoxColumn.HeaderText = "材料名称"
-        Me.ObjNameDataGridViewTextBoxColumn.Name = "ObjNameDataGridViewTextBoxColumn"
-        Me.ObjNameDataGridViewTextBoxColumn.Width = 80
-        '
-        'ObjSupDataGridViewTextBoxColumn
-        '
-        Me.ObjSupDataGridViewTextBoxColumn.DataPropertyName = "Obj_Sup"
-        Me.ObjSupDataGridViewTextBoxColumn.HeaderText = "厂商"
-        Me.ObjSupDataGridViewTextBoxColumn.Name = "ObjSupDataGridViewTextBoxColumn"
-        '
-        'ObjectListBindingSource
-        '
-        Me.ObjectListBindingSource.DataMember = "Object_List"
-        Me.ObjectListBindingSource.DataSource = Me.ObjectList_DataSet
-        '
-        'ObjectList_DataSet
-        '
-        Me.ObjectList_DataSet.DataSetName = "ObjectList_DataSet"
-        Me.ObjectList_DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'Object_ListTableAdapter
-        '
-        Me.Object_ListTableAdapter.ClearBeforeFill = True
         '
         'Button1
         '
@@ -111,7 +51,7 @@ Partial Class Maintenance_ObjectList
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(280, 319)
+        Me.Button2.Location = New System.Drawing.Point(43, 319)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 2
@@ -120,7 +60,7 @@ Partial Class Maintenance_ObjectList
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(366, 319)
+        Me.Button3.Location = New System.Drawing.Point(247, 319)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 3
@@ -137,23 +77,13 @@ Partial Class Maintenance_ObjectList
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ObjectList_DataGridView)
         Me.Name = "Maintenance_ObjectList"
-        Me.Text = "Maintenance_ObjectList"
+        Me.Text = "材料维护"
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ObjectListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ObjectList_DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ObjectList_DataGridView As DataGridView
-    Friend WithEvents ObjectList_DataSet As ObjectList_DataSet
-    Friend WithEvents ObjectListBindingSource As BindingSource
-    Friend WithEvents Object_ListTableAdapter As ObjectList_DataSetTableAdapters.Object_ListTableAdapter
-    Friend WithEvents Code4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents Code9DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ObjTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ObjNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ObjSupDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button

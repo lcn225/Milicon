@@ -165,6 +165,45 @@ Module MiliconModule
 
     End Sub
 
+    Public Sub FillDGVbyObjecList(ByRef DGV As DataGridView)
+
+        DBcon()
+
+        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
+        Dim ds As DataSet = New DataSet
+        '准备查询所有材料的ID与名称与厂商
+
+        da.Fill(ds, "FillDGV")
+
+        DGV.DataSource = ds.Tables(0)
+        DGV.Columns(0).Visible = False
+        '隐藏第一列“ID”
+
+        cn.Close()
+
+    End Sub
+    '参数为空时，该方法用TYPE表内全部数据填充DGV
+
+    Public Sub FillDGVbyObjecList(ByVal Type As String, ByRef DGV As DataGridView)
+
+        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
+        Dim ds As DataSet = New DataSet
+        '准备查询所有材料名称与厂商
+
+        cn.Open()
+
+        da.Fill(ds, "FillDGV")
+
+        DGV.DataSource = ds.Tables(0)
+        DGV.Columns(0).Visible = False
+        '隐藏第一列“ID”
+
+        cn.Close()
+
+    End Sub
+    '参数为材料种类时，该方法使DGV仅显示全部该种类材料
 
     Public Sub ResetFormText(ByRef F As Form)
 

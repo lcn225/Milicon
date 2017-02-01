@@ -35,44 +35,12 @@ Public Class ObjectList
     End Sub
     '用材料类型列表填充下拉列表
 
-    Private Sub FillDGV()
-        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List ORDER  by Obj_Type, Obj_Name, Obj_Sup"
-        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
-        Dim ds As DataSet = New DataSet
-        '准备查询所有材料的ID与名称与厂商
-
-        da.Fill(ds, "FillDGV")
-
-        ObjectList_DataGridView.DataSource = ds.Tables(0)
-        ObjectList_DataGridView.Columns(0).Visible = False
-        '隐藏第一列“ID”
-
-    End Sub
-    '参数为空时，该方法用TYPE表内全部数据填充DGV
-
-    Private Sub FillDGV(ByVal Type As String)
-
-        Dim sql As String = "select Obj_ID as 材料ID,Obj_Type as 材料类型,Obj_Name as 材料名,Obj_Sup as 厂商 from Object_List where Obj_Type = '" + Type + "' ORDER  by Obj_Type, Obj_Name, Obj_Sup"
-        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
-        Dim ds As DataSet = New DataSet
-        '准备查询所有材料名称与厂商
-
-        da.Fill(ds, "FillDGV")
-
-        ObjectList_DataGridView.DataSource = ds.Tables(0)
-        ObjectList_DataGridView.Columns(0).Visible = False
-        '隐藏第一列“ID”
-
-    End Sub
-    '参数为材料种类时，该方法使DGV仅显示全部该种类材料
-
     Private Sub ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         SelectRowNumber = 0
         '默认选中第一行
 
-        'TODO: 这行代码将数据加载到表“ObjectList_DataSet.Object_List”中。您可以根据需要移动或删除它。
-        Me.Object_ListTableAdapter.Fill(Me.ObjectList_DataSet.Object_List)
+        FillDGVbyObjecList(Me.ObjectList_DataGridView)
 
         Me.Text = ini.GetIniString("ObjectList", "Title", "Title")
         Me.OK_Button.Text = ini.GetIniString("ObjectList", "Button1", "OK")
@@ -80,7 +48,7 @@ Public Class ObjectList
 
         FillComboBoxByObjType()
         '填充ComboBox
-        FillDGV()
+        'FillDGV(Me.ObjectList_DataGridView)
         '填充DGV
 
     End Sub
@@ -121,10 +89,10 @@ Public Class ObjectList
         '获取变更后所选字符串
 
         If selected = "所有材料" Then
-            FillDGV()
+            FillDGVbyObjecList(Me.ObjectList_DataGridView)
             '如果所选为所有材料时，DGV显示所有材料
         Else
-            FillDGV(selected)
+            FillDGVbyObjecList(selected, Me.ObjectList_DataGridView)
             '否则显示所选种类材料
         End If
     End Sub
