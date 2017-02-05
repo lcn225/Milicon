@@ -25,7 +25,8 @@ Public Class Maintenance_ObjectList
         For i = 0 To RowsCount - 1
             Dim Type_ID As String = ds.Tables(0).Rows(i)(0).ToString
             Dim Obj_Type As String = ds.Tables(0).Rows(i)(1).ToString
-            Type_Combobox_Datatable.Rows.Add(Type_ID, Obj_Type)
+            'Type_Combobox_Datatable.Rows.Add(Type_ID, Obj_Type)
+            Type_Combobox_Datatable.Rows.Add(Obj_Type, Obj_Type)
         Next
         '将查询结果（数据集）添加到数据表中
 
@@ -36,25 +37,26 @@ Public Class Maintenance_ObjectList
         '将下拉列表绑定数据源
 
     End Sub
+    '绑给combobox绑定数据源
 
     Private Sub ChangeDGVWithCombobox()
 
         Dim Type_Column As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
-
         ComboBoxData(Type_Column)
+        '为该列绑定数据源
 
         ObjectList_DataGridView.Columns.Insert(0, Type_Column)
         '将下拉列表列插入到DGV第一列
 
-
-
         For i = 0 To ObjectList_DataGridView.Rows.Count - 1
             Dim type As String = ObjectList_DataGridView.Rows(i).Cells(2).Value
             If type <> "" Then
-                ObjectList_DataGridView.Rows(i).Cells(0).Value = GetIDByType(type)
+                'ObjectList_DataGridView.Rows(i).Cells(0).Value = GetIDByType(type)
+                ObjectList_DataGridView.Rows(i).Cells(0).Value = type
             End If
         Next
         '将下拉列表的默认值设为与DS中材料类型一致
+        '之后考虑用枚举优化
 
         ObjectList_DataGridView.Columns.RemoveAt(2)
         '删除材料类型列，用combobox替换
@@ -64,7 +66,9 @@ Public Class Maintenance_ObjectList
 
     Private Sub Maintenance_ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ResetDGV(Me)
         FillDGVbyObjecList(Me.ObjectList_DataGridView)
+        DisplaySort(Me.ObjectList_DataGridView)
         '以材料列表填充DGV
 
         ChangeDGVWithCombobox()
@@ -101,14 +105,14 @@ Public Class Maintenance_ObjectList
         Dim tempStrSQL As String
         Dim i As Integer = 0
 
-        For i = DB_RowCount("Object_List") To Me.ObjectList_DataGridView.Rows.Count
+        For i = DB_RowCount("Object_List") To Me.ObjectList_DataGridView.Rows.Count - 2
             'i从数据库记录数到DGV行数递增
-            If ObjectList_DataGridView.Rows(i).Cells(1).Value = "" Then
+            If ObjectList_DataGridView.Rows(i).Cells(1).ToString = "" Then
                 '判断是否填入新行
                 Exit For
             ElseIf True Then
 
-                Dim Obj_Type As String = ObjectList_DataGridView.Rows(i).Cells(1).Value.ToString.Trim
+                Dim Obj_Type As String = ObjectList_DataGridView.Rows(i).Cells(0).Value.ToString.Trim
                 Dim Obj_Name As String = ObjectList_DataGridView.Rows(i).Cells(2).Value.ToString.Trim
                 Dim Obj_Sup As String = ObjectList_DataGridView.Rows(i).Cells(3).Value.ToString.Trim
 
@@ -132,8 +136,13 @@ Public Class Maintenance_ObjectList
     '点击关闭按钮关闭
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        ResetDGV(Me)
         FillDGVbyObjecList(Me.ObjectList_DataGridView)
+        DisplaySort(Me.ObjectList_DataGridView)
+        '以材料列表填充DGV
 
+        ChangeDGVWithCombobox()
+        '用Combobox替换DGV中材料类型列
     End Sub
     '点击取消按钮取消输入（重新读取）
 

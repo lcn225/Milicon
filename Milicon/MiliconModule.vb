@@ -178,6 +178,18 @@ Module MiliconModule
 
     End Sub
 
+    Public Sub DisplaySort(ByRef DGV As DataGridView)
+
+        Dim ColNum As String = DGV.ColumnCount
+        Dim i As Integer
+
+        For i = 0 To ColNum - 1
+            DGV.Columns(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+
+    End Sub
+    '禁用DGV的点击排序功能
+
     Public Sub FillDGVbyObjecList(ByRef DGV As DataGridView)
 
         DBcon()
