@@ -67,6 +67,19 @@ Module MiliconModule
     End Function
     '根据测试批号查找材料种类，输入ID，返回字符串
 
+    Public Function GetIDByType(ByVal Obj_Type As String) As String
+        DBcon()
+
+        Dim sql As String = "Select Type_ID from ObjectType_List where Obj_Type = '" + Obj_Type + "'"
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetIDByType")
+        Dim Type_ID As String = ds.Tables(0).Rows(0)(0).ToString
+
+        Return Type_ID
+    End Function
+    '根据材料类型查询类型ID，输入类型名称，返回字符串
+
     Public Function GetTableNameByLoginNo(ByVal LoginNo As String) As DataSet
 
         DBcon()

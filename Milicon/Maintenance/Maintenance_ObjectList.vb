@@ -1,22 +1,18 @@
 ﻿Imports System.Data.OleDb
 
 Public Class Maintenance_ObjectList
-    Private Sub Maintenance_ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'DBcon()
+    Private Sub ComboBoxData(ByRef c As DataGridViewComboBoxColumn)
+        c.HeaderText = "材料类型"
+        c.Name = "Obj_Name"
+        '定义DGV下拉列表列
 
-        FillDGVbyObjecList(Me.ObjectList_DataGridView)
-        '以材料列表填充DGV
-        'Me.ObjectList_DataGridView.Columns(0).Visible = True
-        '显示ID列（填充时默认为不显示）
-        'Me.ObjectList_DataGridView.Sort(Me.ObjectList_DataGridView.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
-        '根据第一列的ID来排序
+        Dim Type_Combobox_Datatable As DataTable = New DataTable
+        Type_Combobox_Datatable.Columns.Add("id", Type.GetType("System.String"))
+        Type_Combobox_Datatable.Columns.Add("name", Type.GetType("System.String"))
+        '建立数据表
 
-        Dim column As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
-        column.HeaderText = "材料类型"
-        column.Name = "Obj_Name"
-
-        Dim sql As String = "select Obj_Type from ObjectType_List"
+        Dim sql As String = "select Type_ID, Obj_Type from ObjectType_List"
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
         '准备查询所有材料类型
@@ -27,22 +23,55 @@ Public Class Maintenance_ObjectList
 
         Dim i
         For i = 0 To RowsCount - 1
-            Dim Type As String = ds.Tables(0).Rows(i)(0).ToString
-            column.Items.Add(Type)
+            Dim Type_ID As String = ds.Tables(0).Rows(i)(0).ToString
+            Dim Obj_Type As String = ds.Tables(0).Rows(i)(1).ToString
+            Type_Combobox_Datatable.Rows.Add(Type_ID, Obj_Type)
         Next
-        '将查询结果（数据集）添加到Combobox中
+        '将查询结果（数据集）添加到数据表中
 
-        cn.Close()
-
-        ObjectList_DataGridView.Columns.Insert(0, column)
-
-        For i = 0 To ObjectList_DataGridView.Rows.Count - 1
-            ObjectList_DataGridView.Rows(i).Cells(0).Value = ObjectList_DataGridView.Rows(i).Cells(2).Value
-        Next
-        ObjectList_DataGridView.Columns.RemoveAt(2)
-        '用combobox替换
+        c.DataSource = Type_Combobox_Datatable
+        c.ValueMember = "id"
+        c.DisplayMember = "name"
+        c.DataPropertyName = "Type"
+        '将下拉列表绑定数据源
 
     End Sub
+
+    Private Sub ChangeDGVWithCombobox()
+
+        Dim Type_Column As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+
+        ComboBoxData(Type_Column)
+
+        ObjectList_DataGridView.Columns.Insert(0, Type_Column)
+        '将下拉列表列插入到DGV第一列
+
+
+
+        For i = 0 To ObjectList_DataGridView.Rows.Count - 1
+            Dim type As String = ObjectList_DataGridView.Rows(i).Cells(2).Value
+            If type <> "" Then
+                ObjectList_DataGridView.Rows(i).Cells(0).Value = GetIDByType(type)
+            End If
+        Next
+        '将下拉列表的默认值设为与DS中材料类型一致
+
+        ObjectList_DataGridView.Columns.RemoveAt(2)
+        '删除材料类型列，用combobox替换
+
+    End Sub
+    '用Combobox替换DGV中材料类型列
+
+    Private Sub Maintenance_ObjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        FillDGVbyObjecList(Me.ObjectList_DataGridView)
+        '以材料列表填充DGV
+
+        ChangeDGVWithCombobox()
+        '用Combobox替换DGV中材料类型列
+
+    End Sub
+    '窗口加载时填充DGV
 
     Public Function DB_RowCount(ByVal TableName As String) As Integer
         Dim Max As Integer = 0
