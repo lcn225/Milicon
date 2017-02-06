@@ -101,6 +101,12 @@
     <Compile Include="Maintenance\MaintenanceMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maintenance\Maintenance_Object.Designer.vb">
+      <DependentUpon>Maintenance_Object.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\Maintenance_Object.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maintenance\Maintenance_ObjectList.Designer.vb">
       <DependentUpon>Maintenance_ObjectList.vb</DependentUpon>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenance\MaintenanceMainMenu.resx">
       <DependentUpon>MaintenanceMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\Maintenance_Object.resx">
+      <DependentUpon>Maintenance_Object.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenance\Maintenance_ObjectList.resx">
       <DependentUpon>Maintenance_ObjectList.vb</DependentUpon>

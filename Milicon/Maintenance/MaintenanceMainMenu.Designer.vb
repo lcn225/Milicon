@@ -36,7 +36,7 @@ Partial Class MaintenanceMainMenu
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(205, 44)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "材料列表维护"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
@@ -45,7 +45,7 @@ Partial Class MaintenanceMainMenu
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(205, 44)
         Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Button2"
+        Me.Button2.Text = "密码维护"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
@@ -54,7 +54,7 @@ Partial Class MaintenanceMainMenu
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(205, 44)
         Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Button3"
+        Me.Button3.Text = "规格维护"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4

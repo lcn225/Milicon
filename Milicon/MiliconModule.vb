@@ -31,7 +31,7 @@ Module MiliconModule
     End Function
     '根据材料ID查找材料种类，输入ID，返回字符串
 
-    Public Function GetTableName_Type(ByVal ID_Obj As String) As DataSet
+    Public Function GetTableNameByID(ByVal ID_Obj As String) As DataSet
         DBcon()
         Dim result As DataSet
 
@@ -41,7 +41,7 @@ Module MiliconModule
         Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
         da = New OleDbDataAdapter(sql2, cn)
         result = New DataSet
-        da.Fill(result, "GetTableName_Type")
+        da.Fill(result, "GetTableNameByID")
         'Dim Type As String = ds.Tables(0).Rows(0)(0).ToString
 
         '根据材料种类查找表名
@@ -80,6 +80,33 @@ Module MiliconModule
     End Function
     '根据材料类型查询类型ID，输入类型名称，返回字符串
 
+    Public Function GetTableNameByType(ByVal Obje_Type As String) As DataSet
+
+        Dim result As DataSet
+
+        Dim sql As String = "Select * from ObjectType_List where Obj_Type='" + Obje_Type + "'"
+        da = New OleDbDataAdapter(sql, cn)
+        result = New DataSet
+        da.Fill(result, "GetTableName")
+
+        Return result
+
+    End Function
+    '根据材料类型查找表名，返回DS
+
+    Public Function GetTableNameStrByType(ByVal Obje_Type As String) As String
+
+        Dim ds As DataSet = New DataSet
+
+        ds = GetTableNameByType(Obje_Type)
+
+        Dim TableName As String = ds.Tables(0).Rows(0)("TableName").ToString
+
+        Return TableName
+
+    End Function
+    '根据材料类型查找测试项目表名，返回字符串
+
     Public Function GetTableNameByLoginNo(ByVal LoginNo As String) As DataSet
 
         DBcon()
@@ -88,10 +115,8 @@ Module MiliconModule
         Dim Type_Obj As String = GetObjTypeByLoginNo(LoginNo)
         '根据ID查找材料种类
 
-        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
-        da = New OleDbDataAdapter(sql2, cn)
-        result = New DataSet
-        da.Fill(result, "GetTableName")
+        result = GetTableNameByType(Type_Obj)
+        '根据种类查找表名
 
         Return result
     End Function
@@ -177,6 +202,7 @@ Module MiliconModule
         '重置DGV
 
     End Sub
+    '重置DGV
 
     Public Sub DisplaySort(ByRef DGV As DataGridView)
 
@@ -189,6 +215,36 @@ Module MiliconModule
 
     End Sub
     '禁用DGV的点击排序功能
+
+    Public Sub FillComboBoxByObjType(ByRef cb As ComboBox)
+        cb.Items.Add("所有材料")
+        '在下拉列表中增加第一行，全部材料
+
+        'cn.Open()
+
+        Dim sql As String = "select Obj_Type from ObjectType_List"
+        Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
+        Dim ds As DataSet = New DataSet
+        '准备查询所有材料类型
+
+        da.Fill(ds, "FillComboBoxByObjType")
+        Dim RowsCount = ds.Tables(0).Rows.Count
+        '建立数据集，统计记录数
+
+        Dim i
+        For i = 0 To RowsCount - 1
+            Dim Type As String = ds.Tables(0).Rows(i)(0)
+            cb.Items.Add(Type)
+        Next
+        '将查询结果（数据集）添加到Combobox中
+
+        cb.SelectedIndex = 0
+        '默认选中第一个
+
+        cn.Close()
+
+    End Sub
+    '用材料类型列表填充下拉列表
 
     Public Sub FillDGVbyObjecList(ByRef DGV As DataGridView)
 
@@ -251,5 +307,6 @@ Module MiliconModule
 
     End Sub
     '清除当前窗口的所有text
+
 
 End Module

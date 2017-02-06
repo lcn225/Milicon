@@ -25,4 +25,9 @@
     Private Sub MaintenanceMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MainMenu.Show()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Maintenance_Object.Show()
+        Me.Hide()
+    End Sub
 End Class

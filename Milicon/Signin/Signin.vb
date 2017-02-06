@@ -77,7 +77,7 @@ Public Class Signin
     Private Function GetTI(ByVal ID_Obj As String) As DataSet
         DBcon()
         Dim Type_ds As DataSet
-        Type_ds = GetTableName_Type(ID_Obj)
+        Type_ds = GetTableNameByID(ID_Obj)
         '根据ID返回TYPE相关信息（主要是表名）
 
         Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("TableName").ToString
@@ -121,7 +121,7 @@ Public Class Signin
         Dim RowsCount As Integer = TestDataInput_DataGridView.RowCount
         '获取DGV总行数
 
-        Dim Type_ds = GetTableName_Type(Me.ID_Object)
+        Dim Type_ds = GetTableNameByID(Me.ID_Object)
         Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("DataTableName").ToString
         '获取材料对应data信息表
 
@@ -201,6 +201,7 @@ Public Class Signin
 
     Private Sub ObjectList_Button_Click(sender As Object, e As EventArgs) Handles ObjectList_Button.Click
         ObjectList.Show()
+        ObjectList.ObjectList_Load(Me, e)
     End Sub
     '点击浏览打开原材料列表进行选择
 
