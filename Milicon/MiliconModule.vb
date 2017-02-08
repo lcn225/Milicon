@@ -31,26 +31,6 @@ Module MiliconModule
     End Function
     '根据材料ID查找材料种类，输入ID，返回字符串
 
-    Public Function GetTableNameByID(ByVal ID_Obj As String) As DataSet
-        DBcon()
-        Dim result As DataSet
-
-        Dim Type_Obj As String = GetObjType(ID_Obj)
-        '根据ID查找材料种类
-
-        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
-        da = New OleDbDataAdapter(sql2, cn)
-        result = New DataSet
-        da.Fill(result, "GetTableNameByID")
-        'Dim Type As String = ds.Tables(0).Rows(0)(0).ToString
-
-        '根据材料种类查找表名
-        Return result
-        cn.Close()
-
-    End Function
-    '根据材料ID查找表名，返回DS
-
     Public Function GetObjTypeByLoginNo(ByVal LoginNo As String) As String
         DBcon()
 
@@ -66,6 +46,38 @@ Module MiliconModule
         cn.Close()
     End Function
     '根据测试批号查找材料种类，输入ID，返回字符串
+
+    Public Function GetObjNameByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+
+        Dim sql As String = "Select Object_List.Obj_Name from Data_List, Object_List where Data_List.LoginNo=" + LoginNo + " and Data_List.Obj_ID = Object_List.Obj_ID"
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetObjTypeByLoginNo")
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据测试批号查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据测试批号查找材料名称，输入ID，返回字符串
+
+    Public Function GetObjIDByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+
+        Dim sql As String = "Select Object_List.Obj_ID from Data_List, Object_List where Data_List.LoginNo=" + LoginNo + " and Data_List.Obj_ID = Object_List.Obj_ID"
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetObjTypeByLoginNo")
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据测试批号查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据测试批号查找材料ID，输入ID，返回字符串
 
     Public Function GetIDByType(ByVal Obj_Type As String) As String
         DBcon()

@@ -23,14 +23,8 @@ Public Class TestResult
 
         Dim TableName_DS As DataSet = New DataSet
         Dim result As DataSet = New DataSet
-        Dim DataTableName As String
 
-        TableName_DS = GetTableNameByLoginNo(TestID)
-        '根据测试批号获取表名DS
-        DataTableName = TableName_DS.Tables(0).Rows(0)("DataTableName").ToString
-        '获取测试数据表表名
-
-        Dim sql = "select * from " + DataTableName + " where LoginNo = " + TestID
+        Dim sql = "select * from Data_List where LoginNo = " + TestID
         da = New OleDbDataAdapter(sql, cn)
         da.Fill(result, "GetTestData")
 
@@ -44,15 +38,9 @@ Public Class TestResult
 
         Dim TableName_DS As DataSet = New DataSet
         Dim result As DataSet = New DataSet
-        Dim TableName As String
+        Dim Obj_ID As String = GetObjIDByLoginNo(TestID)
 
-
-        TableName_DS = GetTableNameByLoginNo(TestID)
-        '根据测试批号获取表名DS
-        TableName = TableName_DS.Tables(0).Rows(0)("TableName").ToString
-        '获取测试数据表表名
-
-        Dim sql = "Select * from Data_List, Object_List, " + TableName + " where Object_List.Obj_Name=" + TableName + ".Obj_Name and  Data_list.Obj_ID=Object_List.Obj_ID and Data_List.LoginNo = " + TestID
+        Dim sql = "Select * from Object_List where Obj_ID = " + Obj_ID
         da = New OleDbDataAdapter(sql, cn)
         da.Fill(result, "GetTestData")
 
@@ -157,8 +145,6 @@ Public Class TestResult
         Dim RowsCount As Integer = TestData_DataGridView.RowCount
         '获取DGV总行数
 
-        Dim DataTableName As String = GetDateTableNameByLoginNo(TestLots)
-
         For i = 0 To RowsCount - 1
             For j = 0 To 2
                 Str_Col = "Value" + （i + 1）.ToString + "_" + （j + 1）.ToString
@@ -174,7 +160,7 @@ Public Class TestResult
         Str = Mid(Str, 1, Len(Str) - 2)
         '删去最后两位（即多出来的", "）
 
-        sql = "UPDATE " + DataTableName + " SET " + Str + " WHERE LoginNo = " + TestLots
+        sql = "UPDATE Data_List SET " + Str + " WHERE LoginNo = " + TestLots
         'UPDATE Person SET FirstName = 'Fred' WHERE LastName = 'Wilson' 
 
         Return sql

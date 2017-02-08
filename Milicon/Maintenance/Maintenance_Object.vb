@@ -34,11 +34,7 @@
 
     Public Sub DisplayTI()
 
-        Dim Obj_Type As String = GetObjType(Me.ID_Object)
-
-        Dim TableName As String = GetTableNameStrByType(Obj_Type)
-
-        Dim sql As String = "Select * from " + TableName
+        Dim sql As String = "Select * from Object_List where Obj_ID = " + Me.ID_Object.ToString
         da = New OleDb.OleDbDataAdapter(sql, cn)
         ds = New DataSet
         da.Fill(ds, "result")
