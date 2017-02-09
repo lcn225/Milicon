@@ -75,13 +75,9 @@ Public Class Signin
     '输入测试材料规格，显示登录界面
 
     Private Function GetTI(ByVal ID_Obj As String) As DataSet
-        DBcon()
-        Dim Type_ds As DataSet
-        Type_ds = GetTableNameByID(ID_Obj)
-        '根据ID返回TYPE相关信息（主要是表名）
 
-        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("TableName").ToString
-        Dim sql As String = "select * from " + TableName_Type + " where ID=1"
+        DBcon()
+        Dim sql As String = "select * from Object_List where Obj_ID=" + ID_Obj
         '根据ID在材料测试项目表中查询记录
         da = New OleDbDataAdapter(sql, cn)
         da.Fill(Me.TI_ds, "GetTIInfo")
@@ -92,9 +88,10 @@ Public Class Signin
     End Function
     '根据ID返回测试信息ds
 
-    Private Function SigninTestInfo() As String
-
+    Private Function SigninTestData() As String
         DBcon()
+
+        Dim sql As String
 
         Dim LoginNo As String = Me.TestLots
         Dim Obj_ID As String = ID_Object
@@ -102,28 +99,14 @@ Public Class Signin
         Dim Lots As String = Me.Lots_TextBox.Text
         Dim TestDate As String = Me.TestDate_DateTimePicker.Text
         Dim Tester As String = Me.Tester_TextBox.Text
-
-        Dim sql As String = "INSERT INTO Data_List VALUES ('" + LoginNo + "','" + Obj_ID + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "')"
-
-        Return sql
-
-    End Function
-    '登录测试信息（批号、日期等），返回SQL语句
-
-    Private Function SigninTestData() As String
-        DBcon()
-
-        Dim sql As String
+        '获取测试信息
 
         Dim Value(3) As String
-        Dim Str_Col As String = "LoginNo"
-        Dim Str_Val As String = "'" + Me.TestLots + "'"
+        Dim Str_Col As String = "LoginNo, Obj_ID, ProDate, Lots, TestDate, Tester"
+        Dim Str_Val As String = "'" + LoginNo + "','" + Obj_ID + "','" + ProDate + "','" + Lots + "','" + TestDate + "','" + Tester + "'"
+        '先写入测试信息相关信息
         Dim RowsCount As Integer = TestDataInput_DataGridView.RowCount
         '获取DGV总行数
-
-        Dim Type_ds = GetTableNameByID(Me.ID_Object)
-        Dim TableName_Type As String = Type_ds.Tables(0).Rows(0)("DataTableName").ToString
-        '获取材料对应data信息表
 
         cn.Open()
 
@@ -137,8 +120,7 @@ Public Class Signin
                 End If
             Next
         Next
-        'INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
-        sql = "INSERT INTO " + TableName_Type + " (" + Str_Col + ") VALUES (" + Str_Val + ")"
+        sql = "INSERT INTO Data_List (" + Str_Col + ") VALUES (" + Str_Val + ")"
 
         Return sql
 
@@ -238,16 +220,12 @@ Public Class Signin
 
     Private Sub Signin()
 
-        Dim sql1 As String
-        Dim sql2 As String
+        Dim sql As String
         Dim cmd As OleDbCommand
 
-        sql1 = SigninTestInfo()
-        sql2 = SigninTestData()
+        sql = SigninTestData()
 
-        cmd = New OleDbCommand(sql1, cn)
-        cmd.ExecuteNonQuery()
-        cmd = New OleDbCommand(sql2, cn)
+        cmd = New OleDbCommand(sql, cn)
         cmd.ExecuteNonQuery()
 
         MessageBox.Show("登录成功")

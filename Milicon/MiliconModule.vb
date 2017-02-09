@@ -8,7 +8,7 @@ Module MiliconModule
 
 
     Public Sub DBcon()
-        Dim cnStr As String = "Provider=" + ini.GetIniString("DBconnect", "Provider", "Microsoft.Jet.OLEDB.4.0") + ";Data Source=" + ini.GetIniString("DBconnect", "Source", "\\192.168.2.100\DataBase\Milicon.mdb") + ";Persist Security Info=" + ini.GetIniString("DBconnect", "Persist Security Info", "False")
+        Dim cnStr As String = "Provider=" + ini.GetIniString("DBconnect", "Provider", "Microsoft.Jet.OLEDB.4.0") + ";Data Source=" + ini.GetIniString("DBconnect", "Data Source", System.AppDomain.CurrentDomain.BaseDirectory + "Milicon.mdb") + ";Persist Security Info=" + ini.GetIniString("DBconnect", "Persist Security Info", "False")
         '根据INI内容定义链接字符串
         cn = New OleDbConnection(cnStr)
         '建立链接
@@ -31,26 +31,6 @@ Module MiliconModule
     End Function
     '根据材料ID查找材料种类，输入ID，返回字符串
 
-    Public Function GetTableNameByID(ByVal ID_Obj As String) As DataSet
-        DBcon()
-        Dim result As DataSet
-
-        Dim Type_Obj As String = GetObjType(ID_Obj)
-        '根据ID查找材料种类
-
-        Dim sql2 As String = "Select * from ObjectType_List where Obj_Type='" + Type_Obj + "'"
-        da = New OleDbDataAdapter(sql2, cn)
-        result = New DataSet
-        da.Fill(result, "GetTableNameByID")
-        'Dim Type As String = ds.Tables(0).Rows(0)(0).ToString
-
-        '根据材料种类查找表名
-        Return result
-        cn.Close()
-
-    End Function
-    '根据材料ID查找表名，返回DS
-
     Public Function GetObjTypeByLoginNo(ByVal LoginNo As String) As String
         DBcon()
 
@@ -67,6 +47,38 @@ Module MiliconModule
     End Function
     '根据测试批号查找材料种类，输入ID，返回字符串
 
+    Public Function GetObjNameByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+
+        Dim sql As String = "Select Object_List.Obj_Name from Data_List, Object_List where Data_List.LoginNo=" + LoginNo + " and Data_List.Obj_ID = Object_List.Obj_ID"
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetObjTypeByLoginNo")
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据测试批号查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据测试批号查找材料名称，输入ID，返回字符串
+
+    Public Function GetObjIDByLoginNo(ByVal LoginNo As String) As String
+        DBcon()
+
+        Dim sql As String = "Select Object_List.Obj_ID from Data_List, Object_List where Data_List.LoginNo=" + LoginNo + " and Data_List.Obj_ID = Object_List.Obj_ID"
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "GetObjTypeByLoginNo")
+        Dim Type_Obj As String = ds.Tables(0).Rows(0)(0).ToString
+        '根据测试批号查找材料种类
+
+        Return Type_Obj
+
+        cn.Close()
+    End Function
+    '根据测试批号查找材料ID，输入ID，返回字符串
+
     Public Function GetIDByType(ByVal Obj_Type As String) As String
         DBcon()
 
@@ -79,63 +91,6 @@ Module MiliconModule
         Return Type_ID
     End Function
     '根据材料类型查询类型ID，输入类型名称，返回字符串
-
-    Public Function GetTableNameByType(ByVal Obje_Type As String) As DataSet
-
-        Dim result As DataSet
-
-        Dim sql As String = "Select * from ObjectType_List where Obj_Type='" + Obje_Type + "'"
-        da = New OleDbDataAdapter(sql, cn)
-        result = New DataSet
-        da.Fill(result, "GetTableName")
-
-        Return result
-
-    End Function
-    '根据材料类型查找表名，返回DS
-
-    Public Function GetTableNameStrByType(ByVal Obje_Type As String) As String
-
-        Dim ds As DataSet = New DataSet
-
-        ds = GetTableNameByType(Obje_Type)
-
-        Dim TableName As String = ds.Tables(0).Rows(0)("TableName").ToString
-
-        Return TableName
-
-    End Function
-    '根据材料类型查找测试项目表名，返回字符串
-
-    Public Function GetTableNameByLoginNo(ByVal LoginNo As String) As DataSet
-
-        DBcon()
-        Dim result As DataSet
-
-        Dim Type_Obj As String = GetObjTypeByLoginNo(LoginNo)
-        '根据ID查找材料种类
-
-        result = GetTableNameByType(Type_Obj)
-        '根据种类查找表名
-
-        Return result
-    End Function
-    '根据测试批号查找表名，返回DS
-
-    Public Function GetDateTableNameByLoginNo(ByVal LoginNo As String) As String
-        DBcon()
-        Dim result As DataSet
-        Dim TableName As String
-
-        result = GetTableNameByLoginNo(LoginNo)
-        '根据LoginNo返回DS
-
-        TableName = result.Tables(0).Rows(0)("DataTableName").ToString
-        '从DS中获取DataTableName
-
-        Return TableName
-    End Function
-    '根据测试批号查找测试数据表名，返回字符串
 
     Public Function GetTestInfoByLoginNo(ByVal LoginNo As String) As DataSet
 
@@ -217,6 +172,10 @@ Module MiliconModule
     '禁用DGV的点击排序功能
 
     Public Sub FillComboBoxByObjType(ByRef cb As ComboBox)
+
+        cb.Items.Clear()
+        '重置该列表
+
         cb.Items.Add("所有材料")
         '在下拉列表中增加第一行，全部材料
 
