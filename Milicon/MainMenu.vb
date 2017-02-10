@@ -35,4 +35,8 @@
 
     End Sub
 
+    Private Sub FormatMaintenance_Button_Click(sender As Object, e As EventArgs) Handles FormatMaintenance_Button.Click
+        Wave.Show()
+        Me.Hide()
+    End Sub
 End Class

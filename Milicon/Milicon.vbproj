@@ -68,6 +68,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -180,6 +181,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestObjectName_DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Wave\Wave.Designer.vb">
+      <DependentUpon>Wave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Wave\Wave.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainMenu.resx">
@@ -217,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Signin\Signin.resx">
       <DependentUpon>Signin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wave\Wave.resx">
+      <DependentUpon>Wave.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
