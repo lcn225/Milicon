@@ -22,17 +22,17 @@ Partial Class Wave
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.ObjectList_Button = New System.Windows.Forms.Button()
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DateEnd_DateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.DateStart_DateTimePicker = New System.Windows.Forms.DateTimePicker()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Data_Chart = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.TI_CheckedListBox = New System.Windows.Forms.CheckedListBox()
+        CType(Me.Data_Chart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ObjectList_Button
@@ -76,37 +76,38 @@ Partial Class Wave
         Me.DateStart_DateTimePicker.TabIndex = 18
         Me.DateStart_DateTimePicker.Value = New Date(2017, 2, 10, 0, 0, 0, 0)
         '
-        'Chart1
+        'Data_Chart
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend4)
-        Me.Chart1.Location = New System.Drawing.Point(34, 122)
-        Me.Chart1.Name = "Chart1"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart1.Series.Add(Series4)
-        Me.Chart1.Size = New System.Drawing.Size(730, 315)
-        Me.Chart1.TabIndex = 22
-        Me.Chart1.Text = "Chart1"
+        ChartArea2.Name = "ChartArea1"
+        Me.Data_Chart.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Data_Chart.Legends.Add(Legend2)
+        Me.Data_Chart.Location = New System.Drawing.Point(193, 90)
+        Me.Data_Chart.Name = "Data_Chart"
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Data_Chart.Series.Add(Series2)
+        Me.Data_Chart.Size = New System.Drawing.Size(571, 347)
+        Me.Data_Chart.TabIndex = 22
+        Me.Data_Chart.Text = "Chart1"
         '
-        'ComboBox1
+        'TI_CheckedListBox
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(35, 76)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 20)
-        Me.ComboBox1.TabIndex = 23
+        Me.TI_CheckedListBox.CheckOnClick = True
+        Me.TI_CheckedListBox.FormattingEnabled = True
+        Me.TI_CheckedListBox.Location = New System.Drawing.Point(35, 90)
+        Me.TI_CheckedListBox.Name = "TI_CheckedListBox"
+        Me.TI_CheckedListBox.Size = New System.Drawing.Size(122, 340)
+        Me.TI_CheckedListBox.TabIndex = 24
         '
         'Wave
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(805, 514)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.Chart1)
+        Me.Controls.Add(Me.TI_CheckedListBox)
+        Me.Controls.Add(Me.Data_Chart)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DateEnd_DateTimePicker)
         Me.Controls.Add(Me.DateStart_DateTimePicker)
@@ -114,7 +115,7 @@ Partial Class Wave
         Me.Controls.Add(Me.NameInput_TextBox)
         Me.Name = "Wave"
         Me.Text = "Wave"
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Data_Chart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -125,6 +126,6 @@ Partial Class Wave
     Friend WithEvents Label2 As Label
     Friend WithEvents DateEnd_DateTimePicker As DateTimePicker
     Friend WithEvents DateStart_DateTimePicker As DateTimePicker
-    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Data_Chart As DataVisualization.Charting.Chart
+    Friend WithEvents TI_CheckedListBox As CheckedListBox
 End Class
