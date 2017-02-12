@@ -146,7 +146,7 @@ Module MiliconModule
     End Function
     '对字符串简单加密，输出密文
 
-    Public Function ave(ByVal num() As String) As Double
+    Public Function ave(ByVal num() As String, ByVal rnd As Integer) As Double
         Dim sum As Double = 0.0
         Dim n As Integer = 0
         Dim result As Double = 0.0
@@ -158,10 +158,11 @@ Module MiliconModule
             End If
         Next
 
-        result = sum / n
+        result = System.Math.Round(sum / n, rnd)
 
         Return result
     End Function
+    '计算平均数，删除空白值
 
     Public Sub ResetDGV(ByRef F As Form)
 

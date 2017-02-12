@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Wave
 
@@ -50,23 +51,28 @@ Public Class Wave
         Dim num As Integer = search_ds.Tables(0).Rows.Count
         Dim val_Num As Integer = getQtyByID(Obj_ID, TI_index)
         Dim val_Ave As Double = "0.0"
+        '定义相关变量
 
         Dim result_dt As DataTable = New DataTable
+        result_dt.TableName = ""
         result_dt.Columns.Add("日期")
         result_dt.Columns.Add("数据")
+        '定义DT列
 
         For i = 0 To num - 1
             Dim row_Str(val_Num) As String
             For j = 0 To val_Num - 1
                 row_Str(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index + 1) & "_" & (j + 1)).ToString
-                val_Ave = ave(row_Str)
+                val_Ave = ave(row_Str, 2)
             Next
             result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), val_Ave)
         Next
+        '将日期与平均数据填入DT中
 
         Return result_dt
 
     End Function
+    '根据材料ID及1项测试内容返回相关信息，返回有DataTable
 
     Private Function getTestData(ByVal Obj_ID As String,
                                  ByVal TI_index1 As Integer, ByVal TI_index2 As Integer,
@@ -90,6 +96,43 @@ Public Class Wave
     End Sub
     '点击一览打开材料列表
 
+    Private Sub FillChart(ByVal DT As DataTable)
+
+        Data_Chart.ChartAreas.Clear()
+
+        Data_Chart.ChartAreas.Add("测试数据")
+        Data_Chart.ChartAreas("测试数据").BackColor = Color.FromName("GradientInactiveCaption") '设置绘图区颜色
+        Data_Chart.ChartAreas("测试数据").AxisX.IsMarginVisible = True
+        'Data_Chart.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
+        Data_Chart.ChartAreas("测试数据").AxisX.Title = "时间" 'X轴名称
+        Data_Chart.ChartAreas("测试数据").AxisY.Title = "数量" 'Y轴名称
+
+        Data_Chart.Titles.Clear()
+        Data_Chart.Titles.Add("测试数据推移图")
+
+        Data_Chart.Series.Clear() '清除所有数据集
+        Dim newSeries1 As New Series("标准值") '新增数据集
+        newSeries1.ChartType = SeriesChartType.Line '直线
+        newSeries1.BorderWidth = 2
+        newSeries1.Color = Color.DimGray
+        newSeries1.XValueType = ChartValueType.Date
+        newSeries1.IsValueShownAsLabel = True
+        Data_Chart.Series.Add(newSeries1)
+
+        'Dim xValue As Double
+        Dim yValue As Double
+        Dim num As Integer = DT.Rows.Count
+
+        For i = 1 To num
+            'xValue = DT.Rows(i - 1)("日期")
+            yValue = DT.Rows(i - 1)("数据")
+            Data_Chart.Series("标准值").Points.AddXY(i, yValue)
+
+        Next
+
+    End Sub
+    '输入DataTable，绘制图表
+
     Private Sub Wave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DBcon()
 
@@ -101,10 +144,9 @@ Public Class Wave
         DateStart_DateTimePicker.Value = DateEnd_DateTimePicker.Value.AddMonths(-1)
         '重置DTP为上月和本月
 
-        'TI_CheckedListBox.DataSource = vbNull
 
     End Sub
-
+    '加载
 
     Private Sub Wave_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MainMenu.Show()
@@ -135,11 +177,16 @@ Public Class Wave
             TI_CheckedListBox.SetItemChecked(TI_CheckedListBox.SelectedIndex, False)
         End If
         '如果选择两项以上则报警
-
     End Sub
+    '检测CLB动态
 
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
-        getTestData(Me.ID_Object, TI_CheckedListBox.CheckedIndices(0), DateStart_DateTimePicker.Value, DateEnd_DateTimePicker.Value)
+
+        Dim TestData As DataTable = getTestData(Me.ID_Object, TI_CheckedListBox.CheckedIndices(0),
+                                                DateStart_DateTimePicker.Value, DateEnd_DateTimePicker.Value)
+        FillChart(TestData)
+
     End Sub
+    '点击OK按钮开始画图
 
 End Class
