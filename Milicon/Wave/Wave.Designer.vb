@@ -32,6 +32,8 @@ Partial Class Wave
         Me.DateStart_DateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.Data_Chart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TI_CheckedListBox = New System.Windows.Forms.CheckedListBox()
+        Me.cancelSelect_Button = New System.Windows.Forms.Button()
+        Me.OK_Button = New System.Windows.Forms.Button()
         CType(Me.Data_Chart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,7 +57,7 @@ Partial Class Wave
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(551, 35)
+        Me.Label2.Location = New System.Drawing.Point(841, 35)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(17, 12)
         Me.Label2.TabIndex = 20
@@ -63,14 +65,15 @@ Partial Class Wave
         '
         'DateEnd_DateTimePicker
         '
-        Me.DateEnd_DateTimePicker.Location = New System.Drawing.Point(577, 31)
+        Me.DateEnd_DateTimePicker.Location = New System.Drawing.Point(867, 31)
         Me.DateEnd_DateTimePicker.Name = "DateEnd_DateTimePicker"
         Me.DateEnd_DateTimePicker.Size = New System.Drawing.Size(105, 21)
         Me.DateEnd_DateTimePicker.TabIndex = 19
+        Me.DateEnd_DateTimePicker.Value = New Date(2017, 2, 12, 15, 7, 52, 0)
         '
         'DateStart_DateTimePicker
         '
-        Me.DateStart_DateTimePicker.Location = New System.Drawing.Point(434, 31)
+        Me.DateStart_DateTimePicker.Location = New System.Drawing.Point(724, 31)
         Me.DateStart_DateTimePicker.Name = "DateStart_DateTimePicker"
         Me.DateStart_DateTimePicker.Size = New System.Drawing.Size(105, 21)
         Me.DateStart_DateTimePicker.TabIndex = 18
@@ -88,7 +91,7 @@ Partial Class Wave
         Series2.Legend = "Legend1"
         Series2.Name = "Series1"
         Me.Data_Chart.Series.Add(Series2)
-        Me.Data_Chart.Size = New System.Drawing.Size(571, 347)
+        Me.Data_Chart.Size = New System.Drawing.Size(779, 370)
         Me.Data_Chart.TabIndex = 22
         Me.Data_Chart.Text = "Chart1"
         '
@@ -101,11 +104,32 @@ Partial Class Wave
         Me.TI_CheckedListBox.Size = New System.Drawing.Size(122, 340)
         Me.TI_CheckedListBox.TabIndex = 24
         '
+        'cancelSelect_Button
+        '
+        Me.cancelSelect_Button.Location = New System.Drawing.Point(104, 437)
+        Me.cancelSelect_Button.Name = "cancelSelect_Button"
+        Me.cancelSelect_Button.Size = New System.Drawing.Size(53, 23)
+        Me.cancelSelect_Button.TabIndex = 25
+        Me.cancelSelect_Button.Text = "取消"
+        Me.cancelSelect_Button.UseVisualStyleBackColor = True
+        '
+        'OK_Button
+        '
+        Me.OK_Button.Enabled = False
+        Me.OK_Button.Location = New System.Drawing.Point(35, 437)
+        Me.OK_Button.Name = "OK_Button"
+        Me.OK_Button.Size = New System.Drawing.Size(53, 23)
+        Me.OK_Button.TabIndex = 26
+        Me.OK_Button.Text = "确定"
+        Me.OK_Button.UseVisualStyleBackColor = True
+        '
         'Wave
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(805, 514)
+        Me.ClientSize = New System.Drawing.Size(1025, 514)
+        Me.Controls.Add(Me.OK_Button)
+        Me.Controls.Add(Me.cancelSelect_Button)
         Me.Controls.Add(Me.TI_CheckedListBox)
         Me.Controls.Add(Me.Data_Chart)
         Me.Controls.Add(Me.Label2)
@@ -128,4 +152,6 @@ Partial Class Wave
     Friend WithEvents DateStart_DateTimePicker As DateTimePicker
     Friend WithEvents Data_Chart As DataVisualization.Charting.Chart
     Friend WithEvents TI_CheckedListBox As CheckedListBox
+    Friend WithEvents cancelSelect_Button As Button
+    Friend WithEvents OK_Button As Button
 End Class

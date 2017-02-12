@@ -8,7 +8,6 @@
         Me.Signin_Button.Text = ini.GetIniString("MainMenu", "Button1", "Signin")
         Me.SearchData_Button.Text = ini.GetIniString("MainMenu", "Button2", "SearchData")
         Me.FormatMaintenance_Button.Text = ini.GetIniString("MainMenu", "Button3", "FormatMaintenance")
-
     End Sub
 
     Private Sub Signin_Click(sender As Object, e As EventArgs) Handles Signin_Button.Click

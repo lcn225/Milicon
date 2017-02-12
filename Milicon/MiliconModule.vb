@@ -31,6 +31,22 @@ Module MiliconModule
     End Function
     '根据材料ID查找材料种类，输入ID，返回字符串
 
+    Public Function getQtyByID(ByVal ID_Obj As String, ByVal TI As String) As Integer
+
+        DBcon()
+
+        Dim sql As String = "Select TI" & (TI + 1) & "_Qty From Object_List Where Obj_ID = " & ID_Obj
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "getQtyByID")
+        Dim Unit As String = ds.Tables(0).Rows(0)(0).ToString
+
+        Return Unit
+
+        cn.Close()
+    End Function
+    '根据材料ID与测试项目号查找样本数，返回整数
+
     Public Function GetObjTypeByLoginNo(ByVal LoginNo As String) As String
         DBcon()
 
@@ -129,6 +145,23 @@ Module MiliconModule
         Return Result
     End Function
     '对字符串简单加密，输出密文
+
+    Public Function ave(ByVal num() As String) As Double
+        Dim sum As Double = 0.0
+        Dim n As Integer = 0
+        Dim result As Double = 0.0
+
+        For i = 0 To num.Length - 1
+            If num(i) <> "" Then
+                sum += num(i)
+                n += 1
+            End If
+        Next
+
+        result = sum / n
+
+        Return result
+    End Function
 
     Public Sub ResetDGV(ByRef F As Form)
 

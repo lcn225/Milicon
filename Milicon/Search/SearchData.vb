@@ -96,9 +96,9 @@ Public Class SearchData
         'sql前置指令
 
         If Me.RadioButton1.Checked = True Then
-            TestDate = "TestDate >= #" + DateStart + "# and TestDate <= #" + DateEnd + "#"
+            TestDate = "TestDate >= #" & DateStart & "# and TestDate <= #" & DateEnd & "#"
         ElseIf Me.RadioButton2.Checked = True Then
-            TestLots = "LoginNo >= " + LotsStart + " and LoginNo <= " + LotsEnd
+            TestLots = "LoginNo >= " & LotsStart & " and LoginNo <= " & LotsEnd
         Else
             MessageBox.Show("搜索条件错误")
         End If
@@ -107,7 +107,7 @@ Public Class SearchData
         If Obj_Type = "所有材料" Then
             TestType = Nothing
         Else
-            TestType = " and Obj_Type= '" + Obj_Type + "'"
+            TestType = " and Obj_Type= '" & Obj_Type & "'"
         End If
         '如果材料不是选择所有材料，则进行筛选
 
