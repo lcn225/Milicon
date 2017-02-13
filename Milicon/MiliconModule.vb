@@ -234,6 +234,28 @@ Module MiliconModule
     End Sub
     '禁用DGV的点击排序功能
 
+    Public Sub delMulRowFromDataTable(ByRef DT As DataTable, ByVal field As String)
+
+        Dim count As Integer = DT.Rows.Count
+        Dim val
+        Dim last = DT.Rows(count - 1)(field)
+        '获取最后一行该字段数值
+
+        For i = count - 2 To 0 Step -1
+            '从倒数第二行开始到第一行
+            val = DT.Rows(i)(field)
+            If val = last Then
+                '如果该行该字段数值等于下一行
+                DT.Rows(i + 1).Delete()
+                '删除下一行
+            Else
+                last = val
+            End If
+        Next
+
+    End Sub
+    '删除DataTable中指定字段重复行
+
     Public Sub FillComboBoxByObjType(ByRef cb As ComboBox)
 
         cb.Items.Clear()

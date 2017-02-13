@@ -35,7 +35,7 @@ Public Class Wave
 
     Private Function getTestData(ByVal Obj_ID As String,
                                  ByVal TI_index As Integer,
-                                 ByVal startDate As Date, ByVal EndendDate As Date) As DataTable
+                                 ByVal startDate As Date, ByVal endDate As Date) As DataTable
 
         Dim search_ds As DataSet = New DataSet
 
@@ -45,7 +45,7 @@ Public Class Wave
         Next
         '获取数据所在字段名，格式为str
 
-        Dim sql As String = "Select " & str & " from Data_List Where Obj_ID = " & Obj_ID & " and TestDate >= #" & startDate & "# and TestDate <= #" & EndendDate & "#"
+        Dim sql As String = "Select " & str & " from Data_List Where Obj_ID = " & Obj_ID & " and TestDate >= #" & startDate & "# and TestDate <= #" & endDate & "#"
         da = New OleDbDataAdapter(sql, cn)
         da.Fill(search_ds, "getTestData")
         '搜索所有相关数据
@@ -67,9 +67,11 @@ Public Class Wave
                 row_Str(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index + 1) & "_" & (j + 1)).ToString
                 val_Ave = ave(row_Str, 2)
             Next
-            result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), val_Ave)
+            result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), Format(val_Ave, "0.00"))
         Next
         '将日期与平均数据填入DT中
+
+        delMulRowFromDataTable(result_dt, "日期")
 
         Return result_dt
 
@@ -78,14 +80,58 @@ Public Class Wave
 
     Private Function getTestData(ByVal Obj_ID As String,
                                  ByVal TI_index1 As Integer, ByVal TI_index2 As Integer,
-                                 ByVal startDate As Date, ByVal EndendDate As Date) As DataSet
+                                 ByVal startDate As Date, ByVal endDate As Date) As DataTable
 
-        Dim result As DataSet = New DataSet
+        Dim search_ds As DataSet = New DataSet
 
-        Dim sql As String = ""
+        Dim str1 As String = "LoginNo, TestDate"
+        Dim str2 As String = ""
+        For i = 1 To 9
+            str1 = str1 & ", Value" & (TI_index1 + 1) & "_" & i
+            str2 = str2 & ", Value" & (TI_index2 + 1) & "_" & i
+        Next
+        '获取数据所在字段名，格式为str
 
-        Return result
+        Dim sql As String = "Select " & str1 & str2 & " from Data_List Where Obj_ID = " & Obj_ID & " and TestDate >= #" & startDate & "# and TestDate <= #" & endDate & "#"
+        da = New OleDbDataAdapter(sql, cn)
+        da.Fill(search_ds, "getTestData")
+        '搜索所有相关数据
+
+        Dim num As Integer = search_ds.Tables(0).Rows.Count
+        Dim val_Num1 As Integer = getQtyByID(Obj_ID, TI_index1)
+        Dim val_Ave1 As Double = "0.0"
+        Dim val_Num2 As Integer = getQtyByID(Obj_ID, TI_index2)
+        Dim val_Ave2 As Double = "0.0"
+        '定义相关变量
+
+        Dim result_dt As DataTable = New DataTable
+        result_dt.TableName = ""
+        result_dt.Columns.Add("日期", Type.GetType("System.DateTime"))
+        result_dt.Columns.Add("数据1")
+        result_dt.Columns.Add("数据2")
+        '定义DT列
+
+        For i = 0 To num - 1
+            Dim row_Str1(val_Num1) As String
+            Dim row_Str2(val_Num2) As String
+            For j = 0 To val_Num1 - 1
+                row_Str1(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index1 + 1) & "_" & (j + 1)).ToString
+                val_Ave1 = ave(row_Str1, 2)
+            Next
+            For j = 0 To val_Num2 - 1
+                row_Str2(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index2 + 1) & "_" & (j + 1)).ToString
+                val_Ave2 = ave(row_Str2, 2)
+            Next
+            result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), Format(val_Ave1, "0.00"), Format(val_Ave2, "0.00"))
+        Next
+        '将日期与平均数据填入DT中
+
+        delMulRowFromDataTable(result_dt, "日期")
+
+        Return result_dt
+
     End Function
+    '根据材料ID及2项测试内容返回相关信息，返回有DataTable
 
     Public Sub DisplayTI()
         fillCheckedListBoxByTI(ID_Object)
@@ -98,31 +144,42 @@ Public Class Wave
     End Sub
     '点击一览打开材料列表
 
+    Private Sub setCHartAreas(ByRef Ch As Chart)
+
+        Ch.ChartAreas.Clear()
+        Ch.ChartAreas.Add("测试数据")
+        Ch.ChartAreas("测试数据").BackColor = Color.White '设置绘图区颜色
+        Ch.ChartAreas("测试数据").AxisX.IsMarginVisible = True
+        'ch.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
+        Ch.ChartAreas("测试数据").AxisX.Title = "日期" 'X轴名称
+        Ch.ChartAreas("测试数据").AxisX.MajorGrid.Enabled = False '取消X轴网格线
+        Ch.ChartAreas("测试数据").AxisY.Title = Me.TI_CheckedListBox.CheckedItems(0).ToString 'Y轴名称
+        Ch.ChartAreas("测试数据").AxisY.MajorGrid.LineColor = Color.FromArgb(217, 217, 217) '淡灰
+        '设置绘图区相关
+
+    End Sub
+    '设置绘图区相关
+
     Private Sub FillChart(ByVal DT As DataTable)
 
-        Data_Chart.ChartAreas.Clear()
+        Data_Chart.Visible = True
 
-        Data_Chart.ChartAreas.Add("测试数据")
-        Data_Chart.ChartAreas("测试数据").BackColor = Color.White '设置绘图区颜色
-        Data_Chart.ChartAreas("测试数据").AxisX.IsMarginVisible = True
-        'Data_Chart.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
-        Data_Chart.ChartAreas("测试数据").AxisX.Title = "时间" 'X轴名称
-        Data_Chart.ChartAreas("测试数据").AxisX.MajorGrid.Enabled = False '取消X轴网格线
-        Data_Chart.ChartAreas("测试数据").AxisY.Title = "数量" 'Y轴名称
-        Data_Chart.ChartAreas("测试数据").AxisY.MajorGrid.LineColor = Color.FromArgb(217, 217, 217) '淡灰
+        setCHartAreas(Data_Chart)
+        '设置绘图区相关
 
         Data_Chart.Titles.Clear()
         Data_Chart.Titles.Add("测试数据推移图")
+        '设置标题
 
         Data_Chart.Series.Clear() '清除所有数据集
-        Dim newSeries1 As New Series("标准值") '新增数据集
+        Dim newSeries1 As New Series(Me.TI_CheckedListBox.CheckedItems(0).ToString) '新增数据集
         newSeries1.ChartType = SeriesChartType.Line '直线
         newSeries1.BorderWidth = 3
         newSeries1.Color = Color.FromArgb(79, 129, 189) 'Blue
         newSeries1.XValueType = ChartValueType.Date
         newSeries1.IsValueShownAsLabel = True
         Data_Chart.Series.Add(newSeries1)
-
+        '设置系列1相关
 
         Dim xValue As Double
         Dim yValue As Double
@@ -130,11 +187,34 @@ Public Class Wave
 
         For i = 1 To num
             'xValue = Convert.ToDateTime(DT.Rows(i - 1)("日期").ToString).ToOADate()
-            xValue = DT.Rows(i - 1)("日期").ToOADate()
-            yValue = DT.Rows(i - 1)("数据")
-            Data_Chart.Series("标准值").Points.AddXY(xValue, yValue)
-
+            xValue = DT.Rows(i - 1)("日期").ToOADate() '转换为双精度日期
+            yValue = DT.Rows(i - 1)("数据1")
+            Data_Chart.Series(0).Points.AddXY(xValue, yValue)
         Next
+
+        If DT.Columns.Count = 3 Then
+            '如果DT有三列（两列测试数据），则再加一个系列
+
+            Dim newSeries2 As New Series '新增数据集
+            newSeries2.ChartType = SeriesChartType.Line '直线
+            newSeries2.BorderWidth = 3
+            newSeries2.Color = Color.FromArgb(192, 80, 77) 'Red
+            newSeries2.XValueType = ChartValueType.Date
+            newSeries1.YAxisType = AxisType.Primary
+            newSeries2.YAxisType = AxisType.Secondary
+            newSeries2.IsValueShownAsLabel = True
+            Data_Chart.Series.Add(newSeries2)
+            '设置系列2相关
+
+            For i = 1 To num
+                xValue = DT.Rows(i - 1)("日期").ToOADate() '转换为双精度日期
+                yValue = DT.Rows(i - 1)("数据2")
+                Data_Chart.Series(1).Points.AddXY(xValue, yValue)
+            Next
+
+        End If
+
+
 
     End Sub
     '输入DataTable，绘制图表
@@ -149,6 +229,8 @@ Public Class Wave
         DateEnd_DateTimePicker.Value = Today
         DateStart_DateTimePicker.Value = DateEnd_DateTimePicker.Value.AddMonths(-1)
         '重置DTP为上月和本月
+
+        Data_Chart.Visible = False
 
 
     End Sub
@@ -188,9 +270,12 @@ Public Class Wave
 
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
-        Dim TestData As DataTable = getTestData(Me.ID_Object, TI_CheckedListBox.CheckedIndices(0),
+        Dim TestData As DataTable = getTestData(Me.ID_Object,
+                                                0, 1,
                                                 DateStart_DateTimePicker.Value, DateEnd_DateTimePicker.Value)
+        '获取测试数据
         FillChart(TestData)
+        '将测试数据画图
 
     End Sub
     '点击OK按钮开始画图
