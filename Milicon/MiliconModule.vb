@@ -193,6 +193,35 @@ Module MiliconModule
     End Sub
     '重置DGV
 
+    Public Sub ResetCLB(ByRef F As Form)
+
+        Dim CLB_Name As String = ""
+
+        For Each con As Control In F.Controls
+            If TypeOf con Is CheckedListBox Then
+                '如果当前控件是CLB的时候
+                CLB_Name = con.Name
+                '获取CLB名称
+            End If
+        Next con
+
+        Dim CLB As CheckedListBox = F.Controls(CLB_Name)
+        '引用该F的CLB
+
+        Dim Rows As Integer = CLB.Items.Count
+        '获取该CLB行数
+
+        'CLB.DataSource = vbNull
+        '清除CLB所有数据
+        For i = Rows - 1 To 0 Step -1
+            CLB.Items.RemoveAt(i)
+        Next
+        '清除CLB所有行
+        '重置CLB
+
+    End Sub
+    '重置DGV
+
     Public Sub DisplaySort(ByRef DGV As DataGridView)
 
         Dim ColNum As String = DGV.ColumnCount

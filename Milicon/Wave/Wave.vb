@@ -7,6 +7,8 @@ Public Class Wave
 
     Private Sub fillCheckedListBoxByTI(ByVal ID_Obj As String)
 
+        ResetCLB(Me)
+
         Dim sql As String = "Select * from Object_List Where Obj_ID = " + ID_Obj
         Dim TI_ds As DataSet = New DataSet
 
@@ -55,7 +57,7 @@ Public Class Wave
 
         Dim result_dt As DataTable = New DataTable
         result_dt.TableName = ""
-        result_dt.Columns.Add("日期")
+        result_dt.Columns.Add("日期", Type.GetType("System.DateTime"))
         result_dt.Columns.Add("数据")
         '定义DT列
 
@@ -101,11 +103,13 @@ Public Class Wave
         Data_Chart.ChartAreas.Clear()
 
         Data_Chart.ChartAreas.Add("测试数据")
-        Data_Chart.ChartAreas("测试数据").BackColor = Color.FromName("GradientInactiveCaption") '设置绘图区颜色
+        Data_Chart.ChartAreas("测试数据").BackColor = Color.White '设置绘图区颜色
         Data_Chart.ChartAreas("测试数据").AxisX.IsMarginVisible = True
         'Data_Chart.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
         Data_Chart.ChartAreas("测试数据").AxisX.Title = "时间" 'X轴名称
+        Data_Chart.ChartAreas("测试数据").AxisX.MajorGrid.Enabled = False '取消X轴网格线
         Data_Chart.ChartAreas("测试数据").AxisY.Title = "数量" 'Y轴名称
+        Data_Chart.ChartAreas("测试数据").AxisY.MajorGrid.LineColor = Color.FromArgb(217, 217, 217) '淡灰
 
         Data_Chart.Titles.Clear()
         Data_Chart.Titles.Add("测试数据推移图")
@@ -113,20 +117,22 @@ Public Class Wave
         Data_Chart.Series.Clear() '清除所有数据集
         Dim newSeries1 As New Series("标准值") '新增数据集
         newSeries1.ChartType = SeriesChartType.Line '直线
-        newSeries1.BorderWidth = 2
-        newSeries1.Color = Color.DimGray
+        newSeries1.BorderWidth = 3
+        newSeries1.Color = Color.FromArgb(79, 129, 189) 'Blue
         newSeries1.XValueType = ChartValueType.Date
         newSeries1.IsValueShownAsLabel = True
         Data_Chart.Series.Add(newSeries1)
 
-        'Dim xValue As Double
+
+        Dim xValue As Double
         Dim yValue As Double
         Dim num As Integer = DT.Rows.Count
 
         For i = 1 To num
-            'xValue = DT.Rows(i - 1)("日期")
+            'xValue = Convert.ToDateTime(DT.Rows(i - 1)("日期").ToString).ToOADate()
+            xValue = DT.Rows(i - 1)("日期").ToOADate()
             yValue = DT.Rows(i - 1)("数据")
-            Data_Chart.Series("标准值").Points.AddXY(i, yValue)
+            Data_Chart.Series("标准值").Points.AddXY(xValue, yValue)
 
         Next
 
