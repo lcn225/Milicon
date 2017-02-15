@@ -34,14 +34,18 @@ Public Class Wave
     '将实验项目填充到CLB中
 
     Private Function getTestData(ByVal Obj_ID As String,
-                                 ByVal TI_index As Integer,
+                                 ByRef CLB As CheckedListBox,
                                  ByVal startDate As Date, ByVal endDate As Date) As DataTable
 
         Dim search_ds As DataSet = New DataSet
+        Dim checkedNum As Integer = CLB.CheckedIndices.Count
 
-        Dim str As String = "LoginNo, TestDate"
-        For i = 1 To 9
-            str = str & ", Value" & (TI_index + 1) & "_" & i
+        Dim str As String = "LoginNo"
+
+        For index = 0 To checkedNum - 1
+            For i = 1 To 9
+                str = str & ", Value" & (CLB.CheckedIndices(index) + 1) & "_" & i
+            Next
         Next
         '获取数据所在字段名，格式为str
 
@@ -51,82 +55,55 @@ Public Class Wave
         '搜索所有相关数据
 
         Dim num As Integer = search_ds.Tables(0).Rows.Count
-        Dim val_Num As Integer = getQtyByID(Obj_ID, TI_index)
-        Dim val_Ave As Double = "0.0"
-        '定义相关变量
+        '统计数据表中行数量（即搜索结果数量）
+
+        Dim val_Num(checkedNum - 1) As Integer
+        For i = 0 To checkedNum - 1
+            val_Num(i) = getQtyByID(Obj_ID, CLB.CheckedIndices(i))
+        Next
+        '定义数组val_Num，填充每一个勾选TI的qty进入数组
+
+        Dim val_Ave(checkedNum - 1) As Double
+        '定义数组val_Ave
 
         Dim result_dt As DataTable = New DataTable
         result_dt.TableName = ""
-        result_dt.Columns.Add("日期", Type.GetType("System.DateTime"))
-        result_dt.Columns.Add("数据")
-        '定义DT列
+        result_dt.Columns.Add("测试编号")
+        '增加日期列
+        For i = 1 To checkedNum
+            result_dt.Columns.Add("数据" & i)
+        Next
+        '定义DT，增加对应数量的数据列
 
         For i = 0 To num - 1
-            Dim row_Str(val_Num) As String
-            For j = 0 To val_Num - 1
-                row_Str(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index + 1) & "_" & (j + 1)).ToString
-                val_Ave = ave(row_Str, 2)
+            '每循环一次添加一行数据
+            Dim dr As DataRow = result_dt.NewRow
+            dr("测试编号") = search_ds.Tables(0).Rows(i)(0)
+            '定义dataRow
+
+            For j = 0 To checkedNum - 1
+                '每循环一次获得一个系列的平均数
+
+                Dim row_Str(val_Num(j) - 1) As String
+                '定义数组，数组长度为对应TI的qty
+
+
+                For k = 0 To val_Num(j) - 1
+                    row_Str(k) = search_ds.Tables(0).Rows(i)("Value" & (CLB.CheckedIndices(j) + 1) & "_" & (k + 1)).ToString
+                Next
+                '将若干个实验数据填入row_Str数组
+
+                val_Ave(j) = ave(row_Str, 2)
+                dr("数据" & (j + 1)) = Format(val_Ave(j), "0.00")
+                '取平均数并填入dr对应字段
+
             Next
-            result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), Format(val_Ave, "0.00"))
+            result_dt.Rows.Add(dr)
         Next
         '将日期与平均数据填入DT中
 
-        delMulRowFromDataTable(result_dt, "日期")
-
-        Return result_dt
-
-    End Function
-    '根据材料ID及1项测试内容返回相关信息，返回有DataTable
-
-    Private Function getTestData(ByVal Obj_ID As String,
-                                 ByVal TI_index1 As Integer, ByVal TI_index2 As Integer,
-                                 ByVal startDate As Date, ByVal endDate As Date) As DataTable
-
-        Dim search_ds As DataSet = New DataSet
-
-        Dim str1 As String = "LoginNo, TestDate"
-        Dim str2 As String = ""
-        For i = 1 To 9
-            str1 = str1 & ", Value" & (TI_index1 + 1) & "_" & i
-            str2 = str2 & ", Value" & (TI_index2 + 1) & "_" & i
-        Next
-        '获取数据所在字段名，格式为str
-
-        Dim sql As String = "Select " & str1 & str2 & " from Data_List Where Obj_ID = " & Obj_ID & " and TestDate >= #" & startDate & "# and TestDate <= #" & endDate & "#"
-        da = New OleDbDataAdapter(sql, cn)
-        da.Fill(search_ds, "getTestData")
-        '搜索所有相关数据
-
-        Dim num As Integer = search_ds.Tables(0).Rows.Count
-        Dim val_Num1 As Integer = getQtyByID(Obj_ID, TI_index1)
-        Dim val_Ave1 As Double = "0.0"
-        Dim val_Num2 As Integer = getQtyByID(Obj_ID, TI_index2)
-        Dim val_Ave2 As Double = "0.0"
-        '定义相关变量
-
-        Dim result_dt As DataTable = New DataTable
-        result_dt.TableName = ""
-        result_dt.Columns.Add("日期", Type.GetType("System.DateTime"))
-        result_dt.Columns.Add("数据1")
-        result_dt.Columns.Add("数据2")
-        '定义DT列
-
-        For i = 0 To num - 1
-            Dim row_Str1(val_Num1) As String
-            Dim row_Str2(val_Num2) As String
-            For j = 0 To val_Num1 - 1
-                row_Str1(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index1 + 1) & "_" & (j + 1)).ToString
-                val_Ave1 = ave(row_Str1, 2)
-            Next
-            For j = 0 To val_Num2 - 1
-                row_Str2(j) = search_ds.Tables(0).Rows(i)("Value" & (TI_index2 + 1) & "_" & (j + 1)).ToString
-                val_Ave2 = ave(row_Str2, 2)
-            Next
-            result_dt.Rows.Add(search_ds.Tables(0).Rows(i)(1), Format(val_Ave1, "0.00"), Format(val_Ave2, "0.00"))
-        Next
-        '将日期与平均数据填入DT中
-
-        delMulRowFromDataTable(result_dt, "日期")
+        delMulRowFromDataTable(result_dt, "测试编号")
+        '
 
         Return result_dt
 
@@ -153,6 +130,9 @@ Public Class Wave
         'ch.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
         Ch.ChartAreas("测试数据").AxisX.Title = "日期" 'X轴名称
         Ch.ChartAreas("测试数据").AxisX.MajorGrid.Enabled = False '取消X轴网格线
+        Ch.ChartAreas("测试数据").AxisX.IntervalAutoMode = IntervalAutoMode.FixedCount
+        Ch.ChartAreas("测试数据").AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None
+        Ch.ChartAreas("测试数据").AxisX.LabelStyle.Angle = -90
         Ch.ChartAreas("测试数据").AxisY.Title = Me.TI_CheckedListBox.CheckedItems(0).ToString 'Y轴名称
         Ch.ChartAreas("测试数据").AxisY.MajorGrid.LineColor = Color.FromArgb(217, 217, 217) '淡灰
         '设置绘图区相关
@@ -176,7 +156,7 @@ Public Class Wave
         newSeries1.ChartType = SeriesChartType.Line '直线
         newSeries1.BorderWidth = 3
         newSeries1.Color = Color.FromArgb(79, 129, 189) 'Blue
-        newSeries1.XValueType = ChartValueType.Date
+        newSeries1.XValueType = ChartValueType.String
         newSeries1.IsValueShownAsLabel = True
         Data_Chart.Series.Add(newSeries1)
         '设置系列1相关
@@ -187,7 +167,7 @@ Public Class Wave
 
         For i = 1 To num
             'xValue = Convert.ToDateTime(DT.Rows(i - 1)("日期").ToString).ToOADate()
-            xValue = DT.Rows(i - 1)("日期").ToOADate() '转换为双精度日期
+            xValue = DT.Rows(i - 1)("测试编号")
             yValue = DT.Rows(i - 1)("数据1")
             Data_Chart.Series(0).Points.AddXY(xValue, yValue)
         Next
@@ -199,7 +179,7 @@ Public Class Wave
             newSeries2.ChartType = SeriesChartType.Line '直线
             newSeries2.BorderWidth = 3
             newSeries2.Color = Color.FromArgb(192, 80, 77) 'Red
-            newSeries2.XValueType = ChartValueType.Date
+            newSeries2.XValueType = ChartValueType.String
             newSeries1.YAxisType = AxisType.Primary
             newSeries2.YAxisType = AxisType.Secondary
             newSeries2.IsValueShownAsLabel = True
@@ -207,7 +187,7 @@ Public Class Wave
             '设置系列2相关
 
             For i = 1 To num
-                xValue = DT.Rows(i - 1)("日期").ToOADate() '转换为双精度日期
+                xValue = DT.Rows(i - 1)("测试编号")
                 yValue = DT.Rows(i - 1)("数据2")
                 Data_Chart.Series(1).Points.AddXY(xValue, yValue)
             Next
@@ -271,7 +251,7 @@ Public Class Wave
     Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
         Dim TestData As DataTable = getTestData(Me.ID_Object,
-                                                0, 1,
+                                                TI_CheckedListBox,
                                                 DateStart_DateTimePicker.Value, DateEnd_DateTimePicker.Value)
         '获取测试数据
         FillChart(TestData)
