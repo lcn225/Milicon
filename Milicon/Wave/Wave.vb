@@ -130,8 +130,7 @@ Public Class Wave
         'ch.ChartAreas("测试数据").Area3DStyle.Enable3D = True‘启用3D显示
         Ch.ChartAreas("测试数据").AxisX.Title = "日期" 'X轴名称
         Ch.ChartAreas("测试数据").AxisX.MajorGrid.Enabled = False '取消X轴网格线
-        Ch.ChartAreas("测试数据").AxisX.IntervalAutoMode = IntervalAutoMode.FixedCount
-        Ch.ChartAreas("测试数据").AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None
+        Ch.ChartAreas("测试数据").AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount
         Ch.ChartAreas("测试数据").AxisX.LabelStyle.Angle = -90
         Ch.ChartAreas("测试数据").AxisY.Title = Me.TI_CheckedListBox.CheckedItems(0).ToString 'Y轴名称
         Ch.ChartAreas("测试数据").AxisY.MajorGrid.LineColor = Color.FromArgb(217, 217, 217) '淡灰
@@ -140,61 +139,63 @@ Public Class Wave
     End Sub
     '设置绘图区相关
 
+    Private Sub setSeries(ByRef Ch As Chart, ByVal n As Integer)
+
+        Dim colorset(3) As Integer
+        colorset(0) = &HFF4F81BD '蓝色
+        colorset(1) = &HFFC0504D '红色
+        colorset(2) = &HFF9BBB59 '绿色
+
+
+        Dim newSeries As New Series(Me.TI_CheckedListBox.CheckedItems(n).ToString) '新增数据集
+        newSeries.ChartType = SeriesChartType.Line '直线
+        newSeries.BorderWidth = 3
+        newSeries.Color = Color.FromArgb(colorset(n))
+        '定义线条颜色
+        newSeries.XValueType = ChartValueType.String
+        newSeries.IsValueShownAsLabel = True
+        Ch.Series.Add(newSeries)
+        '设置系列集相关
+
+    End Sub
+    '设置系列集相关
+
+
     Private Sub FillChart(ByVal DT As DataTable)
+
+        Dim xValue As Double
+        Dim yValue As Double
+        Dim checkedNum As Integer = DT.Columns.Count - 1
+        '获取数据列数（即全部列数减去X轴列数）
+        Dim num As Integer = DT.Rows.Count
 
         Data_Chart.Visible = True
 
         setCHartAreas(Data_Chart)
         '设置绘图区相关
-
         Data_Chart.Titles.Clear()
         Data_Chart.Titles.Add("测试数据推移图")
         '设置标题
 
         Data_Chart.Series.Clear() '清除所有数据集
-        Dim newSeries1 As New Series(Me.TI_CheckedListBox.CheckedItems(0).ToString) '新增数据集
-        newSeries1.ChartType = SeriesChartType.Line '直线
-        newSeries1.BorderWidth = 3
-        newSeries1.Color = Color.FromArgb(79, 129, 189) 'Blue
-        newSeries1.XValueType = ChartValueType.String
-        newSeries1.IsValueShownAsLabel = True
-        Data_Chart.Series.Add(newSeries1)
-        '设置系列1相关
 
-        Dim xValue As Double
-        Dim yValue As Double
-        Dim num As Integer = DT.Rows.Count
+        Data_Chart.DataSource = DT
+        Data_Chart.DataBind()
 
-        For i = 1 To num
-            'xValue = Convert.ToDateTime(DT.Rows(i - 1)("日期").ToString).ToOADate()
-            xValue = DT.Rows(i - 1)("测试编号")
-            yValue = DT.Rows(i - 1)("数据1")
-            Data_Chart.Series(0).Points.AddXY(xValue, yValue)
+        For i = 0 To checkedNum - 1
+
+            setSeries(Data_Chart, i)
+            '设置系列集i
+
+            If i > 0 Then
+                Data_Chart.Series(0).YAxisType = AxisType.Primary
+                Data_Chart.Series(i).YAxisType = AxisType.Secondary
+            End If
+
+            Data_Chart.Series(i).XValueMember = "测试编号"
+            Data_Chart.Series(i).YValueMembers = "数据" & (i + 1)
+
         Next
-
-        If DT.Columns.Count = 3 Then
-            '如果DT有三列（两列测试数据），则再加一个系列
-
-            Dim newSeries2 As New Series '新增数据集
-            newSeries2.ChartType = SeriesChartType.Line '直线
-            newSeries2.BorderWidth = 3
-            newSeries2.Color = Color.FromArgb(192, 80, 77) 'Red
-            newSeries2.XValueType = ChartValueType.String
-            newSeries1.YAxisType = AxisType.Primary
-            newSeries2.YAxisType = AxisType.Secondary
-            newSeries2.IsValueShownAsLabel = True
-            Data_Chart.Series.Add(newSeries2)
-            '设置系列2相关
-
-            For i = 1 To num
-                xValue = DT.Rows(i - 1)("测试编号")
-                yValue = DT.Rows(i - 1)("数据2")
-                Data_Chart.Series(1).Points.AddXY(xValue, yValue)
-            Next
-
-        End If
-
-
 
     End Sub
     '输入DataTable，绘制图表
@@ -258,6 +259,6 @@ Public Class Wave
         '将测试数据画图
 
     End Sub
-    '点击OK按钮开始画图
+
 
 End Class
