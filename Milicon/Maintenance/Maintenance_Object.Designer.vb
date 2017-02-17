@@ -28,6 +28,8 @@ Partial Class Maintenance_Object
         Me.Signin_Button = New System.Windows.Forms.Button()
         Me.ObjectList_Button = New System.Windows.Forms.Button()
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
+        Me.Help_Button = New System.Windows.Forms.Button()
+        Me.Add_Button = New System.Windows.Forms.Button()
         CType(Me.TestItem_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -39,6 +41,7 @@ Partial Class Maintenance_Object
         Me.TestItem_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TestItem_DataGridView.Location = New System.Drawing.Point(36, 66)
         Me.TestItem_DataGridView.Name = "TestItem_DataGridView"
+        Me.TestItem_DataGridView.RowHeadersVisible = False
         Me.TestItem_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TestItem_DataGridView.RowTemplate.Height = 23
         Me.TestItem_DataGridView.Size = New System.Drawing.Size(626, 284)
@@ -46,7 +49,7 @@ Partial Class Maintenance_Object
         '
         'Exit_Button
         '
-        Me.Exit_Button.Location = New System.Drawing.Point(526, 380)
+        Me.Exit_Button.Location = New System.Drawing.Point(525, 380)
         Me.Exit_Button.Name = "Exit_Button"
         Me.Exit_Button.Size = New System.Drawing.Size(75, 65)
         Me.Exit_Button.TabIndex = 18
@@ -55,7 +58,7 @@ Partial Class Maintenance_Object
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Location = New System.Drawing.Point(314, 380)
+        Me.Cancel_Button.Location = New System.Drawing.Point(384, 380)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 65)
         Me.Cancel_Button.TabIndex = 17
@@ -88,11 +91,32 @@ Partial Class Maintenance_Object
         Me.NameInput_TextBox.Size = New System.Drawing.Size(140, 21)
         Me.NameInput_TextBox.TabIndex = 19
         '
+        'Help_Button
+        '
+        Me.Help_Button.Location = New System.Drawing.Point(526, 25)
+        Me.Help_Button.Name = "Help_Button"
+        Me.Help_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Help_Button.TabIndex = 21
+        Me.Help_Button.Text = "说明"
+        Me.Help_Button.UseVisualStyleBackColor = True
+        '
+        'Add_Button
+        '
+        Me.Add_Button.Enabled = False
+        Me.Add_Button.Location = New System.Drawing.Point(243, 380)
+        Me.Add_Button.Name = "Add_Button"
+        Me.Add_Button.Size = New System.Drawing.Size(75, 65)
+        Me.Add_Button.TabIndex = 22
+        Me.Add_Button.Text = "Add"
+        Me.Add_Button.UseVisualStyleBackColor = True
+        '
         'Maintenance_Object
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(709, 488)
+        Me.Controls.Add(Me.Add_Button)
+        Me.Controls.Add(Me.Help_Button)
         Me.Controls.Add(Me.ObjectList_Button)
         Me.Controls.Add(Me.NameInput_TextBox)
         Me.Controls.Add(Me.Exit_Button)
@@ -112,4 +136,6 @@ Partial Class Maintenance_Object
     Friend WithEvents Signin_Button As Button
     Friend WithEvents ObjectList_Button As Button
     Public WithEvents NameInput_TextBox As TextBox
+    Friend WithEvents Help_Button As Button
+    Friend WithEvents Add_Button As Button
 End Class

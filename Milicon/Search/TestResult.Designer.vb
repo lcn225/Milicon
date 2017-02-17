@@ -152,7 +152,7 @@ Partial Class TestResult
         Me.Print_Button.Name = "Print_Button"
         Me.Print_Button.Size = New System.Drawing.Size(75, 23)
         Me.Print_Button.TabIndex = 28
-        Me.Print_Button.Text = "Button3"
+        Me.Print_Button.Text = "打印"
         Me.Print_Button.UseVisualStyleBackColor = True
         '
         'Exit_Button

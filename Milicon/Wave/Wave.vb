@@ -108,7 +108,7 @@ Public Class Wave
         Return result_dt
 
     End Function
-    '根据材料ID及2项测试内容返回相关信息，返回有DataTable
+    '根据材料ID及测试内容返回相关信息，返回有DataTable
 
     Public Sub DisplayTI()
         fillCheckedListBoxByTI(ID_Object)
@@ -160,14 +160,10 @@ Public Class Wave
     End Sub
     '设置系列集相关
 
-
     Private Sub FillChart(ByVal DT As DataTable)
 
-        Dim xValue As Double
-        Dim yValue As Double
         Dim checkedNum As Integer = DT.Columns.Count - 1
         '获取数据列数（即全部列数减去X轴列数）
-        Dim num As Integer = DT.Rows.Count
 
         Data_Chart.Visible = True
 
@@ -183,7 +179,7 @@ Public Class Wave
         Data_Chart.DataBind()
 
         For i = 0 To checkedNum - 1
-
+            '每次循环设置一个系列集
             setSeries(Data_Chart, i)
             '设置系列集i
 
@@ -191,11 +187,13 @@ Public Class Wave
                 Data_Chart.Series(0).YAxisType = AxisType.Primary
                 Data_Chart.Series(i).YAxisType = AxisType.Secondary
             End If
+            '如果系列集个数大于1，则设置主副纵坐标
 
             Data_Chart.Series(i).XValueMember = "测试编号"
             Data_Chart.Series(i).YValueMembers = "数据" & (i + 1)
-
+            '绑定数据
         Next
+        '系列集设置完毕
 
     End Sub
     '输入DataTable，绘制图表
@@ -212,7 +210,6 @@ Public Class Wave
         '重置DTP为上月和本月
 
         Data_Chart.Visible = False
-
 
     End Sub
     '加载
