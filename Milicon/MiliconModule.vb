@@ -352,5 +352,41 @@ Module MiliconModule
     End Sub
     '清除当前窗口的所有text
 
+    Public Sub addObject(ByVal obj_ID As String, ByVal obj_Name As String)
+        DBcon()
+
+        Dim sql1 As String = "Select * from Object_List Where Obj_ID = " & obj_ID
+        da = New OleDbDataAdapter(sql1, cn)
+        ds = New DataSet
+        da.Fill(ds, "object_Info")
+
+        Dim num As Integer = ds.Tables(0).Columns.Count
+        '获得列数
+        Dim colName As String = ""
+        Dim str As String = ""
+        For i = 1 To num - 1
+            Dim temp As String = ds.Tables(0).Rows(0)(i).ToString
+            '遍历第二之后的每个字段
+            If temp <> "" Then
+                '如果该字段为空值，则跳过
+                colName = colName & " ," & ds.Tables(0).Columns(i).ColumnName
+                str = str & " ,'" & temp & "'"
+            End If
+        Next
+        colName = Mid(colName, 3)
+        str = Mid(str, 3)
+        str = str.Replace(ds.Tables(0).Rows(0)("Obj_Name").ToString, obj_Name)
+        '将所有数据输入
+
+        Dim sql2 As String = "INSERT INTO Object_List (" & colName & ") VALUES (" & str & ")"
+        '生成输入sql语句
+
+        Dim cmd As OleDbCommand
+
+        cn.Open()
+        cmd = New OleDbCommand(sql2, cn)
+        cmd.ExecuteNonQuery()
+        cn.Close()
+    End Sub
 
 End Module

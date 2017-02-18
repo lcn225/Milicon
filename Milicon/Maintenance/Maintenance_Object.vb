@@ -78,6 +78,8 @@
 
         Me.Signin_Button.Enabled = True
         '确定材料名后启用登录按钮
+        Me.Add_Button.Enabled = True
+        '确定材料名后启用增加按钮
 
     End Sub
     '在DGV中显示各种TI
@@ -106,5 +108,19 @@
 
     End Sub
     '点击说明按钮显示说明
+
+    Private Sub Add_Button_Click(sender As Object, e As EventArgs) Handles Add_Button.Click
+        DBcon()
+
+        Dim obj_Name As String = ""
+        obj_Name = InputBox("请输入新增规格名称" & vbLf & "新增规格的测试项目将会和现规格相同", "输入名称", "", 10, 10)
+
+        If obj_Name <> "" Then
+            addObject(Me.ID_Object, obj_Name)
+            MessageBox.Show("添加成功！")
+            NameInput_TextBox.Text = obj_Name
+        End If
+
+    End Sub
 
 End Class
