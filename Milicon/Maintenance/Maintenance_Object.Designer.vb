@@ -30,26 +30,28 @@ Partial Class Maintenance_Object
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
         Me.Help_Button = New System.Windows.Forms.Button()
         Me.Add_Button = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.sup_TextBox = New System.Windows.Forms.TextBox()
+        Me.Info_Label = New System.Windows.Forms.Label()
         CType(Me.TestItem_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TestItem_DataGridView
         '
-        Me.TestItem_DataGridView.AllowUserToAddRows = False
         Me.TestItem_DataGridView.AllowUserToDeleteRows = False
         Me.TestItem_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.TestItem_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TestItem_DataGridView.Location = New System.Drawing.Point(36, 66)
+        Me.TestItem_DataGridView.Location = New System.Drawing.Point(54, 108)
         Me.TestItem_DataGridView.Name = "TestItem_DataGridView"
         Me.TestItem_DataGridView.RowHeadersVisible = False
         Me.TestItem_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TestItem_DataGridView.RowTemplate.Height = 23
-        Me.TestItem_DataGridView.Size = New System.Drawing.Size(626, 284)
+        Me.TestItem_DataGridView.Size = New System.Drawing.Size(582, 313)
         Me.TestItem_DataGridView.TabIndex = 1
         '
         'Exit_Button
         '
-        Me.Exit_Button.Location = New System.Drawing.Point(525, 380)
+        Me.Exit_Button.Location = New System.Drawing.Point(511, 438)
         Me.Exit_Button.Name = "Exit_Button"
         Me.Exit_Button.Size = New System.Drawing.Size(75, 65)
         Me.Exit_Button.TabIndex = 18
@@ -58,7 +60,7 @@ Partial Class Maintenance_Object
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Location = New System.Drawing.Point(384, 380)
+        Me.Cancel_Button.Location = New System.Drawing.Point(370, 438)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 65)
         Me.Cancel_Button.TabIndex = 17
@@ -67,7 +69,7 @@ Partial Class Maintenance_Object
         '
         'Signin_Button
         '
-        Me.Signin_Button.Location = New System.Drawing.Point(102, 380)
+        Me.Signin_Button.Location = New System.Drawing.Point(88, 438)
         Me.Signin_Button.Name = "Signin_Button"
         Me.Signin_Button.Size = New System.Drawing.Size(75, 65)
         Me.Signin_Button.TabIndex = 16
@@ -103,18 +105,46 @@ Partial Class Maintenance_Object
         'Add_Button
         '
         Me.Add_Button.Enabled = False
-        Me.Add_Button.Location = New System.Drawing.Point(243, 380)
+        Me.Add_Button.Location = New System.Drawing.Point(229, 438)
         Me.Add_Button.Name = "Add_Button"
         Me.Add_Button.Size = New System.Drawing.Size(75, 65)
         Me.Add_Button.TabIndex = 22
         Me.Add_Button.Text = "Add"
         Me.Add_Button.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(54, 73)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(29, 12)
+        Me.Label1.TabIndex = 23
+        Me.Label1.Text = "厂商"
+        '
+        'sup_TextBox
+        '
+        Me.sup_TextBox.Location = New System.Drawing.Point(122, 69)
+        Me.sup_TextBox.Name = "sup_TextBox"
+        Me.sup_TextBox.Size = New System.Drawing.Size(100, 21)
+        Me.sup_TextBox.TabIndex = 25
+        '
+        'Info_Label
+        '
+        Me.Info_Label.AutoSize = True
+        Me.Info_Label.Location = New System.Drawing.Point(379, 73)
+        Me.Info_Label.Name = "Info_Label"
+        Me.Info_Label.Size = New System.Drawing.Size(59, 12)
+        Me.Info_Label.TabIndex = 26
+        Me.Info_Label.Text = "         "
+        '
         'Maintenance_Object
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(709, 488)
+        Me.ClientSize = New System.Drawing.Size(709, 556)
+        Me.Controls.Add(Me.Info_Label)
+        Me.Controls.Add(Me.sup_TextBox)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Add_Button)
         Me.Controls.Add(Me.Help_Button)
         Me.Controls.Add(Me.ObjectList_Button)
@@ -138,4 +168,7 @@ Partial Class Maintenance_Object
     Public WithEvents NameInput_TextBox As TextBox
     Friend WithEvents Help_Button As Button
     Friend WithEvents Add_Button As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents sup_TextBox As TextBox
+    Friend WithEvents Info_Label As Label
 End Class

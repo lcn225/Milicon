@@ -234,6 +234,34 @@ Module MiliconModule
     End Sub
     '禁用DGV的点击排序功能
 
+    Public Function checkDGVNull(ByRef DGV As DataGridView) As Boolean
+
+        Dim num = DGV.RowCount
+        '获取行数
+        Dim col = DGV.ColumnCount
+        '获取列数
+        Dim result As Boolean = False
+
+        For i = 0 To num - 1
+            If DGV.Rows(i).Cells(0).Value <> "" Then
+                '如果某行首值不为空时才继续判断该行（筛选新增空行）
+                For j = 0 To col - 1
+                    If DGV.Rows(i).Cells(j).Value = "" Then
+                        '如果某个单元格为空
+                        result = False
+                        MessageBox.Show("第" & i + 1 & "行第" & j + 1 & "列为空值")
+                        GoTo Exitall
+                    End If
+                Next
+            End If
+        Next
+
+Exitall:
+        Return result
+
+    End Function
+    '确认DGV中是否有空值，有的话返回True，没有的话返回False
+
     Public Sub delMulRowFromDataTable(ByRef DT As DataTable, ByVal field As String)
 
         Dim count As Integer = DT.Rows.Count
@@ -364,6 +392,7 @@ Module MiliconModule
         '获得列数
         Dim colName As String = ""
         Dim str As String = ""
+
         For i = 1 To num - 1
             Dim temp As String = ds.Tables(0).Rows(0)(i).ToString
             '遍历第二之后的每个字段
@@ -373,10 +402,15 @@ Module MiliconModule
                 str = str & " ,'" & temp & "'"
             End If
         Next
+        '将所有数据输入
         colName = Mid(colName, 3)
         str = Mid(str, 3)
+        '删除头部多余字符
         str = str.Replace(ds.Tables(0).Rows(0)("Obj_Name").ToString, obj_Name)
-        '将所有数据输入
+        '替换名称为新名称
+        str = str.Replace("'True'", "True")
+        str = str.Replace("'False'", "False")
+        '更改字符串，以输入正确的数据类型
 
         Dim sql2 As String = "INSERT INTO Object_List (" & colName & ") VALUES (" & str & ")"
         '生成输入sql语句
@@ -387,6 +421,10 @@ Module MiliconModule
         cmd = New OleDbCommand(sql2, cn)
         cmd.ExecuteNonQuery()
         cn.Close()
+
     End Sub
+    '根据输入的ID号，新增相同TI的材料
+
+
 
 End Module
