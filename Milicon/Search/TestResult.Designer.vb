@@ -22,6 +22,7 @@ Partial Class TestResult
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TestResult))
         Me.TestLots_Label = New System.Windows.Forms.Label()
         Me.TestData_DataGridView = New System.Windows.Forms.DataGridView()
         Me.TestDate_DateTimePicker = New System.Windows.Forms.DateTimePicker()
@@ -183,6 +184,7 @@ Partial Class TestResult
         Me.Controls.Add(Me.ProDate_Label)
         Me.Controls.Add(Me.TestData_DataGridView)
         Me.Controls.Add(Me.TestLots_Label)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "TestResult"
         Me.Text = "TestResult"
         CType(Me.TestData_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

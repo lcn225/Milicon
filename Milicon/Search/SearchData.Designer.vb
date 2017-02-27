@@ -22,6 +22,7 @@ Partial Class SearchData
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SearchData))
         Me.TestList_DataGridView = New System.Windows.Forms.DataGridView()
         Me.Search_Button = New System.Windows.Forms.Button()
         Me.OK_Button = New System.Windows.Forms.Button()
@@ -217,6 +218,7 @@ Partial Class SearchData
         Me.Controls.Add(Me.OK_Button)
         Me.Controls.Add(Me.Search_Button)
         Me.Controls.Add(Me.TestList_DataGridView)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "SearchData"
         Me.Text = "SearchData"
         CType(Me.TestList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

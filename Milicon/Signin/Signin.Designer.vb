@@ -22,6 +22,7 @@ Partial Class Signin
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Signin))
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
         Me.ObjectList_Button = New System.Windows.Forms.Button()
         Me.ProDate_Label = New System.Windows.Forms.Label()
@@ -189,6 +190,7 @@ Partial Class Signin
         Me.Controls.Add(Me.ProDate_Label)
         Me.Controls.Add(Me.ObjectList_Button)
         Me.Controls.Add(Me.NameInput_TextBox)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Signin"
         Me.Text = "Signin"
         CType(Me.TestDataInput_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

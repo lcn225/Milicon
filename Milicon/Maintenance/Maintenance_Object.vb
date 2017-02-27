@@ -29,6 +29,8 @@ Public Class Maintenance_Object
 
         Me.Signin_Button.Enabled = False
 
+        Me.TestItem_DataGridView.EditMode = DataGridViewEditMode.EditOnEnter
+
     End Sub
 
     Private Sub ObjectList_Button_Click(sender As Object, e As EventArgs) Handles ObjectList_Button.Click
@@ -36,6 +38,31 @@ Public Class Maintenance_Object
         ObjectList.ObjectList_Load(Me, e)
     End Sub
     '点击浏览打开原材料列表进行选择
+
+    Private Sub addTrueFalseCBL()
+
+        Dim TF_Column As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+        TF_Column.HeaderText = "重要性"
+        TF_Column.Name = "TF"
+        TF_Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        Dim TF_Combobox_Datatable As DataTable = New DataTable
+        TF_Combobox_Datatable.Columns.Add("id", Type.GetType("System.String"))
+        TF_Combobox_Datatable.Columns.Add("TF", Type.GetType("System.String"))
+        '建立数据表
+
+        TF_Combobox_Datatable.Rows.Add("True", "True")
+        TF_Combobox_Datatable.Rows.Add("False", "False")
+
+        TF_Column.DataSource = TF_Combobox_Datatable
+        TF_Column.ValueMember = "id"
+        TF_Column.DisplayMember = "TF"
+        TF_Column.DataPropertyName = "Type"
+
+        Me.TestItem_DataGridView.Columns.Insert(Me.TestItem_DataGridView.ColumnCount, TF_Column)
+
+    End Sub
+    '增加一列CBL用来选择Ture或False
 
     Public Sub DisplayTI()
 
@@ -56,6 +83,8 @@ Public Class Maintenance_Object
         TestItem_DataGridView.Columns.Add("TI_Unit", "单位")
         TestItem_DataGridView.Columns.Add("TI_Qty", "样本数量")
         TestItem_DataGridView.Columns.Add("TI_Ref", "重要性")
+        addTrueFalseCBL()
+        '增加各列
 
         Dim RowsCount As Integer
         If ds.Tables(0).Rows(0)("TI_Num").ToString <> "" Then
@@ -63,6 +92,8 @@ Public Class Maintenance_Object
         Else
             RowsCount = 0
         End If
+        '获取TI数目
+
         Dim TI_Name As String = ""
         Dim TI_Type As String = ""
         Dim TI_Stand As String = ""
@@ -90,7 +121,12 @@ Public Class Maintenance_Object
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Qty").Value = ds.Tables(0).Rows(0)(TI_Qty).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Ref").Value = ds.Tables(0).Rows(0)(TI_Ref).ToString
 
+            TestItem_DataGridView.Rows(i - 1).Cells("TF").Value = TestItem_DataGridView.Rows(i - 1).Cells("TI_Ref").Value
+            '给CBL赋值
         Next
+
+        TestItem_DataGridView.Columns.RemoveAt(6)
+        '删除重复列以完成CBL的替换
 
         Me.Signin_Button.Enabled = True
         '确定材料名后启用登录按钮
@@ -180,8 +216,6 @@ Public Class Maintenance_Object
     End Sub
     '根据输入的ID号，变更TI
 
-
-
     Private Sub Add_Button_Click(sender As Object, e As EventArgs) Handles Add_Button.Click
         DBcon()
 
@@ -215,8 +249,15 @@ Public Class Maintenance_Object
     '点击OK后保存修改
 
     Private Sub TestItem_DataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles TestItem_DataGridView.CurrentCellChanged
+
+        If TestItem_DataGridView.CurrentCellAddress.X = -1 Then
+            Exit Sub
+        End If
+        'DGV重置时防错
+
         Dim sel As Integer
         sel = TestItem_DataGridView.CurrentCell.ColumnIndex
+        '获取当前选中单元格所在列
 
         Select Case sel
             Case 0

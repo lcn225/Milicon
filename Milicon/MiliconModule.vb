@@ -256,6 +256,9 @@ Module MiliconModule
             End If
         Next
 
+        result = True
+        '如果以上全过，返回true
+
 Exitall:
         Return result
 

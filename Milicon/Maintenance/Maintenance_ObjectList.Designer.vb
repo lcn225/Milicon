@@ -22,6 +22,7 @@ Partial Class Maintenance_ObjectList
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Maintenance_ObjectList))
         Me.ObjectList_DataGridView = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -76,6 +77,7 @@ Partial Class Maintenance_ObjectList
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ObjectList_DataGridView)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Maintenance_ObjectList"
         Me.Text = "材料维护"
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

@@ -22,6 +22,7 @@ Partial Class Maintenance_Object
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Maintenance_Object))
         Me.TestItem_DataGridView = New System.Windows.Forms.DataGridView()
         Me.Exit_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
@@ -131,7 +132,7 @@ Partial Class Maintenance_Object
         'Info_Label
         '
         Me.Info_Label.AutoSize = True
-        Me.Info_Label.Location = New System.Drawing.Point(379, 73)
+        Me.Info_Label.Location = New System.Drawing.Point(285, 78)
         Me.Info_Label.Name = "Info_Label"
         Me.Info_Label.Size = New System.Drawing.Size(59, 12)
         Me.Info_Label.TabIndex = 26
@@ -153,6 +154,7 @@ Partial Class Maintenance_Object
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.Signin_Button)
         Me.Controls.Add(Me.TestItem_DataGridView)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Maintenance_Object"
         Me.Text = "Maintenance_Object"
         CType(Me.TestItem_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

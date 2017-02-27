@@ -25,6 +25,7 @@ Partial Class Wave
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Wave))
         Me.ObjectList_Button = New System.Windows.Forms.Button()
         Me.NameInput_TextBox = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -136,6 +137,7 @@ Partial Class Wave
         Me.Controls.Add(Me.DateStart_DateTimePicker)
         Me.Controls.Add(Me.ObjectList_Button)
         Me.Controls.Add(Me.NameInput_TextBox)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Wave"
         Me.Text = "Wave"
         CType(Me.Data_Chart, System.ComponentModel.ISupportInitialize).EndInit()

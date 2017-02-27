@@ -22,6 +22,7 @@ Partial Class ObjectList
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ObjectList))
         Me.ObjectList_DataGridView = New System.Windows.Forms.DataGridView()
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
@@ -80,6 +81,7 @@ Partial Class ObjectList
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.OK_Button)
         Me.Controls.Add(Me.ObjectList_DataGridView)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ObjectList"
         Me.Text = "ObjectList"
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
