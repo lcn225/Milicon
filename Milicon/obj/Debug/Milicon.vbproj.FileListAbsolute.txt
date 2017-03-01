@@ -19,3 +19,4 @@ C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Win
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Maintenance_Object.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Wave.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Milicon.vbprojResolveAssemblyReference.cache
+C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\WindowsApplication1.Maintenance_Type.resources
