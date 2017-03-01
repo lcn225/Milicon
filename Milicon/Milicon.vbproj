@@ -117,6 +117,12 @@
     <Compile Include="Maintenance\Maintenance_ObjectList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maintenance\Maintenance_Type.Designer.vb">
+      <DependentUpon>Maintenance_Type.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\Maintenance_Type.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maintenance\Password.Designer.vb">
       <DependentUpon>Password.vb</DependentUpon>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenance\Maintenance_ObjectList.resx">
       <DependentUpon>Maintenance_ObjectList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenance\Maintenance_Type.resx">
+      <DependentUpon>Maintenance_Type.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenance\Password.resx">
       <DependentUpon>Password.vb</DependentUpon>

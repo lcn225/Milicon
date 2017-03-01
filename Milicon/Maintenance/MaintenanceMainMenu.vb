@@ -30,4 +30,9 @@
         Maintenance_Object.Show()
         Me.Hide()
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Maintenance_Type.Show()
+        Me.Hide()
+    End Sub
 End Class

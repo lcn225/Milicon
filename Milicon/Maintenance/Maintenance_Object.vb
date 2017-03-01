@@ -14,7 +14,6 @@ Public Class Maintenance_Object
     End Sub
     'UI文本初始化
 
-
     Private Sub Maintenance_Object_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         DBcon()
@@ -28,8 +27,6 @@ Public Class Maintenance_Object
         DisplaySort(Me.TestItem_DataGridView)
 
         Me.Signin_Button.Enabled = False
-
-        Me.TestItem_DataGridView.EditMode = DataGridViewEditMode.EditOnEnter
 
     End Sub
 
@@ -127,6 +124,9 @@ Public Class Maintenance_Object
 
         TestItem_DataGridView.Columns.RemoveAt(6)
         '删除重复列以完成CBL的替换
+
+        DisplaySort(Me.TestItem_DataGridView)
+        '禁用排序
 
         Me.Signin_Button.Enabled = True
         '确定材料名后启用登录按钮
@@ -282,5 +282,9 @@ Public Class Maintenance_Object
 
     End Sub
     '输入新TI时显示注释
+
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        DisplayTI()
+    End Sub
 
 End Class

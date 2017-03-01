@@ -42,6 +42,7 @@ Partial Class Maintenance_Object
         Me.TestItem_DataGridView.AllowUserToDeleteRows = False
         Me.TestItem_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.TestItem_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TestItem_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.TestItem_DataGridView.Location = New System.Drawing.Point(54, 108)
         Me.TestItem_DataGridView.Name = "TestItem_DataGridView"
         Me.TestItem_DataGridView.RowHeadersVisible = False

@@ -64,7 +64,7 @@ Partial Class MaintenanceMainMenu
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(205, 44)
         Me.Button4.TabIndex = 3
-        Me.Button4.Text = "Button4"
+        Me.Button4.Text = "种类维护"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5

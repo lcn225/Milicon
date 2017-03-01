@@ -122,6 +122,7 @@ Partial Class Signin
         Me.TestDataInput_DataGridView.AllowUserToAddRows = False
         Me.TestDataInput_DataGridView.AllowUserToDeleteRows = False
         Me.TestDataInput_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TestDataInput_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.TestDataInput_DataGridView.Location = New System.Drawing.Point(51, 161)
         Me.TestDataInput_DataGridView.Name = "TestDataInput_DataGridView"
         Me.TestDataInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders

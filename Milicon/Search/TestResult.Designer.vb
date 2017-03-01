@@ -54,6 +54,7 @@ Partial Class TestResult
         Me.TestData_DataGridView.AllowUserToAddRows = False
         Me.TestData_DataGridView.AllowUserToDeleteRows = False
         Me.TestData_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TestData_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.TestData_DataGridView.Location = New System.Drawing.Point(48, 161)
         Me.TestData_DataGridView.Name = "TestData_DataGridView"
         Me.TestData_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
