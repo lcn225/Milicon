@@ -33,7 +33,9 @@ Partial Class Maintenance_Type
         '
         Me.type_DataGridView.AllowUserToDeleteRows = False
         Me.type_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.type_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.type_DataGridView.Location = New System.Drawing.Point(23, 46)
+        Me.type_DataGridView.MultiSelect = False
         Me.type_DataGridView.Name = "type_DataGridView"
         Me.type_DataGridView.RowTemplate.Height = 23
         Me.type_DataGridView.Size = New System.Drawing.Size(464, 240)
@@ -50,7 +52,8 @@ Partial Class Maintenance_Type
         '
         'del_Button
         '
-        Me.del_Button.Location = New System.Drawing.Point(202, 337)
+        Me.del_Button.Enabled = False
+        Me.del_Button.Location = New System.Drawing.Point(217, 337)
         Me.del_Button.Name = "del_Button"
         Me.del_Button.Size = New System.Drawing.Size(75, 23)
         Me.del_Button.TabIndex = 2
@@ -59,7 +62,7 @@ Partial Class Maintenance_Type
         '
         'exit_Button
         '
-        Me.exit_Button.Location = New System.Drawing.Point(412, 337)
+        Me.exit_Button.Location = New System.Drawing.Point(411, 337)
         Me.exit_Button.Name = "exit_Button"
         Me.exit_Button.Size = New System.Drawing.Size(75, 23)
         Me.exit_Button.TabIndex = 3

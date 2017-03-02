@@ -68,7 +68,7 @@ Public Class Maintenance_ObjectList
 
         ResetDGV(Me)
         FillDGVbyObjecList(Me.ObjectList_DataGridView)
-        DisplaySort(Me.ObjectList_DataGridView)
+        disenableSort(Me.ObjectList_DataGridView)
         '以材料列表填充DGV
 
         ChangeDGVWithCombobox()
@@ -138,7 +138,7 @@ Public Class Maintenance_ObjectList
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         ResetDGV(Me)
         FillDGVbyObjecList(Me.ObjectList_DataGridView)
-        DisplaySort(Me.ObjectList_DataGridView)
+        disenableSort(Me.ObjectList_DataGridView)
         '以材料列表填充DGV
 
         ChangeDGVWithCombobox()

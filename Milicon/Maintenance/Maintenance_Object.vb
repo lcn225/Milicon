@@ -24,7 +24,7 @@ Public Class Maintenance_Object
 
         cn.Close()
 
-        DisplaySort(Me.TestItem_DataGridView)
+        disenableSort(Me.TestItem_DataGridView)
 
         Me.Signin_Button.Enabled = False
 
@@ -125,7 +125,7 @@ Public Class Maintenance_Object
         TestItem_DataGridView.Columns.RemoveAt(6)
         '删除重复列以完成CBL的替换
 
-        DisplaySort(Me.TestItem_DataGridView)
+        disenableSort(Me.TestItem_DataGridView)
         '禁用排序
 
         Me.Signin_Button.Enabled = True

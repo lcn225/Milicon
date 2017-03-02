@@ -222,7 +222,7 @@ Module MiliconModule
     End Sub
     '重置DGV
 
-    Public Sub DisplaySort(ByRef DGV As DataGridView)
+    Public Sub disenableSort(ByRef DGV As DataGridView)
 
         Dim ColNum As String = DGV.ColumnCount
         Dim i As Integer
