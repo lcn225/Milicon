@@ -34,15 +34,20 @@ Public Class Signin
         DBcon()
 
         Dim TI_Name As String
+        Dim TI_Stand As String
         Dim sql_ds_TIName As String
 
         sql_ds_TIName = "TI" + i.ToString + "_Name"
         TI_Name = TI_ds.Tables(0).Rows(0)(sql_ds_TIName).ToString
         '获取字段名为"TIi_Name"的值，i为参数
+        TI_Stand = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Stand") & "±" & TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
+        '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
 
         TestDataInput_DataGridView.Rows.Add()
         TestDataInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         '增添一行，标题为测试项目
+        TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = TI_Stand
+        '第一列为规格值
 
         cn.Close()
 
@@ -57,14 +62,17 @@ Public Class Signin
         '获得测试项目数量
 
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
+        TestDataInput_DataGridView.Columns.Add("Stand", "规格值")
         TestDataInput_DataGridView.Columns.Add("1", "①")
         TestDataInput_DataGridView.Columns.Add("2", "②")
         TestDataInput_DataGridView.Columns.Add("3", "③")
-        TestDataInput_DataGridView.Columns("1").Width = 100
-        TestDataInput_DataGridView.Columns("2").Width = 100
-        TestDataInput_DataGridView.Columns("3").Width = 100
+        TestDataInput_DataGridView.Columns("Stand").Width = 80
+        TestDataInput_DataGridView.Columns("Stand").ReadOnly = True
+        '新增规格值列
+        TestDataInput_DataGridView.Columns("1").Width = 80
+        TestDataInput_DataGridView.Columns("2").Width = 80
+        TestDataInput_DataGridView.Columns("3").Width = 80
         '新增三列待填
-
 
         For i = 1 To TI_Num
             ADD_TestDateInput_DataGridView(i)
