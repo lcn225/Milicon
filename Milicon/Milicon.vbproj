@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="comm\ini.vb" />
+    <Compile Include="inOne.vb" />
     <Compile Include="MainMenu.Designer.vb">
       <DependentUpon>MainMenu.vb</DependentUpon>
     </Compile>
