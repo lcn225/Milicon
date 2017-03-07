@@ -79,8 +79,12 @@ Public Class Signin
         Next
         '添加若干行，每一行标题为各测试项目
 
+        cmb = New CmbDatagridbiew(Me.TestDataInput_DataGridView)
+        cmb.Add(0, 0, 0, 2)
     End Sub
     '输入测试材料规格，显示登录界面
+
+    Private cmb As CmbDatagridbiew
 
     Private Function GetTI(ByVal ID_Obj As String) As DataSet
 
