@@ -78,3 +78,4 @@ Public Class MyRect
         End If
     End Function
 End Class
+

@@ -428,6 +428,29 @@ Exitall:
     End Sub
     '根据输入的ID号，新增相同TI的材料
 
+    Public Sub mergeCell(ByVal Obj_ID As String, ByRef DGV As DataGridView)
+        DBcon()
 
+        Dim sql As String = "Select * from Object_List WHERE Obj_ID = " & Obj_ID
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "mergeCell")
+
+        Dim num As Integer = DGV.RowCount
+        Dim Qty As Integer
+
+        Dim cmb = New CmbDatagridbiew(DGV)
+
+        For i = 0 To num - 1
+            Qty = ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Qty").ToString
+            If Qty = 1 Then
+                cmb.Add(i, 1, i, 3)
+                DGV.Rows(i).Cells(1).ReadOnly = False
+
+            End If
+        Next
+
+
+    End Sub
 
 End Module

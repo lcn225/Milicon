@@ -79,8 +79,8 @@ Public Class Signin
         Next
         '添加若干行，每一行标题为各测试项目
 
-        cmb = New CmbDatagridbiew(Me.TestDataInput_DataGridView)
-        cmb.Add(0, 0, 0, 2)
+        mergeCell(ID_Obj, Me.TestDataInput_DataGridView)
+
     End Sub
     '输入测试材料规格，显示登录界面
 
