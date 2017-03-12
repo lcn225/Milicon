@@ -445,7 +445,7 @@ Exitall:
             Qty = ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Qty").ToString
             If Qty = 1 Then
                 cmb.Add(i, 1, i, 3)
-                DGV.Rows(i).Cells(1).ReadOnly = False
+                DGV.Rows(i).Cells(2).ReadOnly = False
 
             End If
         Next

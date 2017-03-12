@@ -87,6 +87,7 @@ Public Class TestResult
         Dim TestItem As DataSet = New DataSet
         Dim TI_Name As String
         Dim Val(3) As String
+        Dim TI_Stand As String
 
         TestData = GetTestData(LoginNo)
         '根据ID检索测试数据
@@ -96,6 +97,10 @@ Public Class TestResult
         Dim Num = TestItem.Tables(0).Rows(0)("TI_Num")
         '获取测试项目数量
 
+        TestData_DataGridView.Columns.Add("Stand", "规格值")
+        TestData_DataGridView.Columns("Stand").Width = 80
+        TestData_DataGridView.Columns("Stand").ReadOnly = True
+        '新增规格值列
         TestData_DataGridView.Columns.Add("1", "①")
         TestData_DataGridView.Columns.Add("2", "②")
         TestData_DataGridView.Columns.Add("3", "③")
@@ -103,11 +108,19 @@ Public Class TestResult
 
         For i = 1 To Num
             Val = FillRowData(TestData, i)
+
             TI_Name = TestItem.Tables(0).Rows(0)("TI" & i & "_Name")
-            TestData_DataGridView.Rows.Add(Val(0), Val(1), Val(2))
+            TI_Stand = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Stand") & "±" & TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
+            '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
+            TestData_DataGridView.Rows.Add(TI_Stand, Val(0), Val(1), Val(2))
             TestData_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         Next
         '填充测试数据
+
+        Dim Obj_ID As String = TestData.Tables(0).Rows(0)("Obj_ID").ToString
+
+        mergeCell(Obj_ID, Me.TestData_DataGridView)
+        '根据样本数量合并单元格
 
         cn.Close()
 
