@@ -87,7 +87,9 @@ Public Class TestResult
         Dim TestItem As DataSet = New DataSet
         Dim TI_Name As String
         Dim Val(3) As String
+        Dim TI_Type As String
         Dim TI_Stand As String
+        Dim TI_Range As String
 
         TestData = GetTestData(LoginNo)
         '根据ID检索测试数据
@@ -110,10 +112,14 @@ Public Class TestResult
             Val = FillRowData(TestData, i)
 
             TI_Name = TestItem.Tables(0).Rows(0)("TI" & i & "_Name")
-            TI_Stand = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Stand") & "±" & TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
+            TI_Type = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
+            TI_Stand = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Stand")
+            TI_Range = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
             '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
-            TestData_DataGridView.Rows.Add(TI_Stand, Val(0), Val(1), Val(2))
+            TestData_DataGridView.Rows.Add(standAndRange(TI_Type, TI_Stand, TI_Range), Val(0), Val(1), Val(2))
+            '增加一行
             TestData_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
+            '改每行标题
         Next
         '填充测试数据
 

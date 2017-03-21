@@ -220,7 +220,7 @@ Module MiliconModule
         '重置CLB
 
     End Sub
-    '重置DGV
+    '重置CLB
 
     Public Sub disenableSort(ByRef DGV As DataGridView)
 
@@ -435,22 +435,57 @@ Exitall:
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
         da.Fill(ds, "mergeCell")
+        '查找ID对应信息
 
         Dim num As Integer = DGV.RowCount
         Dim Qty As Integer
 
         Dim cmb = New CmbDatagridbiew(DGV)
+        '准备合并单元格
 
         For i = 0 To num - 1
+            '遍历每一行
             Qty = ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Qty").ToString
             If Qty = 1 Then
                 cmb.Add(i, 1, i, 3)
-                DGV.Rows(i).Cells(2).ReadOnly = False
-
+                '如果样本数量为1，则合并单元格为1
+                DGV.Rows(i).Cells(1).ReadOnly = False
+                '使第一个单元格为可读
             End If
         Next
 
-
     End Sub
+    '根据样本数量合并DGV单元格
+
+    Public Function standAndRange(ByVal type As String, ByVal stand As String, ByVal range As String) As String
+
+        Dim TI_Stand As String
+
+        If type = 2 Then
+            '如果TI类型为双边比较
+            TI_Stand = stand & "±" & range
+            '则规格值形式为“Stand±Range”
+        ElseIf type = 1 Then
+            '如果TI类型为单边比较
+            If range = 1 Then
+                '如果比较类型为1
+                TI_Stand = "≥" & stand
+                '则规格值形式为“≥Stand”
+            ElseIf range = 0 Then
+                TI_Stand = "≤" & stand
+                '如果是0，则规格值形式为“≤Stand”
+            Else
+                TI_Stand = "规格值出错，请联络管理员确认"
+                '都不是的话就报错
+            End If
+        Else
+            TI_Stand = "无"
+            '都不是的话就报错
+        End If
+        '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
+
+        Return TI_Stand
+    End Function
+    '输入TI相关参数，返回规格范围
 
 End Module

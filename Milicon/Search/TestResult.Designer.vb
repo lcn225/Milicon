@@ -53,6 +53,7 @@ Partial Class TestResult
         '
         Me.TestData_DataGridView.AllowUserToAddRows = False
         Me.TestData_DataGridView.AllowUserToDeleteRows = False
+        Me.TestData_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.TestData_DataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.TestData_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TestData_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter

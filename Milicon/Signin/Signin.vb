@@ -34,19 +34,21 @@ Public Class Signin
         DBcon()
 
         Dim TI_Name As String
-        Dim TI_Stand As String
         Dim sql_ds_TIName As String
 
         sql_ds_TIName = "TI" + i.ToString + "_Name"
         TI_Name = TI_ds.Tables(0).Rows(0)(sql_ds_TIName).ToString
         '获取字段名为"TIi_Name"的值，i为参数
-        TI_Stand = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Stand") & "±" & TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
-        '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
+
+        Dim TI_Type As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
+        Dim TI_Stand As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Stand")
+        Dim TI_Range As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
+        '获取规格值相关
 
         TestDataInput_DataGridView.Rows.Add()
         TestDataInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         '增添一行，标题为测试项目
-        TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = TI_Stand
+        TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = standAndRange(TI_Type, TI_Stand, TI_Range)
         '第一列为规格值
 
         cn.Close()
@@ -74,6 +76,12 @@ Public Class Signin
         TestDataInput_DataGridView.Columns("3").Width = 80
         '新增三列待填
 
+        If TI_Num = "" Then
+            MessageBox.Show("测试项目出错，请确认")
+            ResetDGV(Me)
+            Exit Sub
+        End If
+
         For i = 1 To TI_Num
             ADD_TestDateInput_DataGridView(i)
         Next
@@ -93,6 +101,7 @@ Public Class Signin
         Dim sql As String = "select * from Object_List where Obj_ID=" + ID_Obj
         '根据ID在材料测试项目表中查询记录
         da = New OleDbDataAdapter(sql, cn)
+        TI_ds = New DataSet
         da.Fill(Me.TI_ds, "GetTIInfo")
 
         Return Me.TI_ds
