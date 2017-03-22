@@ -34,6 +34,7 @@ Partial Class Maintenance_ObjectList
         '
         Me.ObjectList_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.ObjectList_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ObjectList_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.ObjectList_DataGridView.Location = New System.Drawing.Point(43, 51)
         Me.ObjectList_DataGridView.Name = "ObjectList_DataGridView"
         Me.ObjectList_DataGridView.RowHeadersVisible = False

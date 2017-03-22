@@ -170,7 +170,7 @@ Public Class TestResult
                 If TestData_DataGridView.Rows(i).Cells(j).Value = "" Then
                     Str_Val = "'0'"
                 Else
-                    Str_Val = "'" + TestData_DataGridView.Rows(i).Cells(j).Value + "'"
+                    Str_Val = "'" + TestData_DataGridView.Rows(i).Cells(j + 1).Value + "'"
                 End If
                 Str = Str + Str_Col + " = " + Str_Val + ", "
                 '生成"ValueI_J='X', "的连续字符串

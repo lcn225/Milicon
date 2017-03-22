@@ -138,7 +138,7 @@ Public Class Signin
                 If TestDataInput_DataGridView.Rows(i).Cells(j).Value = "" Then
                     Str_Val = Str_Val + ",'0'"
                 Else
-                    Str_Val = Str_Val + ",'" + TestDataInput_DataGridView.Rows(i).Cells(j).Value + "'"
+                    Str_Val = Str_Val + ",'" + TestDataInput_DataGridView.Rows(i).Cells(j + 1).Value + "'"
                 End If
             Next
         Next
