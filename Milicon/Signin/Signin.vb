@@ -219,9 +219,13 @@ Public Class Signin
             MessageBox.Show("请输入材料名称")
             '如果未填材料名，报错提示
         Else
+            ResetDGV(Me)
+            '重置DGV
             DisaplyObjectFormat(ID_Object)
             '否则显示实验相关项目
         End If
+
+        disenableSort(Me.TestDataInput_DataGridView)
 
         Me.Signin_Button.Enabled = True
         '确定材料名后启用登录按钮

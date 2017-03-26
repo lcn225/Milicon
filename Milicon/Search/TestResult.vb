@@ -128,6 +128,9 @@ Public Class TestResult
         mergeCell(Obj_ID, Me.TestData_DataGridView)
         '根据样本数量合并单元格
 
+        disenableSort(Me.TestData_DataGridView)
+        '禁用点击排序
+
         cn.Close()
 
     End Sub
