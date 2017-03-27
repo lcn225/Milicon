@@ -118,6 +118,7 @@ Public Class TestResult
             '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
             TestData_DataGridView.Rows.Add(standAndRange(TI_Type, TI_Stand, TI_Range), Val(0), Val(1), Val(2))
             '增加一行
+            TestData_DataGridView.Rows(i - 1).DefaultCellStyle.Format = "F2"
             TestData_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
             '改每行标题
         Next

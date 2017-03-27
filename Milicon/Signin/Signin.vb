@@ -45,7 +45,14 @@ Public Class Signin
         Dim TI_Range As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
         '获取规格值相关
 
+        Dim TI_Acc As Integer = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Acc")
+        '获取精度
+
+        Dim Acc As String = "F" & TI_Acc
+        '定义精度字符串
+
         TestDataInput_DataGridView.Rows.Add()
+        TestDataInput_DataGridView.Rows(i - 1).DefaultCellStyle.Format = Acc
         TestDataInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         '增添一行，标题为测试项目
         TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = standAndRange(TI_Type, TI_Stand, TI_Range)
