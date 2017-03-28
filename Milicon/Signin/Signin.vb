@@ -53,6 +53,7 @@ Public Class Signin
 
         TestDataInput_DataGridView.Rows.Add()
         TestDataInput_DataGridView.Rows(i - 1).DefaultCellStyle.Format = Acc
+        '设定该行单元格精度
         TestDataInput_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
         '增添一行，标题为测试项目
         TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = standAndRange(TI_Type, TI_Stand, TI_Range)

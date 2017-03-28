@@ -87,9 +87,15 @@ Public Class Wave
                 Dim row_Str(val_Num(j) - 1) As String
                 '定义数组，数组长度为对应TI的qty
 
-
+                Dim temp As String
                 For k = 0 To val_Num(j) - 1
-                    row_Str(k) = search_ds.Tables(0).Rows(i)("Value" & (CLB.CheckedIndices(j) + 1) & "_" & (k + 1)).ToString
+                    temp = search_ds.Tables(0).Rows(i)("Value" & (CLB.CheckedIndices(j) + 1) & "_" & (k + 1)).ToString
+                    If IsNumeric(temp) Then
+                        '判断是否为数字，不是则赋0
+                        row_Str(k) = temp
+                    Else
+                        row_Str(k) = 0
+                    End If
                 Next
                 '将若干个实验数据填入row_Str数组
 

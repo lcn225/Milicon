@@ -77,6 +77,7 @@ Public Class Maintenance_Object
         TestItem_DataGridView.Columns.Add("TI_Type", "测试种类")
         TestItem_DataGridView.Columns.Add("TI_Stand", "标准值")
         TestItem_DataGridView.Columns.Add("TI_Range", "偏差范围")
+        TestItem_DataGridView.Columns.Add("TI_Acc", "精度")
         TestItem_DataGridView.Columns.Add("TI_Unit", "单位")
         TestItem_DataGridView.Columns.Add("TI_Qty", "样本数量")
         TestItem_DataGridView.Columns.Add("TI_Ref", "重要性")
@@ -95,6 +96,7 @@ Public Class Maintenance_Object
         Dim TI_Type As String = ""
         Dim TI_Stand As String = ""
         Dim TI_Range As String = ""
+        Dim TI_Acc As String = ""
         Dim TI_Unit As String = ""
         Dim TI_Qty As String = ""
         Dim TI_Ref As String = ""
@@ -105,6 +107,7 @@ Public Class Maintenance_Object
             TI_Type = "TI" & i & "_Type"
             TI_Stand = "TI" & i & "_Stand"
             TI_Range = "TI" & i & "_Range"
+            TI_Acc = "TI" & i & "_Acc"
             TI_Unit = "TI" & i & "_Unit"
             TI_Qty = "TI" & i & "_Qty"
             TI_Ref = "TI" & i & "_Ref"
@@ -114,6 +117,7 @@ Public Class Maintenance_Object
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Type").Value = ds.Tables(0).Rows(0)(TI_Type).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Stand").Value = ds.Tables(0).Rows(0)(TI_Stand).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Range").Value = ds.Tables(0).Rows(0)(TI_Range).ToString
+            TestItem_DataGridView.Rows(i - 1).Cells("TI_Acc").Value = ds.Tables(0).Rows(0)(TI_Acc).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Unit").Value = ds.Tables(0).Rows(0)(TI_Unit).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Qty").Value = ds.Tables(0).Rows(0)(TI_Qty).ToString
             TestItem_DataGridView.Rows(i - 1).Cells("TI_Ref").Value = ds.Tables(0).Rows(0)(TI_Ref).ToString
@@ -122,7 +126,7 @@ Public Class Maintenance_Object
             '给CBL赋值
         Next
 
-        TestItem_DataGridView.Columns.RemoveAt(6)
+        TestItem_DataGridView.Columns.RemoveAt(7)
         '删除重复列以完成CBL的替换
 
         disenableSort(Me.TestItem_DataGridView)
@@ -153,6 +157,7 @@ Public Class Maintenance_Object
         str = str & vbLf & "测试种类：1为单边范围，2为双边范围"
         str = str & vbLf & "标准值：数据标准值"
         str = str & vbLf & "偏差范围：±值。如果测试种类为2，则此处1表示≥规格值，为0时表示≤规格值"
+        str = str & vbLf & "精度：精确到小数点后多少位"
         str = str & vbLf & "单位：计量单位"
         str = str & vbLf & "样本数量：一般为1或3"
         str = str & vbLf & "重要性：True为必须符合，False为仅作参考"
@@ -182,9 +187,10 @@ Public Class Maintenance_Object
             str = str & ", TI" & (i + 1) & "_Type= '" & Me.TestItem_DataGridView.Rows(i).Cells(1).Value.ToString & "'"
             str = str & ", TI" & (i + 1) & "_Stand= '" & Me.TestItem_DataGridView.Rows(i).Cells(2).Value.ToString & "'"
             str = str & ", TI" & (i + 1) & "_Range= '" & Me.TestItem_DataGridView.Rows(i).Cells(3).Value.ToString & "'"
-            str = str & ", TI" & (i + 1) & "_Unit= '" & Me.TestItem_DataGridView.Rows(i).Cells(4).Value.ToString & "'"
-            str = str & ", TI" & (i + 1) & "_Qty= '" & Me.TestItem_DataGridView.Rows(i).Cells(5).Value.ToString & "'"
-            str = str & ", TI" & (i + 1) & "_Ref= '" & Me.TestItem_DataGridView.Rows(i).Cells(6).Value.ToString & "'"
+            str = str & ", TI" & (i + 1) & "_Acc= " & Me.TestItem_DataGridView.Rows(i).Cells(4).Value.ToString
+            str = str & ", TI" & (i + 1) & "_Unit= '" & Me.TestItem_DataGridView.Rows(i).Cells(5).Value.ToString & "'"
+            str = str & ", TI" & (i + 1) & "_Qty= '" & Me.TestItem_DataGridView.Rows(i).Cells(6).Value.ToString & "'"
+            str = str & ", TI" & (i + 1) & "_Ref= '" & Me.TestItem_DataGridView.Rows(i).Cells(7).Value.ToString & "'"
         Next
         '将所有有效数据输入
 
@@ -193,6 +199,7 @@ Public Class Maintenance_Object
             str = str & ", TI" & (i + 1) & "_Type= Null"
             str = str & ", TI" & (i + 1) & "_Stand= Null"
             str = str & ", TI" & (i + 1) & "_Range= Null"
+            str = str & ", TI" & (i + 1) & "_Acc= Null"
             str = str & ", TI" & (i + 1) & "_Unit= Null"
             str = str & ", TI" & (i + 1) & "_Qty= Null"
             str = str & ", TI" & (i + 1) & "_Ref= Null"
@@ -269,12 +276,14 @@ Public Class Maintenance_Object
             Case 3
                 Info_Label.Text = "偏差范围：±值。如果测试种类为2，则此处1表示≥规格值，为0时表示≤规格值"
             Case 4
-                Info_Label.Text = "单位：计量单位"
+                Info_Label.Text = "精度：精确到小数点后多少位"
             Case 5
-                Info_Label.Text = "样本数量：一般为1或3"
+                Info_Label.Text = "单位：计量单位"
             Case 6
-                Info_Label.Text = "重要性：True为必须符合，False为仅作参考"
+                Info_Label.Text = "样本数量：一般为1或3"
             Case 7
+                Info_Label.Text = "重要性：True为必须符合，False为仅作参考"
+            Case 8
                 Info_Label.Text = "精度：-1表示结果不为数值，0及0以上表示小数点后精度"
             Case Else
                 Info_Label.Text = "未知：请联络管理员"
