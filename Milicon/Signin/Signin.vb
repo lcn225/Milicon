@@ -9,9 +9,9 @@ Public Class Signin
 
         Me.Text = ini.GetIniString("Signin", "Title", "N/A")
         Me.ObjectList_Button.Text = ini.GetIniString("Signin", "Button1", "N/A")
-        Me.Signin_Button.Text = ini.GetIniString("Signin", "Button3", "N/A")
-        Me.Cancel_Button.Text = ini.GetIniString("Signin", "Button4", "N/A")
-        Me.Exit_Button.Text = ini.GetIniString("Signin", "Button5", "N/A")
+        Me.Signin_Button.Text = "F1" & vbLf & ini.GetIniString("Signin", "Button3", "N/A")
+        Me.Cancel_Button.Text = "F10" & vbLf & ini.GetIniString("Signin", "Button4", "N/A")
+        Me.Exit_Button.Text = "F12" & vbLf & ini.GetIniString("Signin", "Button5", "N/A")
         Me.ProDate_Label.Text = ini.GetIniString("Signin", "Label1", "N/A")
         Me.Lots_Label.Text = ini.GetIniString("Signin", "Label2", "N/A")
         Me.TestDate_Label.Text = ini.GetIniString("Signin", "Label3", "N/A")
@@ -72,6 +72,7 @@ Public Class Signin
         '获得测试项目数量
 
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
+        TestDataInput_DataGridView.RowHeadersWidth = 150
         TestDataInput_DataGridView.Columns.Add("Stand", "规格值")
         TestDataInput_DataGridView.Columns.Add("1", "①")
         TestDataInput_DataGridView.Columns.Add("2", "②")
@@ -95,7 +96,10 @@ Public Class Signin
         Next
         '添加若干行，每一行标题为各测试项目
 
-        mergeCell(ID_Obj, Me.TestDataInput_DataGridView)
+        'TestDataInput_DataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing
+        'TestDataInput_DataGridView.AutoResizeRows()
+
+        'mergeCell(ID_Obj, Me.TestDataInput_DataGridView)
         '根据样本数量合并单元格
 
     End Sub
@@ -160,7 +164,7 @@ Public Class Signin
     Private Function GetTestLots() As String
         'Dim TestLots As String = System.DateTime.Today.Year & System.DateTime.Today.Month & System.DateTime.Today.Day
         Dim TodayLots As String
-        Dim today As String = Format(Date.Today, "yyyy/MM/dd")
+        Dim today As String = Format(Date.Today, "yyMMdd")
         Dim Lots As String = 0
 
         DBcon()
@@ -168,7 +172,7 @@ Public Class Signin
         '获取当日日期
         'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
         '调整日期，测试用
-        Dim sql As String = "SELECT COUNT(TestDate) AS LoginNoDate FROM Data_list WHERE (((Data_list.[TestDate])=#" & today & "#))"
+        Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE (LoginNo LIKE '" & today & "*')"
         Dim TestLots_da = New OleDbDataAdapter(sql, cn)
         Dim TestLots_DS = New DataSet
         TestLots_da.Fill(TestLots_DS, "TestLots")
@@ -288,5 +292,21 @@ Public Class Signin
 
     End Sub
     '点击登录按钮登录数据
+
+    '设置快捷键
+    Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.F1 And Signin_Button.Enabled = True Then
+            Signin_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F10 Then
+            Cancel_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F12 Then
+            Exit_Button_Click(Me, e)
+        End If
+    End Sub
 
 End Class

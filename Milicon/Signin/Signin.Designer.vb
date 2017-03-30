@@ -192,6 +192,7 @@ Partial Class Signin
         Me.Controls.Add(Me.ObjectList_Button)
         Me.Controls.Add(Me.NameInput_TextBox)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.Name = "Signin"
         Me.Text = "Signin"
         CType(Me.TestDataInput_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()

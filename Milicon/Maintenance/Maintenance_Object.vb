@@ -274,7 +274,7 @@ Public Class Maintenance_Object
             Case 2
                 Info_Label.Text = "标准值：数据标准值"
             Case 3
-                Info_Label.Text = "偏差范围：±值。如果测试种类为2，则此处1表示≥规格值，为0时表示≤规格值"
+                Info_Label.Text = "偏差范围：±值。如果测试种类为2时，此处1表示≥规格值，为0时表示≤"
             Case 4
                 Info_Label.Text = "精度：精确到小数点后多少位"
             Case 5
