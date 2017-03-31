@@ -125,7 +125,7 @@ Partial Class Signin
         Me.TestDataInput_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.TestDataInput_DataGridView.Location = New System.Drawing.Point(51, 161)
         Me.TestDataInput_DataGridView.Name = "TestDataInput_DataGridView"
-        Me.TestDataInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.TestDataInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.TestDataInput_DataGridView.RowTemplate.Height = 23
         Me.TestDataInput_DataGridView.Size = New System.Drawing.Size(499, 252)
         Me.TestDataInput_DataGridView.TabIndex = 12

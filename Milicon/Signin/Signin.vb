@@ -75,7 +75,9 @@ Public Class Signin
         '获取该测试批号对应规格各TI最大样本数
 
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
-        TestDataInput_DataGridView.RowHeadersWidth = 150
+
+
+        TestDataInput_DataGridView.RowHeadersWidth = 120
         TestDataInput_DataGridView.Columns.Add("Stand", "规格值")
         TestDataInput_DataGridView.Columns("Stand").Width = 80
         TestDataInput_DataGridView.Columns("Stand").ReadOnly = True
@@ -97,8 +99,13 @@ Public Class Signin
 
         For i = 1 To TI_Num
             ADD_TestDateInput_DataGridView(i)
+            TestDataInput_DataGridView.Rows(i - 1).DefaultCellStyle.WrapMode = DataGridViewTriState.True
         Next
         '添加若干行，每一行标题为各测试项目
+
+        TestDataInput_DataGridView.AutoResizeRows()
+
+        'TestDataInput_DataGridView.Rows(1).DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
         'TestDataInput_DataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing
         'TestDataInput_DataGridView.AutoResizeRows()
@@ -176,7 +183,9 @@ Public Class Signin
         '获取当日日期
         'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
         '调整日期，测试用
-        Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE (LoginNo LIKE '" & today & "*')"
+        'Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE (LoginNo LIKE '170401*')"
+        Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE LoginNo LIKE '170401%'"
+        'access中通配符用*，但是vb.net中用%？坑爹啊
         Dim TestLots_da = New OleDbDataAdapter(sql, cn)
         Dim TestLots_DS = New DataSet
         TestLots_da.Fill(TestLots_DS, "TestLots")
@@ -287,6 +296,8 @@ Public Class Signin
             '如果返回值为6，则为选择“是”
             Signin()
         End If
+
+        TestDataInput_DataGridView.DataSource = vbNull
 
         Signin_Button.Enabled = False
         '确认材料名之前禁用登录按钮
