@@ -8,10 +8,10 @@ Public Class SearchData
 
         Me.Text = ini.GetIniString("SearchData", "Title", "N/A")
         Me.Search_Button.Text = ini.GetIniString("SearchData", "Button1", "N/A")
-        Me.OK_Button.Text = ini.GetIniString("SearchData", "Button2", "N/A")
-        Me.Clear_Button.Text = ini.GetIniString("SearchData", "Button3", "N/A")
-        Me.Del_Button.Text = ini.GetIniString("SearchData", "Button4", "N/A")
-        Me.Exit_Button.Text = ini.GetIniString("SearchData", "Button5", "N/A")
+        Me.OK_Button.Text = "F1" & vbLf & ini.GetIniString("SearchData", "Button2", "N/A")
+        Me.Clear_Button.Text = "F2" & vbLf & ini.GetIniString("SearchData", "Button3", "N/A")
+        Me.Del_Button.Text = "F4" & vbLf & ini.GetIniString("SearchData", "Button4", "N/A")
+        Me.Exit_Button.Text = "F12" & vbLf & ini.GetIniString("SearchData", "Button5", "N/A")
         Me.RadioButton1.Text = ini.GetIniString("SearchData", "RadioButton1", "N/A")
         Me.RadioButton2.Text = ini.GetIniString("SearchData", "RadioButton2", "N/A")
         Me.Label5.Text = ini.GetIniString("SearchData", "Label5", "N/A")
@@ -172,16 +172,41 @@ Public Class SearchData
         TestResult.Show()
         Me.Hide()
     End Sub
+    '点击OK按钮打开测试结果
+
+    Private Sub Del_Button_Click(sender As Object, e As EventArgs) Handles Del_Button.Click
+
+    End Sub
 
     Private Sub SearchData_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         MainMenu.Show()
     End Sub
-    '点击OK打开测试结果
 
     Private Sub Clear_Button_Click(sender As Object, e As EventArgs) Handles Clear_Button.Click
         ResetFormText(Me)
         ResetDGV(Me)
     End Sub
     '点击重置清除结果
+
+
+    '设置快捷键
+    Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.F1 And OK_Button.Enabled = True Then
+            OK_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F2 Then
+            Clear_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F4 Then
+            del_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F12 Then
+            Exit_Button_Click(Me, e)
+        End If
+    End Sub
 
 End Class

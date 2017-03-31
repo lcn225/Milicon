@@ -53,7 +53,6 @@ Partial Class TestResult
         '
         Me.TestData_DataGridView.AllowUserToAddRows = False
         Me.TestData_DataGridView.AllowUserToDeleteRows = False
-        Me.TestData_DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.TestData_DataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.TestData_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TestData_DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -61,7 +60,7 @@ Partial Class TestResult
         Me.TestData_DataGridView.Name = "TestData_DataGridView"
         Me.TestData_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TestData_DataGridView.RowTemplate.Height = 23
-        Me.TestData_DataGridView.Size = New System.Drawing.Size(487, 331)
+        Me.TestData_DataGridView.Size = New System.Drawing.Size(687, 331)
         Me.TestData_DataGridView.TabIndex = 1
         '
         'TestDate_DateTimePicker
@@ -136,34 +135,34 @@ Partial Class TestResult
         '
         Me.OK_Button.Location = New System.Drawing.Point(48, 511)
         Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(75, 23)
+        Me.OK_Button.Size = New System.Drawing.Size(76, 47)
         Me.OK_Button.TabIndex = 26
         Me.OK_Button.Text = "Button1"
         Me.OK_Button.UseVisualStyleBackColor = True
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Location = New System.Drawing.Point(185, 511)
+        Me.Cancel_Button.Location = New System.Drawing.Point(252, 511)
         Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Cancel_Button.Size = New System.Drawing.Size(71, 47)
         Me.Cancel_Button.TabIndex = 27
         Me.Cancel_Button.Text = "Button2"
         Me.Cancel_Button.UseVisualStyleBackColor = True
         '
         'Print_Button
         '
-        Me.Print_Button.Location = New System.Drawing.Point(322, 511)
+        Me.Print_Button.Location = New System.Drawing.Point(451, 511)
         Me.Print_Button.Name = "Print_Button"
-        Me.Print_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Print_Button.Size = New System.Drawing.Size(78, 47)
         Me.Print_Button.TabIndex = 28
         Me.Print_Button.Text = "打印"
         Me.Print_Button.UseVisualStyleBackColor = True
         '
         'Exit_Button
         '
-        Me.Exit_Button.Location = New System.Drawing.Point(459, 511)
+        Me.Exit_Button.Location = New System.Drawing.Point(657, 511)
         Me.Exit_Button.Name = "Exit_Button"
-        Me.Exit_Button.Size = New System.Drawing.Size(75, 23)
+        Me.Exit_Button.Size = New System.Drawing.Size(76, 47)
         Me.Exit_Button.TabIndex = 29
         Me.Exit_Button.Text = "Button4"
         Me.Exit_Button.UseVisualStyleBackColor = True
@@ -172,7 +171,7 @@ Partial Class TestResult
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(572, 583)
+        Me.ClientSize = New System.Drawing.Size(785, 587)
         Me.Controls.Add(Me.Exit_Button)
         Me.Controls.Add(Me.Print_Button)
         Me.Controls.Add(Me.Cancel_Button)

@@ -71,19 +71,23 @@ Public Class Signin
         Dim TI_Num As String = TI_ds.Tables(0).Rows(0)("TI_Num").ToString
         '获得测试项目数量
 
+        Dim MAXQty As Integer = getMAXQtyByID(ID_Obj)
+        '获取该测试批号对应规格各TI最大样本数
+
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
         TestDataInput_DataGridView.RowHeadersWidth = 150
         TestDataInput_DataGridView.Columns.Add("Stand", "规格值")
-        TestDataInput_DataGridView.Columns.Add("1", "①")
-        TestDataInput_DataGridView.Columns.Add("2", "②")
-        TestDataInput_DataGridView.Columns.Add("3", "③")
         TestDataInput_DataGridView.Columns("Stand").Width = 80
         TestDataInput_DataGridView.Columns("Stand").ReadOnly = True
         '新增规格值列
-        TestDataInput_DataGridView.Columns("1").Width = 80
-        TestDataInput_DataGridView.Columns("2").Width = 80
-        TestDataInput_DataGridView.Columns("3").Width = 80
-        '新增三列待填
+
+        Dim width As Single = 300 / MAXQty
+        '设定列宽度
+        For i = 1 To MAXQty
+            TestDataInput_DataGridView.Columns.Add(i, Chr(i - 23848))
+            TestDataInput_DataGridView.Columns(i).Width = width
+        Next
+        '根据样本数添加若干列
 
         If TI_Num = "" Then
             MessageBox.Show("测试项目出错，请确认")

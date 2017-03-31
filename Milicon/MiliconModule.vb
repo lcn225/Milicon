@@ -35,13 +35,49 @@ Module MiliconModule
 
         DBcon()
 
-        Dim sql As String = "Select TI" & (TI + 1) & "_Qty From Object_List Where Obj_ID = " & ID_Obj
+        Dim sql As String = "Select TI" & TI & "_Qty From Object_List Where Obj_ID = " & ID_Obj
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
         da.Fill(ds, "getQtyByID")
         Dim Unit As String = ds.Tables(0).Rows(0)(0).ToString
 
         Return Unit
+
+        cn.Close()
+    End Function
+    '根据材料ID与测试项目号查找样本数，返回整数
+
+    Public Function getNumByID(ByVal ID_Obj As String) As Integer
+
+        DBcon()
+
+        Dim sql As String = "Select TI_Num From Object_List Where Obj_ID = " & ID_Obj
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "getNumByID")
+        Dim Unit As String = ds.Tables(0).Rows(0)(0).ToString
+
+        Return Unit
+
+        cn.Close()
+    End Function
+    '根据材料ID查找TI数目，返回整数
+
+    Public Function getMAXQtyByID(ByVal ID_Obj As String) As Integer
+
+        DBcon()
+
+        Dim Num = getNumByID(ID_Obj)
+        '获取TI数目
+
+        Dim Qty(Num) As Integer
+
+        For i = 1 To Num
+            Qty(i - 1) = getQtyByID(ID_Obj, i)
+        Next
+        '获取每一个TI的样本数至数列
+
+        Return Qty.Max
 
         cn.Close()
     End Function
@@ -61,7 +97,7 @@ Module MiliconModule
 
         cn.Close()
     End Function
-    '根据测试批号查找材料种类，输入ID，返回字符串
+    '根据测试批号查找材料种类，输入LoginNo，返回字符串
 
     Public Function GetObjNameByLoginNo(ByVal LoginNo As String) As String
         DBcon()
@@ -77,7 +113,7 @@ Module MiliconModule
 
         cn.Close()
     End Function
-    '根据测试批号查找材料名称，输入ID，返回字符串
+    '根据测试批号查找材料名称，输入LoginNo，返回字符串
 
     Public Function GetObjIDByLoginNo(ByVal LoginNo As String) As String
         DBcon()

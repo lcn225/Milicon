@@ -6,10 +6,10 @@ Public Class TestResult
     Private Sub UItxt()
 
         Me.Text = ini.GetIniString("TestResult", "Title", "N/A")
-        Me.OK_Button.Text = ini.GetIniString("TestResult", "Button1", "N/A")
-        Me.Cancel_Button.Text = ini.GetIniString("TestResult", "Button2", "N/A")
-        Me.Print_Button.Text = ini.GetIniString("TestResult", "Button3", "N/A")
-        Me.Exit_Button.Text = ini.GetIniString("TestResult", "Button4", "N/A")
+        Me.OK_Button.Text = "F1" & vbLf & ini.GetIniString("TestResult", "Button1", "N/A")
+        Me.Cancel_Button.Text = "F2" & vbLf & ini.GetIniString("TestResult", "Button2", "N/A")
+        Me.Print_Button.Text = "F7" & vbLf & ini.GetIniString("TestResult", "Button3", "N/A")
+        Me.Exit_Button.Text = "F12" & vbLf & ini.GetIniString("TestResult", "Button4", "N/A")
         Me.ProDate_Label.Text = ini.GetIniString("TestResult", "Label1", "N/A")
         Me.Lots_Label.Text = ini.GetIniString("TestResult", "Label2", "N/A")
         Me.TestDate_Label.Text = ini.GetIniString("TestResult", "Label3", "N/A")
@@ -100,18 +100,25 @@ Public Class TestResult
         Dim Num = TestItem.Tables(0).Rows(0)("TI_Num")
         '获取测试项目数量
 
+        Dim MAXQty As Integer = getMAXQtyByID(GetObjIDByLoginNo(LoginNo))
+        '获取该测试批号对应规格各TI最大样本数
+
         TestData_DataGridView.Columns.Add("Stand", "规格值")
         TestData_DataGridView.Columns("Stand").Width = 80
         TestData_DataGridView.Columns("Stand").ReadOnly = True
         '新增规格值列
-        TestData_DataGridView.Columns.Add("1", "①")
-        TestData_DataGridView.Columns.Add("2", "②")
-        TestData_DataGridView.Columns.Add("3", "③")
-        '加上三列
+
+        Dim width As Single = 300 / MAXQty
+        '设定列宽度
+        For i = 1 To MAXQty
+            TestData_DataGridView.Columns.Add(i, Chr(i - 23848))
+            TestData_DataGridView.Columns(i).Width = width
+        Next
+        '根据样本数添加若干列
 
         For i = 1 To Num
             Val = FillRowData(TestData, i)
-
+            '返回测试数据
             TI_Name = TestItem.Tables(0).Rows(0)("TI" & i & "_Name")
             TI_Type = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
             TI_Stand = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Stand")
@@ -129,7 +136,7 @@ Public Class TestResult
 
         Dim Obj_ID As String = TestData.Tables(0).Rows(0)("Obj_ID").ToString
 
-        mergeCell(Obj_ID, Me.TestData_DataGridView)
+        'mergeCell(Obj_ID, Me.TestData_DataGridView)
         '根据样本数量合并单元格
 
         disenableSort(Me.TestData_DataGridView)
@@ -278,5 +285,30 @@ Public Class TestResult
 
     End Sub
     '点确定保存修改
+
+    Private Sub Print_Button_Click(sender As Object, e As EventArgs) Handles Print_Button.Click
+
+    End Sub
+    '点击打印开始打印
+
+    '设置快捷键
+    Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.F1 And OK_Button.Enabled = True Then
+            OK_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F2 Then
+            Cancel_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F7 Then
+            print_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F12 Then
+            Exit_Button_Click(Me, e)
+        End If
+    End Sub
 
 End Class

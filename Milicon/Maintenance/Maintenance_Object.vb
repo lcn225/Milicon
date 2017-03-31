@@ -6,10 +6,11 @@ Public Class Maintenance_Object
 
     Private Sub TextFormat()
         Me.Text = ini.GetIniString("Maintenance_Object", "Title", "N/A")
-        Me.Signin_Button.Text = ini.GetIniString("Maintenance_Object", "Button1", "N/A")
-        Me.Add_Button.Text = ini.GetIniString("Maintenance_Object", "Button1.5", "N/A")
-        Me.Cancel_Button.Text = ini.GetIniString("Maintenance_Object", "Button2", "N/A")
-        Me.Exit_Button.Text = ini.GetIniString("Maintenance_Object", "Button3", "N/A")
+        Me.Signin_Button.Text = "F1" & vbLf & ini.GetIniString("Maintenance_Object", "Button1", "N/A")
+        Me.Add_Button.Text = "F3" & vbLf & ini.GetIniString("Maintenance_Object", "Button2", "N/A")
+        Me.Del_Button.Text = "F4" & vbLf & ini.GetIniString("Maintenance_Object", "Button3", "N/A")
+        Me.Cancel_Button.Text = "F9" & vbLf & ini.GetIniString("Maintenance_Object", "Button4", "N/A")
+        Me.Exit_Button.Text = "F12" & vbLf & ini.GetIniString("Maintenance_Object", "Button5", "N/A")
         Me.Label1.Text = ini.GetIniString("Maintenance_Object", "Label", "N/A")
     End Sub
     'UI文本初始化
@@ -156,7 +157,7 @@ Public Class Maintenance_Object
         str = "测试项目：填入测试项目的名称"
         str = str & vbLf & "测试种类：1为单边范围，2为双边范围"
         str = str & vbLf & "标准值：数据标准值"
-        str = str & vbLf & "偏差范围：±值。如果测试种类为2，则此处1表示≥规格值，为0时表示≤规格值"
+        str = str & vbLf & "偏差范围：±值。如测试种类为2时，此处1表示≥规格值，为0时表示≤规格值"
         str = str & vbLf & "精度：精确到小数点后多少位"
         str = str & vbLf & "单位：计量单位"
         str = str & vbLf & "样本数量：一般为1或3"
@@ -274,7 +275,7 @@ Public Class Maintenance_Object
             Case 2
                 Info_Label.Text = "标准值：数据标准值"
             Case 3
-                Info_Label.Text = "偏差范围：±值。如果测试种类为2时，此处1表示≥规格值，为0时表示≤"
+                Info_Label.Text = "偏差范围：±值。如测试种类为2时，此处1表示≥规格值，为0时表示≤规格值"
             Case 4
                 Info_Label.Text = "精度：精确到小数点后多少位"
             Case 5
@@ -292,8 +293,39 @@ Public Class Maintenance_Object
     End Sub
     '输入新TI时显示注释
 
+    '点击取消按钮重置
     Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
         DisplayTI()
     End Sub
 
+
+    '设置快捷键
+    Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.F1 And Signin_Button.Enabled = True Then
+            Signin_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F3 Then
+            Add_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F4 Then
+            Del_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F9 Then
+            Cancel_Button_Click(Me, e)
+        End If
+
+        If e.KeyCode = Keys.F12 Then
+            Exit_Button_Click(Me, e)
+        End If
+
+    End Sub
+
+    '点击删除按钮删除选中TI
+    Private Sub Del_Button_Click(sender As Object, e As EventArgs) Handles Del_Button.Click
+
+    End Sub
 End Class

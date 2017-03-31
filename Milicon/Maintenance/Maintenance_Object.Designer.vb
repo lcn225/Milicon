@@ -34,6 +34,7 @@ Partial Class Maintenance_Object
         Me.Label1 = New System.Windows.Forms.Label()
         Me.sup_TextBox = New System.Windows.Forms.TextBox()
         Me.Info_Label = New System.Windows.Forms.Label()
+        Me.Del_Button = New System.Windows.Forms.Button()
         CType(Me.TestItem_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,7 +54,7 @@ Partial Class Maintenance_Object
         '
         'Exit_Button
         '
-        Me.Exit_Button.Location = New System.Drawing.Point(511, 438)
+        Me.Exit_Button.Location = New System.Drawing.Point(560, 438)
         Me.Exit_Button.Name = "Exit_Button"
         Me.Exit_Button.Size = New System.Drawing.Size(75, 65)
         Me.Exit_Button.TabIndex = 18
@@ -62,7 +63,7 @@ Partial Class Maintenance_Object
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Location = New System.Drawing.Point(370, 438)
+        Me.Cancel_Button.Location = New System.Drawing.Point(434, 438)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 65)
         Me.Cancel_Button.TabIndex = 17
@@ -71,7 +72,7 @@ Partial Class Maintenance_Object
         '
         'Signin_Button
         '
-        Me.Signin_Button.Location = New System.Drawing.Point(88, 438)
+        Me.Signin_Button.Location = New System.Drawing.Point(56, 438)
         Me.Signin_Button.Name = "Signin_Button"
         Me.Signin_Button.Size = New System.Drawing.Size(75, 65)
         Me.Signin_Button.TabIndex = 16
@@ -107,7 +108,7 @@ Partial Class Maintenance_Object
         'Add_Button
         '
         Me.Add_Button.Enabled = False
-        Me.Add_Button.Location = New System.Drawing.Point(229, 438)
+        Me.Add_Button.Location = New System.Drawing.Point(182, 438)
         Me.Add_Button.Name = "Add_Button"
         Me.Add_Button.Size = New System.Drawing.Size(75, 65)
         Me.Add_Button.TabIndex = 22
@@ -133,17 +134,28 @@ Partial Class Maintenance_Object
         'Info_Label
         '
         Me.Info_Label.AutoSize = True
-        Me.Info_Label.Location = New System.Drawing.Point(285, 78)
+        Me.Info_Label.Location = New System.Drawing.Point(258, 78)
         Me.Info_Label.Name = "Info_Label"
         Me.Info_Label.Size = New System.Drawing.Size(59, 12)
         Me.Info_Label.TabIndex = 26
         Me.Info_Label.Text = "         "
+        '
+        'Del_Button
+        '
+        Me.Del_Button.Enabled = False
+        Me.Del_Button.Location = New System.Drawing.Point(308, 438)
+        Me.Del_Button.Name = "Del_Button"
+        Me.Del_Button.Size = New System.Drawing.Size(75, 65)
+        Me.Del_Button.TabIndex = 27
+        Me.Del_Button.Text = "Del"
+        Me.Del_Button.UseVisualStyleBackColor = True
         '
         'Maintenance_Object
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(709, 556)
+        Me.Controls.Add(Me.Del_Button)
         Me.Controls.Add(Me.Info_Label)
         Me.Controls.Add(Me.sup_TextBox)
         Me.Controls.Add(Me.Label1)
@@ -174,4 +186,5 @@ Partial Class Maintenance_Object
     Friend WithEvents Label1 As Label
     Friend WithEvents sup_TextBox As TextBox
     Friend WithEvents Info_Label As Label
+    Friend WithEvents Del_Button As Button
 End Class

@@ -59,7 +59,7 @@ Public Class Wave
 
         Dim val_Num(checkedNum - 1) As Integer
         For i = 0 To checkedNum - 1
-            val_Num(i) = getQtyByID(Obj_ID, CLB.CheckedIndices(i))
+            val_Num(i) = getQtyByID(Obj_ID, CLB.CheckedIndices(i) + 1)
         Next
         '定义数组val_Num，填充每一个勾选TI的qty进入数组
 
