@@ -72,12 +72,25 @@ Module MiliconModule
 
         Dim Qty(Num) As Integer
 
-        For i = 1 To Num
-            Qty(i - 1) = getQtyByID(ID_Obj, i)
+        Dim d As String = "select TI1_Qty as d from Object_List  where Obj_ID = " & ID_Obj & " "
+        For i = 2 To Num
+            d = d & "union select TI" & i & "_Qty as d from Object_List where Obj_ID = " & ID_Obj & " "
         Next
+
+        Dim sql As String = "select max(t.d) from (" & d & ")t"
+
+        da = New OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "getMAXQtyByID")
+        Dim Unit As String = ds.Tables(0).Rows(0)(0).ToString
+
+
+        'For i = 1 To Num
+        'Qty(i - 1) = getQtyByID(ID_Obj, i)
+        'Next
         '获取每一个TI的样本数至数列
 
-        Return Qty.Max
+        Return Unit
 
         cn.Close()
     End Function

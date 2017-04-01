@@ -62,12 +62,12 @@ Public Class TestResult
     End Sub
     '根据测试批号查找测试信息
 
-    Private Function FillRowData(ByVal DB As DataSet, ByVal i As Integer)
+    Private Function FillRowData(ByVal DB As DataSet, ByVal i As Integer, ByVal Qty As Integer)
 
-        Dim Val(3) As String
+        Dim Val(Qty) As String
         Dim Temp As String
 
-        For j = 1 To 3
+        For j = 1 To Qty
             Temp = DB.Tables(0).Rows(0)("Value" & i & "_" & j).ToString
             If Temp = "" Then
                 Val(j - 1) = "/"
@@ -101,6 +101,7 @@ Public Class TestResult
         '获取测试项目数量
 
         Dim MAXQty As Integer = getMAXQtyByID(GetObjIDByLoginNo(LoginNo))
+        'Dim MAXQty As Integer = getMAXQtyByID(TestData.Tables(0).Rows(0)("Obj_ID"))
         '获取该测试批号对应规格各TI最大样本数
 
         TestData_DataGridView.Columns.Add("Stand", "规格值")
@@ -117,7 +118,7 @@ Public Class TestResult
         '根据样本数添加若干列
 
         For i = 1 To Num
-            Val = FillRowData(TestData, i)
+            Val = FillRowData(TestData, i, 3)
             '返回测试数据
             TI_Name = TestItem.Tables(0).Rows(0)("TI" & i & "_Name")
             TI_Type = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
