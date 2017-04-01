@@ -229,13 +229,23 @@ Public Class Maintenance_Object
 
         Dim obj_Name As String = ""
         obj_Name = InputBox("请输入新增规格名称" & vbLf & "新增规格的测试项目将会和现规格相同", "输入名称", "", 10, 10)
+        Dim obj_Sup As String = InputBox("请输入新增规格厂商名称", "输入名称", "", 10, 10)
         '获取新规格名称
 
-        If obj_Name <> "" Then
-            addObject(Me.ID_Object, obj_Name)
+        If obj_Name <> "" And obj_Sup <> "" Then
+            addObject(Me.ID_Object, obj_Name, obj_Sup)
             '添加新规格，新规格TI与此时显示的规格相同，新规格名字为输入的名字
             MessageBox.Show("添加成功！")
-            NameInput_TextBox.Text = obj_Name
+
+            Dim sql As String = "select max(Obj_ID) from Object_List"
+            Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
+            Dim ds As DataSet = New DataSet
+            da.Fill(ds, "MAXID")
+            Me.ID_Object = ds.Tables(0).Rows(0)(0).ToString
+            '将全局变量ID变更为新增后规格ID
+
+            DisplayTI()
+            '重置为变更后规格
         End If
 
         cn.Close()

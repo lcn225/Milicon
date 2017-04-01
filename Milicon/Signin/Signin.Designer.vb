@@ -127,7 +127,7 @@ Partial Class Signin
         Me.TestDataInput_DataGridView.Name = "TestDataInput_DataGridView"
         Me.TestDataInput_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.TestDataInput_DataGridView.RowTemplate.Height = 23
-        Me.TestDataInput_DataGridView.Size = New System.Drawing.Size(499, 252)
+        Me.TestDataInput_DataGridView.Size = New System.Drawing.Size(586, 259)
         Me.TestDataInput_DataGridView.TabIndex = 12
         '
         'Signin_Button
@@ -141,7 +141,7 @@ Partial Class Signin
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.Location = New System.Drawing.Point(263, 434)
+        Me.Cancel_Button.Location = New System.Drawing.Point(306, 434)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(75, 65)
         Me.Cancel_Button.TabIndex = 14
@@ -150,7 +150,7 @@ Partial Class Signin
         '
         'Exit_Button
         '
-        Me.Exit_Button.Location = New System.Drawing.Point(475, 434)
+        Me.Exit_Button.Location = New System.Drawing.Point(561, 434)
         Me.Exit_Button.Name = "Exit_Button"
         Me.Exit_Button.Size = New System.Drawing.Size(75, 65)
         Me.Exit_Button.TabIndex = 15
@@ -175,7 +175,7 @@ Partial Class Signin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(605, 511)
+        Me.ClientSize = New System.Drawing.Size(692, 544)
         Me.Controls.Add(Me.TestDate_DateTimePicker)
         Me.Controls.Add(Me.ProDate_DateTimePicker)
         Me.Controls.Add(Me.Exit_Button)

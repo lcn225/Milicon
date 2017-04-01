@@ -70,25 +70,18 @@ Module MiliconModule
         Dim Num = getNumByID(ID_Obj)
         '获取TI数目
 
-        Dim Qty(Num) As Integer
-
         Dim d As String = "select TI1_Qty as d from Object_List  where Obj_ID = " & ID_Obj & " "
         For i = 2 To Num
             d = d & "union select TI" & i & "_Qty as d from Object_List where Obj_ID = " & ID_Obj & " "
         Next
 
         Dim sql As String = "select max(t.d) from (" & d & ")t"
+        'select max(t.d) from (select TI1_Qty as d from Object_List  where Obj_ID = 28 union select TI2_Qty as d from Object_List where Obj_ID = 28 union select TI3_Qty as d from Object_List where Obj_ID = 28 union select TI4_Qty as d from Object_List where Obj_ID = 28 union select TI5_Qty as d from Object_List where Obj_ID = 28 union select TI6_Qty as d from Object_List where Obj_ID = 28 union select TI7_Qty as d from Object_List where Obj_ID = 28 union select TI8_Qty as d from Object_List where Obj_ID = 28 union select TI9_Qty as d from Object_List where Obj_ID = 28 )t
 
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
         da.Fill(ds, "getMAXQtyByID")
         Dim Unit As String = ds.Tables(0).Rows(0)(0).ToString
-
-
-        'For i = 1 To Num
-        'Qty(i - 1) = getQtyByID(ID_Obj, i)
-        'Next
-        '获取每一个TI的样本数至数列
 
         Return Unit
 
@@ -432,7 +425,7 @@ Exitall:
     End Sub
     '清除当前窗口的所有text
 
-    Public Sub addObject(ByVal obj_ID As String, ByVal obj_Name As String)
+    Public Sub addObject(ByVal obj_ID As String, ByVal obj_Name As String, ByVal obj_Sup As String)
         DBcon()
 
         Dim sql1 As String = "Select * from Object_List Where Obj_ID = " & obj_ID
@@ -460,6 +453,8 @@ Exitall:
         '删除头部多余字符
         str = str.Replace(ds.Tables(0).Rows(0)("Obj_Name").ToString, obj_Name)
         '替换名称为新名称
+        str = str.Replace(ds.Tables(0).Rows(0)("Obj_Sup").ToString, obj_Sup)
+        '替换厂商为新厂商
         str = str.Replace("'True'", "True")
         str = str.Replace("'False'", "False")
         '更改字符串，以输入正确的数据类型
@@ -537,4 +532,16 @@ Exitall:
     End Function
     '输入TI相关参数，返回规格范围
 
+    Public Function ACCC(ByVal val As String, ByVal acc As Integer) As String
+
+        Dim result As String
+        If IsNumeric(val) Then
+
+            result = FormatNumber(val, acc)
+        Else
+            result = val
+        End If
+
+        Return result
+    End Function
 End Module

@@ -65,15 +65,9 @@ Public Class TestResult
     Private Function FillRowData(ByVal DB As DataSet, ByVal i As Integer, ByVal Qty As Integer)
 
         Dim Val(Qty) As String
-        Dim Temp As String
 
         For j = 1 To Qty
-            Temp = DB.Tables(0).Rows(0)("Value" & i & "_" & j).ToString
-            If Temp = "" Then
-                Val(j - 1) = "/"
-            Else
-                Val(j - 1) = Temp
-            End If
+            Val(j - 1) = DB.Tables(0).Rows(0)("Value" & i & "_" & j).ToString
         Next
 
         Return Val
@@ -118,7 +112,7 @@ Public Class TestResult
         '根据样本数添加若干列
 
         For i = 1 To Num
-            Val = FillRowData(TestData, i, 3)
+            Val = FillRowData(TestData, i, MAXQty)
             '返回测试数据
             TI_Name = TestItem.Tables(0).Rows(0)("TI" & i & "_Name")
             TI_Type = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
@@ -126,10 +120,17 @@ Public Class TestResult
             TI_Range = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
             TI_Acc = TestItem.Tables(0).Rows(0)("TI" + i.ToString + "_Acc")
             '获取字段名为"TIi_Stand"与"TIi_Range"的值，i为参数
-            TestData_DataGridView.Rows.Add(standAndRange(TI_Type, TI_Stand, TI_Range), Val(0), Val(1), Val(2))
+            'TestData_DataGridView.Rows.Add(standAndRange(TI_Type, TI_Stand, TI_Range), ACCC(Val(0), TI_Acc), Val(1), ACCC(Val(2), TI_Acc))
+            TestData_DataGridView.Rows.Add()
             '增加一行
-            TestData_DataGridView.Rows(i - 1).DefaultCellStyle.Format = "F" & TI_Acc
-            '设精度
+            TestData_DataGridView.Rows(i - 1).Cells(0).Value = standAndRange(TI_Type, ACCC(TI_Stand, TI_Acc), ACCC(TI_Range, TI_Acc))
+            '该行填入规格值
+
+            For j = 1 To MAXQty
+                TestData_DataGridView.Rows(i - 1).Cells(j).Value = ACCC(Val(j - 1), TI_Acc)
+            Next
+            '将每个测试数据转换为对应精度后填入
+
             TestData_DataGridView.Rows(i - 1).HeaderCell.Value = TI_Name
             '改每行标题
         Next
