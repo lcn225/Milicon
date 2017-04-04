@@ -184,14 +184,14 @@ Public Class Signin
         'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
         '调整日期，测试用
         'Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE (LoginNo LIKE '170401*')"
-        Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE LoginNo LIKE '170401%'"
+        Dim sql As String = "SELECT MAX(LoginNo) AS LoginNoDate FROM Data_list WHERE LoginNo LIKE '" & today & "%'"
         'access中通配符用*，但是vb.net中用%？坑爹啊
         Dim TestLots_da = New OleDbDataAdapter(sql, cn)
         Dim TestLots_DS = New DataSet
         TestLots_da.Fill(TestLots_DS, "TestLots")
         '查询并统计Data_List表中，本日已登录多少数据
 
-        Lots = Format(Val(TestLots_DS.Tables(0).Rows(0)(0).ToString) + 1, "00")
+        Lots = Mid(TestLots_DS.Tables(0).Rows(0)(0).ToString + 1, 7)
         '批号Lots为本日已登录数据量+1
 
         TodayLots = Format(Date.Today, "yyMMdd") & Lots
@@ -297,7 +297,8 @@ Public Class Signin
             Signin()
         End If
 
-        TestDataInput_DataGridView.DataSource = vbNull
+        'TestDataInput_DataGridView.DataSource = vbNull
+        ResetDGV(Me)
 
         Signin_Button.Enabled = False
         '确认材料名之前禁用登录按钮

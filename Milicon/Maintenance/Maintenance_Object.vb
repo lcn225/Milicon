@@ -246,6 +246,10 @@ Public Class Maintenance_Object
 
             DisplayTI()
             '重置为变更后规格
+
+        Else
+            MessageBox.Show("取消新增！")
+
         End If
 
         cn.Close()

@@ -168,6 +168,7 @@ Partial Class Maintenance_Object
         Me.Controls.Add(Me.Signin_Button)
         Me.Controls.Add(Me.TestItem_DataGridView)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.Name = "Maintenance_Object"
         Me.Text = "Maintenance_Object"
         CType(Me.TestItem_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
