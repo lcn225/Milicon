@@ -184,14 +184,14 @@ Public Class Signin
         'Dim today As String = Format(DateAdd(DateInterval.Day, -1, Date.Today), "yyyy/MM/dd")
         '调整日期，测试用
         'Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE (LoginNo LIKE '170401*')"
-        Dim sql As String = "SELECT MAX(LoginNo) AS LoginNoDate FROM Data_list WHERE LoginNo LIKE '" & today & "%'"
+        Dim sql As String = "SELECT COUNT(LoginNo) AS LoginNoDate FROM Data_list WHERE LoginNo LIKE '" & today & "%'"
         'access中通配符用*，但是vb.net中用%？坑爹啊
         Dim TestLots_da = New OleDbDataAdapter(sql, cn)
         Dim TestLots_DS = New DataSet
         TestLots_da.Fill(TestLots_DS, "TestLots")
         '查询并统计Data_List表中，本日已登录多少数据
 
-        Lots = Mid(TestLots_DS.Tables(0).Rows(0)(0).ToString + 1, 7)
+        Lots = Format(Val(TestLots_DS.Tables(0).Rows(0)(0).ToString + 1), "00")
         '批号Lots为本日已登录数据量+1
 
         TodayLots = Format(Date.Today, "yyMMdd") & Lots
@@ -325,4 +325,53 @@ Public Class Signin
         End If
     End Sub
 
+    '输入数值时检测是否合法
+    Private Sub TestDataInput_DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles TestDataInput_DataGridView.CellValueChanged
+
+        Dim num = TestDataInput_DataGridView.RowCount
+        Dim qty = getMAXQtyByID(ID_Object)
+        Dim type As String
+        Dim stand As String
+        Dim range As String
+
+        For i = 0 To num - 1
+            type = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Type")
+            stand = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Stand")
+            range = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range")
+            For j = 1 To qty
+                '如果是单边范围类型
+
+                If type = 1 Then
+                    '如果是大于的情况
+                    If range = 1 Then
+                        '如果大于等于0，则正常
+                        If TestDataInput_DataGridView.Rows(i).Cells(j).Value >= stand Then
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
+                            '否贼背景变红
+                        Else
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                        End If
+                        '如果是小于的情况
+                    ElseIf range = 0 Then
+                        If TestDataInput_DataGridView.Rows(i).Cells(j).Value <= stand Then
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
+                        Else
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                        End If
+                    Else
+
+                    End If
+
+                ElseIf type = 2 Then
+                    If (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) <= Val(stand) + Val(range)) And (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) >= Val(stand) - Val(range)) Then
+                        TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
+                    Else
+                        TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                    End If
+
+                End If
+            Next
+        Next
+
+    End Sub
 End Class
