@@ -291,6 +291,8 @@ Public Class Signin
 
         '之后可以加一个检测未输入项目的方法，在messagebox中显示未输入项目
 
+        ValueCheck()
+        '检测单元格，标记非法数据
         SigninCheck = MessageBox.Show(“是否输入完毕？”, “登录确认”, MessageBoxButtons.YesNo)
         If SigninCheck = 6 Then
             '如果返回值为6，则为选择“是”
@@ -325,9 +327,7 @@ Public Class Signin
         End If
     End Sub
 
-    '输入数值时检测是否合法
-    Private Sub TestDataInput_DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles TestDataInput_DataGridView.CellValueChanged
-
+    Private Sub ValueCheck()
         Dim num = TestDataInput_DataGridView.RowCount
         Dim qty = getMAXQtyByID(ID_Object)
         Dim type As String
@@ -335,10 +335,14 @@ Public Class Signin
         Dim range As String
 
         For i = 0 To num - 1
+            '每个TI遍历一次
+
             type = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Type")
             stand = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Stand")
             range = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range")
+
             For j = 1 To qty
+                '每个样本遍历一次
                 '如果是单边范围类型
 
                 If type = 1 Then
@@ -347,23 +351,27 @@ Public Class Signin
                         '如果大于等于0，则正常
                         If TestDataInput_DataGridView.Rows(i).Cells(j).Value >= stand Then
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
-                            '否贼背景变红
                         Else
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                            '否则背景变红
                         End If
-                        '如果是小于的情况
                     ElseIf range = 0 Then
+                        '如果是小于的情况
                         If TestDataInput_DataGridView.Rows(i).Cells(j).Value <= stand Then
+                            '如果大于等于0，则正常
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
                         Else
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                            '否则背景变红
                         End If
                     Else
 
                     End If
 
                 ElseIf type = 2 Then
+                    '如果是双边范围
                     If (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) <= Val(stand) + Val(range)) And (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) >= Val(stand) - Val(range)) Then
+                        '如果处于范围之内则正常
                         TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
                     Else
                         TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
@@ -372,6 +380,6 @@ Public Class Signin
                 End If
             Next
         Next
-
     End Sub
+
 End Class

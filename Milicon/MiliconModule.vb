@@ -453,7 +453,7 @@ Exitall:
         '删除头部多余字符
         str = str.Replace(ds.Tables(0).Rows(0)("Obj_Name").ToString, obj_Name)
         '替换名称为新名称
-        str = str.Replace(ds.Tables(0).Rows(0)("Obj_Sup").ToString, obj_Sup)
+        str = str.Replace("'" & ds.Tables(0).Rows(0)("Obj_Sup").ToString & "'", "'" & obj_Sup & "'")
         '替换厂商为新厂商
         str = str.Replace("'True'", "True")
         str = str.Replace("'False'", "False")

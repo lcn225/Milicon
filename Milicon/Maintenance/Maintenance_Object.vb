@@ -241,7 +241,9 @@ Public Class Maintenance_Object
             Dim da As OleDbDataAdapter = New OleDbDataAdapter(sql, cn)
             Dim ds As DataSet = New DataSet
             da.Fill(ds, "MAXID")
+
             Me.ID_Object = ds.Tables(0).Rows(0)(0).ToString
+            Me.NameInput_TextBox.Text = obj_Name
             '将全局变量ID变更为新增后规格ID
 
             DisplayTI()
@@ -342,4 +344,5 @@ Public Class Maintenance_Object
     Private Sub Del_Button_Click(sender As Object, e As EventArgs) Handles Del_Button.Click
 
     End Sub
+
 End Class
