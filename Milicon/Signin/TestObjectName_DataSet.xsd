@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="MiliconConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MiliconConnectionString (MySettings)" PropertyReference="ApplicationSettings.WindowsApplication1.My.MySettings.GlobalReference.Default.MiliconConnectionString" Provider="System.Data.OleDb" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="MiliconConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MiliconConnectionString (MySettings)" PropertyReference="ApplicationSettings.MiliconSpace.My.MySettings.GlobalReference.Default.MiliconConnectionString" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Obejct_ListTableAdapter" GeneratorDataComponentClassName="Obejct_ListTableAdapter" Name="Obejct_List" UserDataComponentName="Obejct_ListTableAdapter">
@@ -33,7 +33,7 @@
   <xs:element name="TestObjectName_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TestObjectName_DataSet" msprop:Generator_UserDSName="TestObjectName_DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Obejct_List" msprop:Generator_TableClassName="Obejct_ListDataTable" msprop:Generator_TableVarName="tableObejct_List" msprop:Generator_TablePropName="Obejct_List" msprop:Generator_RowDeletingName="Obejct_ListRowDeleting" msprop:Generator_RowChangingName="Obejct_ListRowChanging" msprop:Generator_RowEvHandlerName="Obejct_ListRowChangeEventHandler" msprop:Generator_RowDeletedName="Obejct_ListRowDeleted" msprop:Generator_UserTableName="Obejct_List" msprop:Generator_RowChangedName="Obejct_ListRowChanged" msprop:Generator_RowEvArgName="Obejct_ListRowChangeEvent" msprop:Generator_RowClassName="Obejct_ListRow">
+        <xs:element name="Obejct_List" msprop:Generator_TableClassName="Obejct_ListDataTable" msprop:Generator_TableVarName="tableObejct_List" msprop:Generator_RowChangedName="Obejct_ListRowChanged" msprop:Generator_TablePropName="Obejct_List" msprop:Generator_RowDeletingName="Obejct_ListRowDeleting" msprop:Generator_RowChangingName="Obejct_ListRowChanging" msprop:Generator_RowEvHandlerName="Obejct_ListRowChangeEventHandler" msprop:Generator_RowDeletedName="Obejct_ListRowDeleted" msprop:Generator_RowClassName="Obejct_ListRow" msprop:Generator_UserTableName="Obejct_List" msprop:Generator_RowEvArgName="Obejct_ListRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Obj_Name" msprop:Generator_ColumnVarNameInTable="columnObj_Name" msprop:Generator_ColumnPropNameInRow="Obj_Name" msprop:Generator_ColumnPropNameInTable="Obj_NameColumn" msprop:Generator_UserColumnName="Obj_Name" minOccurs="0">

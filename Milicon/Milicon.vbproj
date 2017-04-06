@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2E5BE351-A32C-4915-B12F-EAC2285F533F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WindowsApplication1.My.MyApplication</StartupObject>
-    <RootNamespace>WindowsApplication1</RootNamespace>
+    <StartupObject>MiliconSpace.My.MyApplication</StartupObject>
+    <RootNamespace>MiliconSpace</RootNamespace>
     <AssemblyName>Milicon</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

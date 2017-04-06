@@ -829,7 +829,7 @@ Namespace TestObjectName_DataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApplication1.My.MySettings.Default.MiliconConnectionString
+            Me._connection.ConnectionString = Global.MiliconSpace.My.MySettings.Default.MiliconConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

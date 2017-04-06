@@ -311,6 +311,7 @@ Public Class Signin
     End Sub
     '点击登录按钮登录数据
 
+
     '设置快捷键
     Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
 
@@ -325,6 +326,8 @@ Public Class Signin
         If e.KeyCode = Keys.F12 Then
             Exit_Button_Click(Me, e)
         End If
+        '按TAB时不跳到规格列
+
     End Sub
 
     Private Sub ValueCheck()
@@ -382,4 +385,19 @@ Public Class Signin
         Next
     End Sub
 
+    '如果在一行的最后一列按TAB，则跳过规格列
+    Private Sub TestDataInput_DataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles TestDataInput_DataGridView.CurrentCellChanged
+
+        If Signin_Button.Enabled = True Then
+
+            'Dim row As Integer = TestDataInput_DataGridView.CurrentCellAddress.Y
+            Dim col As Integer = TestDataInput_DataGridView.CurrentCellAddress.X
+
+            If col = 0 Then
+                SendKeys.Send("{TAB}")
+            End If
+
+        End If
+
+    End Sub
 End Class
