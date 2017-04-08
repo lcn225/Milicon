@@ -137,6 +137,8 @@ Public Class Maintenance_Object
         '确定材料名后启用登录按钮
         Me.Add_Button.Enabled = True
         '确定材料名后启用增加按钮
+        Me.Del_Button.Enabled = True
+        '确定材料名后启用增加按钮
 
     End Sub
     '在DGV中显示各种TI
@@ -343,6 +345,74 @@ Public Class Maintenance_Object
 
     '点击删除按钮删除选中TI
     Private Sub Del_Button_Click(sender As Object, e As EventArgs) Handles Del_Button.Click
+
+
+        Dim delNum As Integer = TestItem_DataGridView.CurrentCellAddress.Y + 1
+        '获取想要删除的TI的编号
+
+        Dim sel = MsgBox("确定要删除'" & TestItem_DataGridView.Rows(delNum - 1).Cells(0).Value & "'？", 4, "确认删除")
+        If sel <> 6 Then
+            Exit Sub
+        End If
+        '如果不点确定，跳过
+
+
+        Dim col(8) As String
+        col(0) = "Name"
+        col(1) = "Type"
+        col(2) = "Stand"
+        col(3) = "Range"
+        col(4) = "Acc"
+        col(5) = "Unit"
+        col(6) = "Qty"
+        col(7) = "Ref"
+        '定义col字符串
+
+        Dim str As String = ""
+        'UPDATE Object_List SET TI9_Name = null, TI9_TYPE =null WHERE Obj_ID = 39
+
+        DBcon()
+
+        Dim sql As String = "Select * FROM Object_List WHERE Obj_ID = " & ID_Object
+        da = New OleDb.OleDbDataAdapter(sql, cn)
+        ds = New DataSet
+        da.Fill(ds, "Object_List")
+
+        If ds.Tables(0).Rows(0)("TI_NUM") <> delNum Then
+
+            For i = delNum To ds.Tables(0).Rows(0)("TI_NUM") - 1
+
+                str = str & "TI" & i & "_" & col(0) & " = '" & ds.Tables(0).Rows(0)("TI" & (i + 1) & "_" & col(0)) & "', "
+                'TIi_XXX = ‘TI(i+1)_XXX.value’
+                For j = 1 To 7
+                    str = str & "TI" & i & "_" & col(j) & " = " & ds.Tables(0).Rows(0)("TI" & (i + 1) & "_" & col(j)) & ", "
+                    'TIi_XXX = TI(i+1)_XXX.value
+                Next
+            Next
+
+        End If
+
+        For j = 0 To 7
+            str = str & "TI" & ds.Tables(0).Rows(0)("TI_NUM") & "_" & col(j) & " =null, "
+        Next
+        '最后一个TI置空
+
+        str = str & "TI_Num = " & (ds.Tables(0).Rows(0)("TI_NUM") - 1)
+        '修改TI_NUM
+
+        Dim sql2 As String = "UPDATE Object_List SET " & str & " WHERE Obj_ID = " & ID_Object
+
+        Dim cmd As OleDbCommand
+
+        cn.Open()
+        cmd = New OleDbCommand(sql2, cn)
+        cmd.ExecuteNonQuery()
+        cn.Close()
+
+        MsgBox("删除成功！")
+
+        ResetDGV(Me)
+        DisplayTI()
 
     End Sub
 
