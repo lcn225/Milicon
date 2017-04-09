@@ -172,7 +172,7 @@ Module MiliconModule
         Dim Dra
 
         If lng > 4 Then
-            Raw = Mid(Raw, 1, MidOfRaw) & "L" & Mid(Raw, MidOfRaw + 1, MidOfRaw) & "C" & Mid(Raw, MidOfRaw * 2 + 1, MidOfRaw) & "N" & Mid(Raw, MidOfRaw * 3 + 1, MidOfRaw)
+            Raw = Mid(Raw, 1, MidOfRaw) & "L" & Mid(Raw, MidOfRaw + 1, MidOfRaw) & "C" & Mid(Raw, MidOfRaw * 2 + 1, MidOfRaw) & "N" & Mid(Raw, MidOfRaw * 3 + 1, lng - MidOfRaw * 3)
         Else
             Raw = Raw & "LCN"
         End If
@@ -544,4 +544,7 @@ Exitall:
 
         Return result
     End Function
+    '控制小数点精度
+
+
 End Module

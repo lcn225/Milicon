@@ -20,3 +20,4 @@ C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\Mil
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\MiliconSpace.ObjectList.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\MiliconSpace.Signin.resources
 C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\MiliconSpace.Wave.resources
+C:\Users\LCN\Documents\Visual Studio 2015\Projects\Milicon\Milicon\obj\Debug\MiliconSpace.Maintenance_Password.resources
