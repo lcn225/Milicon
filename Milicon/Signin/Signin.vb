@@ -330,12 +330,14 @@ Public Class Signin
 
     End Sub
 
+    '确认输入值是否在规格内
     Private Sub ValueCheck()
         Dim num = TestDataInput_DataGridView.RowCount
         Dim qty = getMAXQtyByID(ID_Object)
         Dim type As String
         Dim stand As String
         Dim range As String
+        Dim ref As Boolean
 
         For i = 0 To num - 1
             '每个TI遍历一次
@@ -343,6 +345,7 @@ Public Class Signin
             type = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Type")
             stand = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Stand")
             range = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range")
+            ref = CBool(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Ref"))
 
             For j = 1 To qty
                 '每个样本遍历一次
@@ -354,18 +357,26 @@ Public Class Signin
                         '如果大于等于0，则正常
                         If TestDataInput_DataGridView.Rows(i).Cells(j).Value >= stand Then
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
-                        Else
+                        ElseIf ref Then
+                            '是否为必须值？
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
                             '否则背景变红
+                        Else
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Yellow
+                            '不是必须值则变黄
                         End If
                     ElseIf range = 0 Then
                         '如果是小于的情况
                         If TestDataInput_DataGridView.Rows(i).Cells(j).Value <= stand Then
                             '如果大于等于0，则正常
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
-                        Else
+                        ElseIf ref Then
+                            '是否为必须值？
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
                             '否则背景变红
+                        Else
+                            TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Yellow
+                            '不是必须值则变黄
                         End If
                     Else
 
