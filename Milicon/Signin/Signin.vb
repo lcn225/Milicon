@@ -4,6 +4,7 @@ Public Class Signin
     Public ID_Object As Integer = 0
     Private TI_ds As DataSet = New DataSet
     Dim TestLots As String
+    Dim maxQty As Integer
 
     Private Sub TextFormat()
 
@@ -43,6 +44,7 @@ Public Class Signin
         Dim TI_Type As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Type")
         Dim TI_Stand As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Stand")
         Dim TI_Range As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Range")
+        Dim TI_Qty As String = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Qty")
         '获取规格值相关
 
         Dim TI_Acc As Integer = TI_ds.Tables(0).Rows(0)("TI" + i.ToString + "_Acc")
@@ -59,6 +61,12 @@ Public Class Signin
         TestDataInput_DataGridView.Rows(i - 1).Cells("Stand").Value = standAndRange(TI_Type, TI_Stand, TI_Range)
         '第一列为规格值
 
+        If TI_Qty <> maxQty Then
+            For j As Integer = TI_Qty + 1 To maxQty
+                TestDataInput_DataGridView.Rows(i - 1).Cells(j).ReadOnly = True
+            Next
+        End If
+
         cn.Close()
 
     End Sub
@@ -70,9 +78,6 @@ Public Class Signin
         Dim i As Integer
         Dim TI_Num As String = TI_ds.Tables(0).Rows(0)("TI_Num").ToString
         '获得测试项目数量
-
-        Dim MAXQty As Integer = getMAXQtyByID(ID_Obj)
-        '获取该测试批号对应规格各TI最大样本数
 
         'TestDateInput_DataGridView.DataSource = ds.Tables(0)
 
@@ -239,6 +244,9 @@ Public Class Signin
         Me.TI_ds = GetTI(ID_Object)
         '将TI相关信息填入TI_DS
 
+        maxQty = getMAXQtyByID(ID_Object)
+        '确认最大样本数
+
         Dim Object_Name = NameInput_TextBox.Text
         If Object_Name = "" Then
             MessageBox.Show("请输入材料名称")
@@ -254,6 +262,7 @@ Public Class Signin
 
         Me.Signin_Button.Enabled = True
         '确定材料名后启用登录按钮
+
 
     End Sub
     '在DGV中显示各种TI
@@ -333,7 +342,6 @@ Public Class Signin
     '确认输入值是否在规格内
     Private Sub ValueCheck()
         Dim num = TestDataInput_DataGridView.RowCount
-        Dim qty = getMAXQtyByID(ID_Object)
         Dim type As String
         Dim stand As String
         Dim range As String
@@ -347,7 +355,7 @@ Public Class Signin
             range = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range")
             ref = CBool(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Ref"))
 
-            For j = 1 To qty
+            For j = 1 To maxqty
                 '每个样本遍历一次
                 '如果是单边范围类型
 
@@ -387,8 +395,13 @@ Public Class Signin
                     If (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) <= Val(stand) + Val(range)) And (Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) >= Val(stand) - Val(range)) Then
                         '如果处于范围之内则正常
                         TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
-                    Else
+                    ElseIf ref Then
+                        '是否为必须值？
                         TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Red
+                        '否则背景变红
+                    Else
+                        TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.Yellow
+                        '不是必须值则变黄
                     End If
 
                 End If

@@ -156,6 +156,35 @@ Public Class Maintenance_ObjectList
         MaintenanceMainMenu.Show()
     End Sub
 
+    '点击删除按钮删除选中材料
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
+        Dim num = ObjectList_DataGridView.CurrentRow.Cells("材料ID").Value
+        '获取选中材料的ID
 
+        Dim sel = MsgBox("确定要删除'" & ObjectList_DataGridView.CurrentRow.Cells("材料名").Value & "'？", 4, "确认删除")
+        If sel <> 6 Then
+            Exit Sub
+        End If
+        '如果不点确定，跳过
+
+        Dim sql As String = "DELETE FROM Object_List Where Obj_ID = " & num
+        'DELETE FROM Person WHERE LastName = 'Wilson' 
+
+        Dim cmd As OleDbCommand = New OleDbCommand(sql, cn)
+
+        cn.Open()
+        cmd.ExecuteNonQuery()
+        cn.Close()
+        MsgBox("删除成功！")
+
+        ResetDGV(Me)
+        FillDGVbyObjecList(Me.ObjectList_DataGridView)
+        disenableSort(Me.ObjectList_DataGridView)
+        '以材料列表填充DGV
+
+        ChangeDGVWithCombobox()
+        '用Combobox替换DGV中材料类型列
+
+    End Sub
 End Class
