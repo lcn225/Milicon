@@ -55,7 +55,7 @@ Partial Class Signin
         Me.ObjectList_Button.Name = "ObjectList_Button"
         Me.ObjectList_Button.Size = New System.Drawing.Size(75, 23)
         Me.ObjectList_Button.TabIndex = 1
-        Me.ObjectList_Button.Text = "一览"
+        Me.ObjectList_Button.Text = "一览（F2）"
         Me.ObjectList_Button.UseVisualStyleBackColor = True
         '
         'ProDate_Label

@@ -328,6 +328,10 @@ Public Class Signin
             Signin_Button_Click(Me, e)
         End If
 
+        If e.KeyCode = Keys.F2 Then
+            ObjectList_Button_Click(Me, e)
+        End If
+
         If e.KeyCode = Keys.F10 Then
             Cancel_Button_Click(Me, e)
         End If
@@ -424,4 +428,15 @@ Public Class Signin
         End If
 
     End Sub
+
+    Private Sub Lots_TextBox_Enter(sender As Object, e As EventArgs) Handles Lots_TextBox.Enter
+        Lots_TextBox.SelectionStart = 0     '选取的起始位置设为0，即从头开始进行文本框内容的选取  
+        Lots_TextBox.SelectionLength = Len(Lots_TextBox.Text)       '选取内容的长度为文本框已经接受的文本长度  
+    End Sub
+
+    Private Sub Tester_TextBox_Enter(sender As Object, e As EventArgs) Handles Tester_TextBox.Enter
+        Tester_TextBox.SelectionStart = 0     '选取的起始位置设为0，即从头开始进行文本框内容的选取  
+        Tester_TextBox.SelectionLength = Len(Tester_TextBox.Text)       '选取内容的长度为文本框已经接受的文本长度  
+    End Sub
+
 End Class

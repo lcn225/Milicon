@@ -24,6 +24,8 @@ Public Class ObjectList
         'FillDGV(Me.ObjectList_DataGridView)
         '填充DGV
 
+        filter_TextBox.Focus()
+
     End Sub
     '窗体初始化
 
@@ -76,4 +78,33 @@ Public Class ObjectList
         '临时调试刷新用，完成后可删除上行
     End Sub
 
+    Private Sub filter_TextBox_TextChanged(sender As Object, e As EventArgs) Handles filter_TextBox.TextChanged
+
+        ObjectType_ComboBox_SelectedIndexChanged(Me, e)
+        '变更后重新填充
+
+        If filter_TextBox.Text = "" Then
+            Exit Sub
+            '如果TEXT为空则跳出
+        Else
+            For i = 0 To ObjectList_DataGridView.RowCount - 1
+                Dim ins As Integer = InStr(ObjectList_DataGridView.Rows(i).Cells("材料名").Value, filter_TextBox.Text, CompareMethod.Text)
+                '搜索关键词是否在材料名中出现
+                If ins = 0 Then
+
+                    Dim myCurrencyManager As CurrencyManager
+
+                    myCurrencyManager = CType(Me.BindingContext(ObjectList_DataGridView.DataSource), CurrencyManager)
+                    ObjectList_DataGridView.CurrentCell = Nothing
+                    myCurrencyManager.SuspendBinding() '挂起数据绑定
+                    ObjectList_DataGridView.Rows(i).Visible = False
+                    myCurrencyManager.ResumeBinding() '恢复数据绑定
+
+                End If
+                '将不包含关键词的行隐藏
+            Next
+
+        End If
+
+    End Sub
 End Class

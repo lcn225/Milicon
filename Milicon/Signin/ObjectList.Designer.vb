@@ -27,6 +27,7 @@ Partial Class ObjectList
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.ObjectType_ComboBox = New System.Windows.Forms.ComboBox()
+        Me.filter_TextBox = New System.Windows.Forms.TextBox()
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,11 +73,19 @@ Partial Class ObjectList
         Me.ObjectType_ComboBox.TabIndex = 3
         Me.ObjectType_ComboBox.Text = "所有材料"
         '
+        'filter_TextBox
+        '
+        Me.filter_TextBox.Location = New System.Drawing.Point(276, 26)
+        Me.filter_TextBox.Name = "filter_TextBox"
+        Me.filter_TextBox.Size = New System.Drawing.Size(160, 21)
+        Me.filter_TextBox.TabIndex = 4
+        '
         'ObjectList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(626, 319)
+        Me.Controls.Add(Me.filter_TextBox)
         Me.Controls.Add(Me.ObjectType_ComboBox)
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.OK_Button)
@@ -86,6 +95,7 @@ Partial Class ObjectList
         Me.Text = "ObjectList"
         CType(Me.ObjectList_DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -93,4 +103,5 @@ Partial Class ObjectList
     Friend WithEvents OK_Button As Button
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents ObjectType_ComboBox As ComboBox
+    Friend WithEvents filter_TextBox As TextBox
 End Class

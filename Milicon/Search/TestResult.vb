@@ -94,6 +94,8 @@ Public Class TestResult
         Dim Num = TestItem.Tables(0).Rows(0)("TI_Num")
         '获取测试项目数量
 
+        Me.Object_Label.Text = TestItem.Tables(0).Rows(0)("Obj_Name").ToString
+
         Dim MAXQty As Integer = getMAXQtyByID(GetObjIDByLoginNo(LoginNo))
         'Dim MAXQty As Integer = getMAXQtyByID(TestData.Tables(0).Rows(0)("Obj_ID"))
         '获取该测试批号对应规格各TI最大样本数

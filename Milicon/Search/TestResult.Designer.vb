@@ -37,6 +37,7 @@ Partial Class TestResult
         Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.Print_Button = New System.Windows.Forms.Button()
         Me.Exit_Button = New System.Windows.Forms.Button()
+        Me.Object_Label = New System.Windows.Forms.Label()
         CType(Me.TestData_DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -167,11 +168,22 @@ Partial Class TestResult
         Me.Exit_Button.Text = "Button4"
         Me.Exit_Button.UseVisualStyleBackColor = True
         '
+        'Object_Label
+        '
+        Me.Object_Label.AutoSize = True
+        Me.Object_Label.Font = New System.Drawing.Font("宋体", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.Object_Label.Location = New System.Drawing.Point(177, 31)
+        Me.Object_Label.Name = "Object_Label"
+        Me.Object_Label.Size = New System.Drawing.Size(20, 20)
+        Me.Object_Label.TabIndex = 30
+        Me.Object_Label.Text = " "
+        '
         'TestResult
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(785, 587)
+        Me.Controls.Add(Me.Object_Label)
         Me.Controls.Add(Me.Exit_Button)
         Me.Controls.Add(Me.Print_Button)
         Me.Controls.Add(Me.Cancel_Button)
@@ -209,4 +221,5 @@ Partial Class TestResult
     Friend WithEvents Cancel_Button As Button
     Friend WithEvents Print_Button As Button
     Friend WithEvents Exit_Button As Button
+    Friend WithEvents Object_Label As Label
 End Class
