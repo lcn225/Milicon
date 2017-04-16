@@ -78,6 +78,7 @@ Public Class ObjectList
         '临时调试刷新用，完成后可删除上行
     End Sub
 
+    '快速检索过滤
     Private Sub filter_TextBox_TextChanged(sender As Object, e As EventArgs) Handles filter_TextBox.TextChanged
 
         ObjectType_ComboBox_SelectedIndexChanged(Me, e)
@@ -107,4 +108,7 @@ Public Class ObjectList
         End If
 
     End Sub
+
+
 End Class
+

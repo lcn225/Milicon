@@ -306,16 +306,15 @@ Public Class Signin
         If SigninCheck = 6 Then
             '如果返回值为6，则为选择“是”
             Signin()
+            'TestDataInput_DataGridView.DataSource = vbNull
+            ResetDGV(Me)
+
+            Signin_Button.Enabled = False
+            '确认材料名之前禁用登录按钮
+
+            RefTestLots()
+            '刷新测试批号
         End If
-
-        'TestDataInput_DataGridView.DataSource = vbNull
-        ResetDGV(Me)
-
-        Signin_Button.Enabled = False
-        '确认材料名之前禁用登录按钮
-
-        RefTestLots()
-        '刷新测试批号
 
     End Sub
     '点击登录按钮登录数据
