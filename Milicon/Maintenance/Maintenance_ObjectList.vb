@@ -42,6 +42,7 @@ Public Class Maintenance_ObjectList
     Private Sub ChangeDGVWithCombobox()
 
         Dim Type_Column As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+
         ComboBoxData(Type_Column)
         '为该列绑定数据源
 
@@ -185,6 +186,38 @@ Public Class Maintenance_ObjectList
 
         ChangeDGVWithCombobox()
         '用Combobox替换DGV中材料类型列
+
+    End Sub
+
+    '双击DGV修改对应规格材料
+    Private Sub ObjectList_DataGridView_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ObjectList_DataGridView.MouseDoubleClick
+        Dim curRow As DataGridViewRow = Me.ObjectList_DataGridView.CurrentRow
+
+        Dim sel As Integer = MessageBox.Show(“是否修改规格信息？”, “修改确认”, MessageBoxButtons.YesNo)
+        If sel = 6 Then
+
+            Dim cmd As OleDbCommand
+
+            Dim id As Integer = curRow.Cells("材料ID").Value
+            Dim Type As String = InputBox("请输入材料类型", "材料类型", curRow.Cells(0).Value.ToString)
+            Dim Name As String = InputBox("请输入材料名", "材料名", curRow.Cells("材料名").Value.ToString)
+            Dim Sup As String = InputBox("请输入厂商", "厂商", curRow.Cells("厂商").Value.ToString)
+
+            Dim sql As String = "UPDATE Object_List SET Obj_Type = '" & Type & "', Obj_Name = '" & Name & "', Obj_Sup = '" & Sup & "' WHERE Obj_ID = " & id
+            'UPDATE Person SET Address = 'Zhongshan 23', City = 'Nanjing' WHERE LastName = 'Wilson'
+
+            cn.Open()
+
+            cmd = New OleDbCommand(sql, cn)
+            cmd.ExecuteNonQuery()
+
+            MessageBox.Show("修改成功")
+
+            cn.Close()
+
+            Maintenance_ObjectList_Load(sender, e)
+
+        End If
 
     End Sub
 End Class

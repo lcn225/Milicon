@@ -314,6 +314,7 @@ Public Class Signin
 
             RefTestLots()
             '刷新测试批号
+
         End If
 
     End Sub

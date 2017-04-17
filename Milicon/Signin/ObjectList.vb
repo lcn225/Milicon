@@ -109,6 +109,15 @@ Public Class ObjectList
 
     End Sub
 
+    '设置快捷键
+    Private Sub Signin_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.Up Then
+            MsgBox(1)
+        End If
+
+    End Sub
+
 
 End Class
 
