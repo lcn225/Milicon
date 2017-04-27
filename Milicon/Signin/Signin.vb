@@ -290,6 +290,9 @@ Public Class Signin
 
         MessageBox.Show("登录成功")
 
+        RefTestLots()
+        '刷新测试批号
+
         '之后加一个成功一个失败时的防错
 
     End Sub
@@ -311,9 +314,6 @@ Public Class Signin
 
             Signin_Button.Enabled = False
             '确认材料名之前禁用登录按钮
-
-            RefTestLots()
-            '刷新测试批号
 
         End If
 
