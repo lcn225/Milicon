@@ -107,7 +107,7 @@ Partial Class SearchData
         Me.DateStart_DateTimePicker.Name = "DateStart_DateTimePicker"
         Me.DateStart_DateTimePicker.Size = New System.Drawing.Size(105, 21)
         Me.DateStart_DateTimePicker.TabIndex = 7
-        Me.DateStart_DateTimePicker.Value = New Date(2017, 1, 6, 0, 0, 0, 0)
+        Me.DateStart_DateTimePicker.Value = New Date(2017, 4, 29, 0, 0, 0, 0)
         '
         'DateEnd_DateTimePicker
         '

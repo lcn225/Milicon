@@ -21,6 +21,8 @@ Public Class SearchData
     Private Sub Top20()
         DBcon()
 
+        ResetDGV(Me)
+
         Dim sql As String = "Select Top 20 Data_List.LoginNo As 测试编号, Object_List.Obj_Type As 材料类型, Object_List.Obj_Name As 材料名称, Data_List.ProDate As 生产日期, Data_List.Lots As 批号, Data_List.TestDate As 测试日期, Data_List.Tester As 测试人 from Data_List, Object_List where Data_List.Obj_ID = Object_List.Obj_ID order by LoginNo desc"
         da = New OleDbDataAdapter(sql, cn)
         ds = New DataSet
@@ -175,6 +177,26 @@ Public Class SearchData
     '点击OK按钮打开测试结果
 
     Private Sub Del_Button_Click(sender As Object, e As EventArgs) Handles Del_Button.Click
+
+        Dim TestLots As String = TestList_DataGridView.CurrentRow.Cells("测试编号").Value
+
+        Dim sel = MsgBox("确定要删除'" & TestLots & ": " & TestList_DataGridView.CurrentRow.Cells("材料名称").Value & "'？", 4, "确认删除")
+        If sel <> 6 Then
+            Exit Sub
+        End If
+        '如果不点确定，跳过
+
+        Dim sql As String = "DELETE FROM Data_List Where LoginNo = " & TestLots
+        'DELETE FROM Person WHERE LastName = 'Wilson' 
+
+        Dim cmd As OleDbCommand = New OleDbCommand(sql, cn)
+
+        cn.Open()
+        cmd.ExecuteNonQuery()
+        cn.Close()
+        MsgBox("删除成功！")
+
+        Top20()
 
     End Sub
 
