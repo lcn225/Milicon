@@ -546,5 +546,19 @@ Exitall:
     End Function
     '控制小数点精度
 
+    Public Function ToShort(ByVal val As String) As String
+
+        Dim result As String
+        If IsNumeric(val) Then
+
+            result = CShort(val)
+        Else
+            result = val
+        End If
+
+        Return result
+    End Function
+    '如果是数字则转换为数字类型
+
 
 End Module

@@ -349,25 +349,27 @@ Public Class Signin
         Dim type As String
         Dim stand As String
         Dim range As String
+        Dim qty As Integer
         Dim ref As Boolean
 
         For i = 0 To num - 1
             '每个TI遍历一次
 
             type = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Type")
-            stand = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Stand")
-            range = TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range")
+            stand = Val(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Stand"))
+            range = Val(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Range"))
+            qty = Val(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Qty"))
             ref = CBool(TI_ds.Tables(0).Rows(0)("TI" & (i + 1) & "_Ref"))
 
-            For j = 1 To maxqty
+            For j = 1 To qty
                 '每个样本遍历一次
-                '如果是单边范围类型
 
                 If type = 1 Then
-                    '如果是大于的情况
+                    '如果是单边范围类型
                     If range = 1 Then
-                        '如果大于等于0，则正常
-                        If TestDataInput_DataGridView.Rows(i).Cells(j).Value >= stand Then
+                        '如果是小于的情况
+                        If Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) >= stand Then
+                            '如果大于等于0，则正常
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
                         ElseIf ref Then
                             '是否为必须值？
@@ -379,7 +381,7 @@ Public Class Signin
                         End If
                     ElseIf range = 0 Then
                         '如果是小于的情况
-                        If TestDataInput_DataGridView.Rows(i).Cells(j).Value <= stand Then
+                        If Val(TestDataInput_DataGridView.Rows(i).Cells(j).Value) <= stand Then
                             '如果大于等于0，则正常
                             TestDataInput_DataGridView.Rows(i).Cells(j).Style.BackColor = Color.White
                         ElseIf ref Then
