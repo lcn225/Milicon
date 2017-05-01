@@ -88,6 +88,7 @@ Partial Class MainMenu
         Me.Controls.Add(Me.SearchData_Button)
         Me.Controls.Add(Me.Signin_Button)
         Me.Controls.Add(Me.SWName_Label)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainMenu"
         Me.Text = "MainMenu1"
